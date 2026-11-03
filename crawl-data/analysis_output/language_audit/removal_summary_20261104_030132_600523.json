@@ -1,0 +1,38 @@
+{
+  "source": "C:\\Users\\PC\\PycharmProjects\\ABSA-T7\\crawl-data\\data\\combined_reviews_brand_filled.csv",
+  "output": "C:\\Users\\PC\\PycharmProjects\\ABSA-T7\\crawl-data\\data\\combined_reviews_brand_filled_language_filtered.csv",
+  "updated_in_place": false,
+  "backup": null,
+  "removal_label": "language",
+  "record_column": "language_source_record",
+  "rows_before": 16449,
+  "rows_removed": 94,
+  "rows_after": 16355,
+  "columns": 21,
+  "removal_lists": {
+    "C:\\Users\\PC\\PycharmProjects\\ABSA-T7\\crawl-data\\analysis_output\\language_audit\\english_reviews.csv": {
+      "listed_rows": 78,
+      "unique_source_rows": 78,
+      "overlap_with_prior_lists": 0
+    },
+    "C:\\Users\\PC\\PycharmProjects\\ABSA-T7\\crawl-data\\analysis_output\\language_audit\\mixed_language_reviews.csv": {
+      "listed_rows": 11,
+      "unique_source_rows": 11,
+      "overlap_with_prior_lists": 0
+    },
+    "C:\\Users\\PC\\PycharmProjects\\ABSA-T7\\crawl-data\\analysis_output\\language_audit\\english_other_language_reviews.csv": {
+      "listed_rows": 1,
+      "unique_source_rows": 1,
+      "overlap_with_prior_lists": 0
+    },
+    "C:\\Users\\PC\\PycharmProjects\\ABSA-T7\\crawl-data\\analysis_output\\language_audit\\language_reviews_to_check.csv": {
+      "listed_rows": 4,
+      "unique_source_rows": 4,
+      "overlap_with_prior_lists": 0
+    }
+  },
+  "sha256_before": "b3e635e296c4ed86a112d71db53bba2038e17959a744369bdc551cf9c7c07ba1",
+  "sha256_after": "54369ba50bf7a8309b973ab26e4ec9cd7d29c140e198bc666471fbfe76d5ad16",
+  "backup_matches_original": null,
+  "retained_values_and_order_verified": true
+}

@@ -34,6 +34,11 @@ import pandas as pd
 from tqdm import tqdm
 
 try:
+    from .seller_reply_rules import strip_seller_reply
+except ImportError:  # Chạy trực tiếp script từ command line.
+    from seller_reply_rules import strip_seller_reply
+
+try:
     import demoji
 except ImportError:
     demoji = None
@@ -469,7 +474,8 @@ def normalize_comment(raw: object) -> str:
     """Text đọc được cho ABSA: vẫn giữ phủ định, dấu câu và chữ số (pH, giá...)."""
     if raw is None or pd.isna(raw):
         return ""
-    text = unicodedata.normalize("NFC", html.unescape(str(raw))).lower()
+    customer_text, _ = strip_seller_reply(str(raw))
+    text = unicodedata.normalize("NFC", html.unescape(customer_text)).lower()
     text = re.sub(r"<[^>]*>", " ", text)
     text = re.sub(r"https?://\S+|www\.\S+", " ", text)
     text = remove_emoji(text)

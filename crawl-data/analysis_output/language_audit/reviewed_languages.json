@@ -1,0 +1,2143 @@
+{
+  "source_sha256": "b3e635e296c4ed86a112d71db53bba2038e17959a744369bdc551cf9c7c07ba1",
+  "reviewed_candidate_records": 534,
+  "decision_basis": "Manual reading of screened candidate texts, plus independent scan of English-rich clauses across all raw comments. Loanwords, greetings and product names were checked in context.",
+  "decisions": {
+    "3": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "92": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "111": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "218": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "267": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "382": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "403": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "416": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "426": {
+      "status": "mixed",
+      "reason": "Có nội dung nhận xét tiếng Việt và mệnh đề/cụm trả lời tiếng Anh có nghĩa, không chỉ tên sản phẩm hoặc một từ mượn."
+    },
+    "459": {
+      "status": "mixed",
+      "reason": "Có nội dung nhận xét tiếng Việt và mệnh đề/cụm trả lời tiếng Anh có nghĩa, không chỉ tên sản phẩm hoặc một từ mượn."
+    },
+    "498": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "508": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "545": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "563": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "566": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "580": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "593": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "619": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "637": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "649": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "745": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "754": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "765": {
+      "status": "mixed",
+      "reason": "Có nội dung nhận xét tiếng Việt và mệnh đề/cụm trả lời tiếng Anh có nghĩa, không chỉ tên sản phẩm hoặc một từ mượn."
+    },
+    "784": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "788": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "789": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "798": {
+      "status": "mixed",
+      "reason": "Có nội dung nhận xét tiếng Việt và mệnh đề/cụm trả lời tiếng Anh có nghĩa, không chỉ tên sản phẩm hoặc một từ mượn."
+    },
+    "801": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "804": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "811": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "812": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "828": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "829": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "830": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "837": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "839": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "843": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "848": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "852": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "863": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "870": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "920": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "936": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "950": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "1105": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "1390": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "1401": {
+      "status": "mixed",
+      "reason": "Có nội dung nhận xét tiếng Việt và mệnh đề/cụm trả lời tiếng Anh có nghĩa, không chỉ tên sản phẩm hoặc một từ mượn."
+    },
+    "1431": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "1512": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "1518": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "1519": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "1524": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "1579": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "1704": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "1738": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "1739": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "1773": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "1804": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "1849": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "1888": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "1891": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "1893": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "1935": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "1948": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "1980": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "1985": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "1995": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2007": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "2011": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "2021": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2043": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "2046": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2062": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2068": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2081": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2095": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2111": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2125": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2146": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2185": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2207": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2228": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2238": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2243": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2255": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2267": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2313": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2331": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2353": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "2361": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2377": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2388": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2392": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2393": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2403": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2408": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2425": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2439": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2459": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2468": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2478": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2530": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2545": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2584": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2619": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2634": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2655": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2691": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "2697": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2730": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2791": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "2795": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2802": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "2816": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "2833": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2864": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2873": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2890": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2895": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2906": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2907": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2927": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2938": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2962": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2972": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2974": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2975": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2978": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2984": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "2998": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3001": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3027": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3166": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "3185": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3189": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3190": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3203": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3214": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3260": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3276": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3288": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3290": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3332": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "3364": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3375": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3381": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3406": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3420": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3435": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3497": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "3520": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "3562": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3585": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3634": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3646": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3664": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3681": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3682": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3685": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3697": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3754": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3757": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3774": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3813": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3863": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "3877": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "3925": {
+      "status": "mixed",
+      "reason": "Có nội dung nhận xét tiếng Việt và mệnh đề/cụm trả lời tiếng Anh có nghĩa, không chỉ tên sản phẩm hoặc một từ mượn."
+    },
+    "4057": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4127": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4148": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4155": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4214": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4273": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "4285": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4305": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "4311": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "4323": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4350": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4376": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4390": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4446": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "4450": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4468": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4493": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4544": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "4553": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4562": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "4563": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "4597": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4612": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4613": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4620": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4639": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4640": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4689": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4735": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4740": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4752": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4764": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4776": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4854": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4875": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4882": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4922": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "4939": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4988": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "4996": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "5038": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "5068": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "5086": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "5093": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "5147": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "5180": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "5239": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "5268": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "5271": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "5411": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "5424": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "5430": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "5524": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "5528": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "5541": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "5683": {
+      "status": "uncertain",
+      "reason": "Có cụm tiếng Anh xen chuỗi ký tự rác và một ký tự Việt; chưa coi toàn review là tiếng Anh."
+    },
+    "5700": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "5702": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "5734": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "6093": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "6123": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "6168": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "6242": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "6259": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "6273": {
+      "status": "mixed",
+      "reason": "Có nội dung nhận xét tiếng Việt và mệnh đề/cụm trả lời tiếng Anh có nghĩa, không chỉ tên sản phẩm hoặc một từ mượn."
+    },
+    "6307": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "6312": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "6325": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "6332": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "6383": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "6493": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "6499": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "6501": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "6502": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "6660": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "6671": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "6703": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "6901": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "6937": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7047": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7073": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7113": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7116": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7139": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7167": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7249": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7266": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7270": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7280": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7303": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7310": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7316": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7386": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "7405": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7430": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7441": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7490": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7492": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7496": {
+      "status": "mixed",
+      "reason": "Có nội dung nhận xét tiếng Việt và mệnh đề/cụm trả lời tiếng Anh có nghĩa, không chỉ tên sản phẩm hoặc một từ mượn."
+    },
+    "7560": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7633": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7689": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7699": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7703": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7715": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7765": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7841": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7845": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7889": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7915": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7950": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "7964": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8001": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8030": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8052": {
+      "status": "mixed",
+      "reason": "Có nội dung nhận xét tiếng Việt và mệnh đề/cụm trả lời tiếng Anh có nghĩa, không chỉ tên sản phẩm hoặc một từ mượn."
+    },
+    "8103": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8124": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8149": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8155": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8164": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8171": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8179": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8190": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8301": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8316": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8336": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8343": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "8369": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8404": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8415": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8475": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8504": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "8549": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8596": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8628": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8640": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8652": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8696": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8713": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8746": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8758": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8768": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8774": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8780": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8820": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8884": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8896": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8912": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8921": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8958": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "8986": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "9054": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "9061": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "9065": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "9089": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "9148": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "9154": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "9272": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "9326": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "9431": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "9433": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "9440": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "9497": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "9503": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "9544": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "9566": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "9675": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "9680": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "9681": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "9724": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "9749": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "9755": {
+      "status": "mixed",
+      "reason": "Có nội dung nhận xét tiếng Việt và mệnh đề/cụm trả lời tiếng Anh có nghĩa, không chỉ tên sản phẩm hoặc một từ mượn."
+    },
+    "9835": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "9873": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "9958": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10024": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10036": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10041": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10062": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10075": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10081": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10082": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10085": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10139": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10185": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10243": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10244": {
+      "status": "english_other_language",
+      "reason": "Nhận xét trộn tiếng Anh và tiếng Hàn, không có nội dung tiếng Việt."
+    },
+    "10326": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10359": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10375": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10376": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10414": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10421": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10433": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10450": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10472": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10499": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10600": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10635": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10687": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "10690": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10717": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10771": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10776": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10842": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10852": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "10860": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10866": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "10903": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10905": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10920": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "10955": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "10958": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "11000": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "11132": {
+      "status": "uncertain",
+      "reason": "Nội dung chỉ có veri ok sau tiêu đề Việt; có thể là very ok nhưng chưa đủ chắc chắn."
+    },
+    "11136": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "11150": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "11181": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "11219": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "11221": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "11224": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "11278": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "11324": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "11328": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "11420": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "11435": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "11627": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "11664": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "11756": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "11771": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "11773": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "11863": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "11916": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "11917": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "11929": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12046": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12125": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12170": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12271": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12351": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12360": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12377": {
+      "status": "english",
+      "reason": "Nội dung nhận xét bằng tiếng Anh; nhãn trường hoặc tiêu đề đánh giá tiếng Việt được bỏ qua khi phân loại."
+    },
+    "12381": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12398": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12406": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12413": {
+      "status": "mixed",
+      "reason": "Có nội dung nhận xét tiếng Việt và mệnh đề/cụm trả lời tiếng Anh có nghĩa, không chỉ tên sản phẩm hoặc một từ mượn."
+    },
+    "12442": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12449": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12451": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12473": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "12482": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12531": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12543": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12630": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12651": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12674": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12689": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12732": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12762": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12802": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12833": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12843": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12860": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12864": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12879": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12902": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "12952": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "12987": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "13048": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "13067": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "13093": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "13121": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "13132": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "13157": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "13161": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "13217": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "13259": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "13311": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "13315": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "13399": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "13429": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "13442": {
+      "status": "uncertain",
+      "reason": "Chỉ là tên sản phẩm Hada Labo Pro Anti Aging alpha Lifting Cleanser; không coi tên sản phẩm là câu review tiếng Anh."
+    },
+    "13462": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "13469": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "13483": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "13501": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "13547": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "13556": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "13559": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "13656": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "13695": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "13741": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "13761": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "13910": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "13911": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "13943": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "13984": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "13997": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14007": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14083": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14085": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14092": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14105": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14117": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14135": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14153": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "14167": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14171": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14181": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14194": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14199": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14256": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "14280": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "14306": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14317": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14376": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14383": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14393": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14417": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14470": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14539": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14606": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14664": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14677": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "14734": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14750": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14803": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14823": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14826": {
+      "status": "uncertain",
+      "reason": "Chỉ có Goof; có thể gõ nhầm Good, chưa đủ chắc chắn."
+    },
+    "14853": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14905": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14910": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "14995": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "15096": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "15158": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "15177": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "15184": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "15199": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "15206": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "15221": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "15223": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "15310": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "15440": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "15475": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "15532": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "15570": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "15583": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "15595": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "15603": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "15612": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "15727": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "15786": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "15814": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "15863": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "15900": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "15913": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    },
+    "15915": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "15983": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "16004": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "16066": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "16108": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "16170": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "16235": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "16325": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "16350": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "16373": {
+      "status": "retained",
+      "reason": "Không xác nhận là review tiếng Anh: tiếng Việt có/không dấu, từ mượn, tên sản phẩm hoặc nội dung quá ngắn/rác."
+    },
+    "16393": {
+      "status": "english_short",
+      "reason": "Nội dung chỉ 1-3 từ tiếng Anh hoặc biến thể kéo dài/gõ phiên âm; ngoài nhãn/tiêu đề không có nhận xét tiếng Việt."
+    }
+  }
+}
