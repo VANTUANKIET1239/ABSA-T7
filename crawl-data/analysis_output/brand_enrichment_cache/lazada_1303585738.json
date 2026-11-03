@@ -1,0 +1,54 @@
+﻿{
+    "key":  "lazada_1303585738",
+    "product_url":  "https://www.lazada.vn/products/pdp-i1303585738.html",
+    "product_name":  "Sửa rữa mặt tinh chất than tre hoạt tính Gold Bee - sữa rửa mặt than tre - sữa rửa mặt than hoạt tính - sửa rửa mặt ngăn ngừa mụn tinh chất than tre - chăm sóc da mặt",
+    "review_count":  15,
+    "platform":  "Lazada",
+    "fetched_at":  "2026-11-03T18:04:09.9815490Z",
+    "http_status":  200,
+    "fetch_status":  "product_data_loaded",
+    "page_title":  "Sửa rữa mặt tinh chất than tre hoạt tính Gold Bee - sữa rửa mặt than tre - sữa rửa mặt than hoạt tính - sửa rửa mặt ngăn ngừa mụn tinh chất than tre - chăm sóc da mặt | Lazada Việt Nam",
+    "direct_brand":  "",
+    "product_fields":  {
+                           "product":  {
+                                           "desc":  "\u003cdiv\u003e\u003cimg src=\"https://vn-test-11.slatic.net/shop/c6f7f1d0b28415b96930c2213053b958.jpeg\" /\u003e\u003cimg src=\"https://vn-test-11.slatic.net/shop/9e16a52ab45653a1363e9bd2580970e1.jpeg\" /\u003e\u003cimg src=\"https://vn-test-11.slatic.net/shop/007a8fc2b4967edd66134d7be013cedd.jpeg\" /\u003e\u003cimg src=\"https://vn-test-11.slatic.net/shop/299a1cacad3dcde6eccc0b9893b01706.jpeg\" /\u003e\u003cimg src=\"https://vn-test-11.slatic.net/shop/6c4eb18831a4d48ecddca6c41d76e409.jpeg\" /\u003e\u003cimg src=\"https://vn-test-11.slatic.net/shop/ac89ce795a9ed719e6114b52bd76562a.jpeg\" /\u003e\u003c/div\u003e",
+                                           "highlights":  "\u003cul class=\u0027\u0027\u003e\u003cli class=\u0027\u0027\u003eChất liệu: dạng gel\u003c/li\u003e\u003cli class=\u0027\u0027\u003eChiết xuất: than hoạt t\u0026iacute;nh v\u0026agrave; collagen\u003c/li\u003e\u003cli class=\u0027\u0027\u003eTrọng lượng: 100g\u003c/li\u003e\u003cli class=\u0027\u0027\u003eƯU ĐIỂM NỔI BẬT SỬA RỬA MẶT THAN HOẠT T\u0026Iacute;NH DETOX\u003c/li\u003e\u003cli class=\u0027\u0027\u003e✅ L\u0026agrave;m sạch da loại bỏ mọi bụi bẩn\u003c/li\u003e\u003cli class=\u0027\u0027\u003e✅ Than hoat t\u0026iacute;nh gi\u0026uacute;p trắng da v\u0026agrave; giữ ẩm\u003c/li\u003e\u003cli class=\u0027\u0027\u003e✅ Ngừa mụn v\u0026agrave; ngừa n\u0026aacute;m\u003c/li\u003e\u003cli class=\u0027\u0027\u003e✅ Thải độc gi\u0026uacute;p se kh\u0026iacute;t lỗ ch\u0026acirc;n l\u0026ocirc;ng\u003c/li\u003e\u003cli class=\u0027\u0027\u003e✅ Ph\u0026ugrave; hợp với mọi loại da.\u003c/li\u003e\u003c/ul\u003e",
+                                           "link":  "https://www.lazada.vn/products/sua-rua-mat-tinh-chat-than-tre-hoat-tinh-gold-bee-sua-rua-mat-than-tre-sua-rua-mat-than-hoat-tinh-sua-rua-mat-ngan-ngua-mun-tinh-chat-than-tre-cham-soc-da-mat-i1303585738-s5028545042.html",
+                                           "rightImgRatio":  1.9,
+                                           "title":  "Sửa rữa mặt tinh chất than tre hoạt tính Gold Bee - sữa rửa mặt than tre - sữa rửa mặt than hoạt tính - sửa rửa mặt ngăn ngừa mụn tinh chất than tre - chăm sóc da mặt"
+                                       },
+                           "specifications":  null,
+                           "skuInfos":  null
+                       },
+    "ld_product":  {
+                       "@type":  "Product",
+                       "@context":  "https://schema.org",
+                       "name":  "Sửa rữa mặt tinh chất than tre hoạt tính Gold Bee - sữa rửa mặt than tre - sữa rửa mặt than hoạt tính - sửa rửa mặt ngăn ngừa mụn tinh chất than tre - chăm sóc da mặt",
+                       "image":  [
+                                     "//vn-test-11.slatic.net/p/8c11b2ec12b88384141008c538041aa8.jpg"
+                                 ],
+                       "category":  "Làm đẹp \u003e Chăm sóc da mặt",
+                       "brand":  {
+                                     "@type":  "Brand"
+                                 },
+                       "sku":  "1303585738_VNAMZ-5028545042",
+                       "mpn":  1303585738,
+                       "description":  "Chất liệu: dạng gel Chiết xuất: than hoạt tính và collagen Trọng lượng: 100g ƯU ĐIỂM NỔI BẬT SỬA RỬA MẶT THAN HOẠT TÍNH DETOX ✅ Làm sạch da loại bỏ mọi bụi bẩn ✅ Than hoat tính giúp trắng da và giữ ẩm ✅ Ngừa mụn và ngừa nám ✅ Thải độc giúp se khít lỗ chân lông ✅ Phù hợp với mọi loại da.",
+                       "url":  "https://www.lazada.vn/products/sua-rua-mat-tinh-chat-than-tre-hoat-tinh-gold-bee-sua-rua-mat-than-tre-sua-rua-mat-than-hoat-tinh-sua-rua-mat-ngan-ngua-mun-tinh-chat-than-tre-cham-soc-da-mat-i1303585738.html",
+                       "offers":  {
+                                      "@type":  "AggregateOffer",
+                                      "availability":  "https://schema.org/InStock",
+                                      "url":  "https://www.lazada.vn/products/sua-rua-mat-tinh-chat-than-tre-hoat-tinh-gold-bee-sua-rua-mat-than-tre-sua-rua-mat-than-hoat-tinh-sua-rua-mat-ngan-ngua-mun-tinh-chat-than-tre-cham-soc-da-mat-i1303585738.html",
+                                      "seller":  {
+                                                     "@type":  "Organization",
+                                                     "name":  ""
+                                                 },
+                                      "hasMerchantReturnPolicy":  {
+                                                                      "@type":  "MerchantReturnPolicy",
+                                                                      "applicableCountry":  "VN",
+                                                                      "returnPolicyCategory":  "https://schema.org/MerchantReturnNotPermitted"
+                                                                  }
+                                  }
+                   },
+    "error":  ""
+}

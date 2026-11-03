@@ -1,0 +1,54 @@
+﻿{
+    "key":  "lazada_924984885",
+    "product_url":  "https://www.lazada.vn/products/pdp-i924984885.html",
+    "product_name":  "Sữa Rửa Mặt, Tắm Cho Da Mụn Và Dầu QUATID - 120ml",
+    "review_count":  1,
+    "platform":  "Lazada",
+    "fetched_at":  "2026-11-03T18:04:13.5721559Z",
+    "http_status":  200,
+    "fetch_status":  "product_data_loaded",
+    "page_title":  "Sữa Rửa Mặt, Tắm Cho Da Mụn Và Dầu QUATID - 120ml | Lazada Việt Nam",
+    "direct_brand":  "",
+    "product_fields":  {
+                           "product":  {
+                                           "desc":  "\u003cp\u003e\u003cspan\u003eLàm sạch mụn, sạch các tác nhân gây mụn và giảm dầu cho da, loại bỏ bụi bẩn do môi trường , làm sạch da và dưỡng ẩm da\u003c/span\u003e\u003c/p\u003e",
+                                           "highlights":  "\u003cp\u003e- C\u0026ocirc;ng dụng: \u0026nbsp;Hỗ trợ l\u0026agrave;m sạch mụn, sạch c\u0026aacute;c t\u0026aacute;c nh\u0026acirc;n g\u0026acirc;y mụn v\u0026agrave; giảm dầu cho da, loại bỏ bụi bẩn do m\u0026ocirc;i trường , l\u0026agrave;m sạch da v\u0026agrave; dưỡng ẩm da\u003cbr/\u003e\r\n- C\u0026aacute;ch d\u0026ugrave;ng : L\u0026agrave;m ướt v\u0026agrave; thoa l\u0026ecirc;n l\u0026agrave;n da một lượng đủ v\u0026agrave; m\u0026aacute;t xa v\u0026agrave;i ph\u0026uacute;t sau đ\u0026oacute; rửa sạch bằng nước v\u0026agrave; thấm kh\u0026ocirc;\u003cbr/\u003e\r\nC\u0026oacute; thể d\u0026ugrave;ng 2-3 lần/ ng\u0026agrave;y.\u003cbr/\u003e\r\n- Đối tượng sử dụng : Mọi loại da gặp t\u0026igrave;nh trạng mụn, đặc biệt d\u0026ugrave;ng cho da dầu v\u0026agrave; sinh nhiều b\u0026atilde; nhờn \u0026nbsp;!\u003cbr/\u003e\r\n- Chai 120ml\u003cbr/\u003e\r\n- Hạn d\u0026ugrave;ng : 36 th\u0026aacute;ng kể từ ng\u0026agrave;y sản xuất\u0026nbsp;\u003c/p\u003e",
+                                           "link":  "https://www.lazada.vn/products/sua-rua-mat-tam-cho-da-mun-va-dau-quatid-120ml-i924984885-s6833369021.html",
+                                           "rightImgRatio":  1.9,
+                                           "title":  "Sữa Rửa Mặt, Tắm Cho Da Mụn Và Dầu QUATID - 120ml"
+                                       },
+                           "specifications":  null,
+                           "skuInfos":  null
+                       },
+    "ld_product":  {
+                       "@type":  "Product",
+                       "@context":  "https://schema.org",
+                       "name":  "Sữa Rửa Mặt, Tắm Cho Da Mụn Và Dầu QUATID - 120ml",
+                       "image":  [
+                                     "//vn-test-11.slatic.net/p/3588ac116c5b0d8064b2767769c4a7cf.jpg"
+                                 ],
+                       "category":  "Làm đẹp \u003e Chăm sóc da mặt",
+                       "brand":  {
+                                     "@type":  "Brand"
+                                 },
+                       "sku":  "924984885_VNAMZ-6833369021",
+                       "mpn":  924984885,
+                       "description":  "- Công dụng:  Hỗ trợ làm sạch mụn, sạch các tác nhân gây mụn và giảm dầu cho da, loại bỏ bụi bẩn do môi trường , làm sạch da và dưỡng ẩm da - Cách dùng : Làm ướt và thoa lên làn da một lượng đủ và mát xa vài phút sau đó rửa sạch bằng nước và thấm khô Có thể dùng 2-3 lần/ ngày. - Đối tượng sử dụng : Mọi loại da gặp tình trạng mụn, đặc biệt dùng cho da dầu và sinh nhiều bã nhờn  ! - Chai 120ml - Hạn dùng : 36 tháng kể từ ngày sản xuất Làm sạch mụn, sạch các tác nhân gây mụn và giảm dầu cho da, loại bỏ bụi bẩn do môi trường , làm sạch da và dưỡng ẩm da",
+                       "url":  "https://www.lazada.vn/products/sua-rua-mat-tam-cho-da-mun-va-dau-quatid-120ml-i924984885.html",
+                       "offers":  {
+                                      "@type":  "AggregateOffer",
+                                      "availability":  "https://schema.org/InStock",
+                                      "url":  "https://www.lazada.vn/products/sua-rua-mat-tam-cho-da-mun-va-dau-quatid-120ml-i924984885.html",
+                                      "seller":  {
+                                                     "@type":  "Organization",
+                                                     "name":  ""
+                                                 },
+                                      "hasMerchantReturnPolicy":  {
+                                                                      "@type":  "MerchantReturnPolicy",
+                                                                      "applicableCountry":  "VN",
+                                                                      "returnPolicyCategory":  "https://schema.org/MerchantReturnNotPermitted"
+                                                                  }
+                                  }
+                   },
+    "error":  ""
+}

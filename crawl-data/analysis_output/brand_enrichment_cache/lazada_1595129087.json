@@ -1,0 +1,52 @@
+﻿{
+    "key":  "lazada_1595129087",
+    "product_url":  "https://www.lazada.vn/products/pdp-i1595129087.html",
+    "product_name":  "sữa rửa mặt sâm đỏ Hàn Quốc , làm sạch da mờ vết nám sạm tàn nhang. giữ độ ẩm cho da",
+    "review_count":  4,
+    "platform":  "Lazada",
+    "fetched_at":  "2026-11-03T18:13:01.9469934Z",
+    "http_status":  200,
+    "fetch_status":  "product_data_loaded",
+    "page_title":  "sữa rửa mặt sâm đỏ Hàn Quốc , làm sạch da mờ vết nám sạm tàn nhang. giữ độ ẩm cho da | Lazada Việt Nam",
+    "direct_brand":  "",
+    "product_fields":  {
+                           "product":  {
+                                           "link":  "https://www.lazada.vn/products/sua-rua-mat-sam-do-han-quoc-lam-sach-da-mo-vet-nam-sam-tan-nhang-giu-do-am-cho-da-i1595129087-s6834941801.html",
+                                           "rightImgRatio":  1.9,
+                                           "title":  "sữa rửa mặt sâm đỏ Hàn Quốc , làm sạch da mờ vết nám sạm tàn nhang. giữ độ ẩm cho da"
+                                       },
+                           "specifications":  null,
+                           "skuInfos":  null
+                       },
+    "ld_product":  {
+                       "@type":  "Product",
+                       "@context":  "https://schema.org",
+                       "name":  "sữa rửa mặt sâm đỏ Hàn Quốc , làm sạch da mờ vết nám sạm tàn nhang. giữ độ ẩm cho da",
+                       "image":  [
+                                     "https://filebroker-cdn.lazada.vn/kf/Se488822e17ee44238246e0b44867ffe48.jpg"
+                                 ],
+                       "category":  "Làm đẹp",
+                       "brand":  {
+                                     "@type":  "Brand"
+                                 },
+                       "sku":  "1595129087_VNAMZ-6834941801",
+                       "mpn":  1595129087,
+                       "description":  "Mua ngay sữa rửa mặt sâm đỏ Hàn Quốc , làm sạch da mờ vết nám sạm tàn nhang. giữ độ ẩm cho da Vietnam Chăm sóc da mặt chính hãng giá tốt tại Lazada.vn. Mua hàng online giá rẻ, bảo hành chính hãng, giao hàng tận nơi, thanh toán khi giao hàng!",
+                       "url":  "https://www.lazada.vn/products/sua-rua-mat-sam-do-han-quoc-lam-sach-da-mo-vet-nam-sam-tan-nhang-giu-do-am-cho-da-i1595129087.html",
+                       "offers":  {
+                                      "@type":  "AggregateOffer",
+                                      "availability":  "https://schema.org/InStock",
+                                      "url":  "https://www.lazada.vn/products/sua-rua-mat-sam-do-han-quoc-lam-sach-da-mo-vet-nam-sam-tan-nhang-giu-do-am-cho-da-i1595129087.html",
+                                      "seller":  {
+                                                     "@type":  "Organization",
+                                                     "name":  ""
+                                                 },
+                                      "hasMerchantReturnPolicy":  {
+                                                                      "@type":  "MerchantReturnPolicy",
+                                                                      "applicableCountry":  "VN",
+                                                                      "returnPolicyCategory":  "https://schema.org/MerchantReturnNotPermitted"
+                                                                  }
+                                  }
+                   },
+    "error":  ""
+}

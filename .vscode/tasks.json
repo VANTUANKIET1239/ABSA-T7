@@ -1,0 +1,20 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Preprocess cleanser reviews: append cleaned_comment",
+			"type": "shell",
+			"command": "C:/Users/PC/PycharmProjects/ABSA-T7/.venv-preprocessing/Scripts/python.exe",
+			"args": [
+				"-X",
+				"utf8",
+				"reprocessing/preprocess_cleanser_reviews.py",
+				"--input",
+				"crawl-data/data/combined_reviews_brand_filled.csv",
+				"--append-text-only"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		}
+	]
+}

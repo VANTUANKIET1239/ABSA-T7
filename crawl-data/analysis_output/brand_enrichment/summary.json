@@ -1,0 +1,16 @@
+﻿{
+    "total_rows":  16822,
+    "missing_brand_before":  7099,
+    "filled_rows":  6956,
+    "missing_brand_after":  143,
+    "reviewed_products":  133,
+    "filled_products":  121,
+    "unresolved_products":  12,
+    "input_sha256":  "A434E88E674D23DC824B9240C4811EBC37DA6DA8053E2849495F8FE6D6D28260",
+    "original_file_unchanged":  true,
+    "checked_at_utc":  "2026-11-03T18:14:45.8323267Z",
+    "note":  "Brand inferred from the recorded listing evidence or matching external sources; not every value came from a structured brand field. Existing nonblank brands are preserved.",
+    "verified_changed_cells":  6956,
+    "all_non_brand_cells_preserved":  true,
+    "existing_brands_preserved":  true
+}

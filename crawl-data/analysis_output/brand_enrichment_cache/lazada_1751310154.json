@@ -1,0 +1,22 @@
+﻿{
+    "key":  "lazada_1751310154",
+    "product_url":  "https://www.lazada.vn/products/pdp-i1751310154.html",
+    "product_name":  "Sửa rửa mặt Gạo Gold Bee",
+    "review_count":  7,
+    "platform":  "Lazada",
+    "fetched_at":  "2026-11-03T17:57:40.2565461Z",
+    "http_status":  200,
+    "fetch_status":  "product_data_loaded",
+    "page_title":  "Sửa rửa mặt Gạo Gold Bee | Lazada Việt Nam",
+    "direct_brand":  "",
+    "product_fields":  {
+                           "product":  {
+                                           "link":  "https://www.lazada.vn/products/sua-rua-mat-gao-gold-bee-i1751310154-s7836106872.html",
+                                           "rightImgRatio":  1.9,
+                                           "title":  "Sửa rửa mặt Gạo Gold Bee"
+                                       },
+                           "specifications":  null,
+                           "skuInfos":  null
+                       },
+    "error":  ""
+}

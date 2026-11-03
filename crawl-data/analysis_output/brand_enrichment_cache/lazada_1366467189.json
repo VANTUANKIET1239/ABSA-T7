@@ -1,0 +1,53 @@
+﻿{
+    "key":  "lazada_1366467189",
+    "product_url":  "https://www.lazada.vn/products/pdp-i1366467189.html",
+    "product_name":  "SỬA RỬA MẶT HATOMGI NHẬT BẢN Ý DĨ 130GR [ CHÍNH HÃNG ]",
+    "review_count":  1,
+    "platform":  "Lazada",
+    "fetched_at":  "2026-11-03T18:12:59.5366030Z",
+    "http_status":  200,
+    "fetch_status":  "product_data_loaded",
+    "page_title":  "SỬA RỬA MẶT HATOMGI NHẬT BẢN  Ý DĨ 130GR [ CHÍNH HÃNG ] | Lazada Việt Nam",
+    "direct_brand":  "",
+    "product_fields":  {
+                           "product":  {
+                                           "desc":  "\u003cdiv\u003e\u003cspan\u003e➖Sữa rửa mặt Hatomogi được chiết xuất từ hạt í dĩ, vì là thành phần quen thuộc nên đã chiếm được lòng tin của chị em nhờ vào khả năng \u003c/span\u003e\u003c/div\u003e\u003cdiv\u003e\u003cspan\u003e\u003cbr /\u003e\u003c/span\u003e\u003c/div\u003e\u003cdiv\u003e\u003cspan\u003e✔️ Loại bỏ chất bẩn hiệu quả trả lại làn da tươi sáng cho bạn.\u003c/span\u003e\u003c/div\u003e\u003cdiv\u003e\u003cspan\u003e✔️ Là sữa rửa mặt ngăn ngừa mụn và sự thô ráp, dưỡng ẩm da từ sâu bên trong \u003c/span\u003e\u003c/div\u003e\u003cdiv\u003e\u003cspan\u003e\u003cbr /\u003e\u003c/span\u003e\u003c/div\u003e\u003cdiv\u003e\u003cspan\u003e➖Sữa rửa mặt Hatomogi được chiết xuất từ hạt í dĩ, vì là thành phần quen thuộc nên đã chiếm được lòng tin của chị em nhờ vào khả năng:\u003c/span\u003e\u003c/div\u003e\u003cdiv\u003e\u003cspan\u003e✔️ Loại bỏ chất bẩn hiệu quả trả lại làn da tươi sáng cho bạn.\u003c/span\u003e\u003c/div\u003e\u003cdiv\u003e\u003cspan\u003e\u003cbr /\u003e\u003c/span\u003e\u003c/div\u003e\u003cdiv\u003e\u003cspan\u003e✔️ Là sữa rửa mặt ngăn ngừa mụn và sự thô ráp, dưỡng ẩm da từ bên trong\u003c/span\u003e\u003c/div\u003e\u003cdiv\u003e#Akcosmestic #suaruamat #hatomugi #chinhhang \u003c/div\u003e",
+                                           "link":  "https://www.lazada.vn/products/sua-rua-mat-hatomgi-nhat-ban-y-di-130gr-chinh-hang-i1366467189-s5651161222.html",
+                                           "rightImgRatio":  1.9,
+                                           "title":  "SỬA RỬA MẶT HATOMGI NHẬT BẢN  Ý DĨ 130GR [ CHÍNH HÃNG ]"
+                                       },
+                           "specifications":  null,
+                           "skuInfos":  null
+                       },
+    "ld_product":  {
+                       "@type":  "Product",
+                       "@context":  "https://schema.org",
+                       "name":  "SỬA RỬA MẶT HATOMGI NHẬT BẢN  Ý DĨ 130GR [ CHÍNH HÃNG ]",
+                       "image":  [
+                                     "https://filebroker-cdn.lazada.vn/kf/Se9802eb3f9544bd483196101e4207219A.jpg"
+                                 ],
+                       "category":  "Làm đẹp \u003e Chăm sóc da mặt",
+                       "brand":  {
+                                     "@type":  "Brand"
+                                 },
+                       "sku":  "1366467189_VNAMZ-5651161222",
+                       "mpn":  1366467189,
+                       "description":  "➖Sữa rửa mặt Hatomogi được chiết xuất từ hạt í dĩ, vì là thành phần quen thuộc nên đã chiếm được lòng tin của chị em nhờ vào khả năng ✔️ Loại bỏ chất bẩn hiệu quả trả lại làn da tươi sáng cho bạn.✔️ Là sữa rửa mặt ngăn ngừa mụn và sự thô ráp, dưỡng ẩm da từ sâu bên trong ➖Sữa rửa mặt Hatomogi được chiết xuất từ hạt í dĩ, vì là thành phần quen thuộc nên đã chiếm được lòng tin của chị em nhờ vào khả năng:✔️ Loại bỏ chất bẩn hiệu quả trả lại làn da tươi sáng cho bạn.✔️ Là sữa rửa mặt ngăn ngừa mụn và sự thô ráp, dưỡng ẩm da từ bên trong#Akcosmestic #suaruamat #hatomugi #chinhhang",
+                       "url":  "https://www.lazada.vn/products/sua-rua-mat-hatomgi-nhat-ban-y-di-130gr-chinh-hang-i1366467189.html",
+                       "offers":  {
+                                      "@type":  "AggregateOffer",
+                                      "availability":  "https://schema.org/InStock",
+                                      "url":  "https://www.lazada.vn/products/sua-rua-mat-hatomgi-nhat-ban-y-di-130gr-chinh-hang-i1366467189.html",
+                                      "seller":  {
+                                                     "@type":  "Organization",
+                                                     "name":  ""
+                                                 },
+                                      "hasMerchantReturnPolicy":  {
+                                                                      "@type":  "MerchantReturnPolicy",
+                                                                      "applicableCountry":  "VN",
+                                                                      "returnPolicyCategory":  "https://schema.org/MerchantReturnNotPermitted"
+                                                                  }
+                                  }
+                   },
+    "error":  ""
+}

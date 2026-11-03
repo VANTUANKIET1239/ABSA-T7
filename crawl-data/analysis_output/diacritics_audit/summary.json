@@ -1,0 +1,19 @@
+{
+  "source": "C:\\Users\\PC\\PycharmProjects\\ABSA-T7\\crawl-data\\data\\combined_reviews_brand_filled.csv",
+  "source_sha256": "c16576291873eb5dc33ce28a71b4968dce324fb631a2cf9a5e1024e50c07ae2a",
+  "rows": 16459,
+  "unique_raw_tokens": 6201,
+  "potentially_ambiguous_ascii_tokens": 627,
+  "note": "Fold matches are candidates, not confirmed spelling errors.",
+  "observed_replacement_pairs": 443,
+  "observed_word_replacement_pairs": 264,
+  "unique_raw_word_forms_in_replacements": 224,
+  "word_replacement_occurrences": 3449,
+  "replacement_occurrences": 2255,
+  "reviews_with_accent_replacements": 1027,
+  "source_unchanged": true,
+  "non_idempotent_preview_records": [],
+  "method": "Manually selected domain phrases and words; exact token boundaries; mixed accented/unaccented syllables allowed in phrases; reviewed partial accent forms and explicit field-value context. Candidate inventory is not an exhaustive semantic classification of spelling errors.",
+  "source_record_definition": "CSV record position including header (first data row=2), not physical line number.",
+  "preview_scope": "Only accent restoration; does not rerun teencode or VNCoreNLP. Existing cleaned_comment in source is not updated."
+}

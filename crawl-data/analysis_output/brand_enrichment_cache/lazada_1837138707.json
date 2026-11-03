@@ -1,0 +1,53 @@
+﻿{
+    "key":  "lazada_1837138707",
+    "product_url":  "https://www.lazada.vn/products/pdp-i1837138707.html",
+    "product_name":  "Sữa Rửa Mặt Simple Tạo Bọt Dịu Nhẹ Cho Da Hỗn Hợp Da Mụn 150ML",
+    "review_count":  1,
+    "platform":  "Lazada",
+    "fetched_at":  "2026-11-03T18:04:05.5223705Z",
+    "http_status":  200,
+    "fetch_status":  "product_data_loaded",
+    "page_title":  "Sữa Rửa Mặt Simple Tạo Bọt Dịu Nhẹ Cho Da Hỗn Hợp Da Mụn 150ML | Lazada Việt Nam",
+    "direct_brand":  "",
+    "product_fields":  {
+                           "product":  {
+                                           "desc":  "\u003carticle\u003e\u003cp\u003e\u003cspan\u003e\u003c/span\u003e\u003cimg src=\"https://vn-live-01.slatic.net/p/72a0fc6c653762bd6fdfddfb38a306b1.jpg\" /\u003e\u003cspan\u003e \u003c/span\u003e\u003cspan\u003e TẠI SAO BẠN NÊN SỬ DỤNG SỮA RỬA MẶT SIMPLE \u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan\u003e\u003c/span\u003e\u003cimg src=\"https://sg-live-01.slatic.net/p/fd6b1f4da092eb12e311697d6a8da023.jpg\" /\u003e\u003cspan\u003e\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan\u003e\u003c/span\u003e\u003c/p\u003e\u003c/article\u003e",
+                                           "link":  "https://www.lazada.vn/products/sua-rua-mat-simple-tao-bot-diu-nhe-cho-da-hon-hop-da-mun-150ml-i1837138707-s13347584673.html",
+                                           "rightImgRatio":  1.9,
+                                           "title":  "Sữa Rửa Mặt Simple Tạo Bọt Dịu Nhẹ Cho Da Hỗn Hợp Da Mụn 150ML"
+                                       },
+                           "specifications":  null,
+                           "skuInfos":  null
+                       },
+    "ld_product":  {
+                       "@type":  "Product",
+                       "@context":  "https://schema.org",
+                       "name":  "Sữa Rửa Mặt Simple Tạo Bọt Dịu Nhẹ Cho Da Hỗn Hợp Da Mụn 150ML",
+                       "image":  [
+                                     "//vn-test-11.slatic.net/p/72a0fc6c653762bd6fdfddfb38a306b1.jpg"
+                                 ],
+                       "category":  "Làm đẹp \u003e Chăm sóc da mặt",
+                       "brand":  {
+                                     "@type":  "Brand"
+                                 },
+                       "sku":  "1837138707_VNAMZ-13347584673",
+                       "mpn":  1837138707,
+                       "description":  "TẠI SAO BẠN NÊN SỬ DỤNG SỮA RỬA MẶT SIMPLE",
+                       "url":  "https://www.lazada.vn/products/sua-rua-mat-simple-tao-bot-diu-nhe-cho-da-hon-hop-da-mun-150ml-i1837138707.html",
+                       "offers":  {
+                                      "@type":  "AggregateOffer",
+                                      "availability":  "https://schema.org/InStock",
+                                      "url":  "https://www.lazada.vn/products/sua-rua-mat-simple-tao-bot-diu-nhe-cho-da-hon-hop-da-mun-150ml-i1837138707.html",
+                                      "seller":  {
+                                                     "@type":  "Organization",
+                                                     "name":  ""
+                                                 },
+                                      "hasMerchantReturnPolicy":  {
+                                                                      "@type":  "MerchantReturnPolicy",
+                                                                      "applicableCountry":  "VN",
+                                                                      "returnPolicyCategory":  "https://schema.org/MerchantReturnNotPermitted"
+                                                                  }
+                                  }
+                   },
+    "error":  ""
+}
