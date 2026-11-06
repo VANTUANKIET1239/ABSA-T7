@@ -15,6 +15,81 @@
 			],
 			"isBackground": false,
 			"problemMatcher": []
+		},
+		{
+			"label": "BERTopic: tests",
+			"type": "shell",
+			"command": "${workspaceFolder}/.venv-bertopic/Scripts/python.exe",
+			"args": [
+				"-B",
+				"-X",
+				"utf8",
+				"-m",
+				"unittest",
+				"discover",
+				"-s",
+				"topic-modeling",
+				"-p",
+				"test_bertopic_cleanser_aspects.py",
+				"-v"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "BERTopic: library smoke test",
+			"type": "shell",
+			"command": "${workspaceFolder}/.venv-bertopic/Scripts/python.exe",
+			"args": [
+				"-u", "-B", "-X", "utf8",
+				"${workspaceFolder}/topic-modeling/bertopic_cleanser_aspects.py",
+				"--input", "${workspaceFolder}/topic-modeling/data/library_smoke_test/input_sample.csv",
+				"--output-dir", "${workspaceFolder}/topic-modeling/data/library_smoke_test",
+				"--grid-search",
+				"--grid-min-cluster-sizes", "15",
+				"--grid-min-samples", "3",
+				"--grid-n-neighbors", "10"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}",
+				"env": {"HF_HUB_OFFLINE": "1", "OMP_NUM_THREADS": "4", "MKL_NUM_THREADS": "4"}
+			},
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "BERTopic: baseline",
+			"type": "shell",
+			"command": "${workspaceFolder}/.venv-bertopic/Scripts/python.exe",
+			"args": [
+				"-u", "-B", "-X", "utf8",
+				"${workspaceFolder}/topic-modeling/bertopic_cleanser_aspects.py",
+				"--single-run",
+				"--output-dir", "${workspaceFolder}/topic-modeling/data/bertopic_unique_baseline"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}",
+				"env": {"OMP_NUM_THREADS": "4", "MKL_NUM_THREADS": "4"}
+			},
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "BERTopic: grid search",
+			"type": "shell",
+			"command": "${workspaceFolder}/.venv-bertopic/Scripts/python.exe",
+			"args": [
+				"-u", "-B", "-X", "utf8",
+				"${workspaceFolder}/topic-modeling/bertopic_cleanser_aspects.py",
+				"--grid-search",
+				"--output-dir", "${workspaceFolder}/topic-modeling/data/bertopic_unique_grid_search"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}",
+				"env": {"OMP_NUM_THREADS": "4", "MKL_NUM_THREADS": "4"}
+			},
+			"isBackground": false,
+			"problemMatcher": []
 		}
 	]
 }

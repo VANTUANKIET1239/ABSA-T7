@@ -1,0 +1,3 @@
+.venv-bertopic/
+__pycache__/
+*.py[cod]

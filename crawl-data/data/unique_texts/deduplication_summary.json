@@ -1,0 +1,25 @@
+{
+  "created_at_utc": "2026-11-04T23:32:34.427513+00:00",
+  "source": "C:\\Users\\PC\\PycharmProjects\\ABSA-T7\\crawl-data\\data\\combined_reviews_brand_filled_language_filtered.csv",
+  "source_sha256": "69d12b2b24250dc95a555c480ed89dac81a2724ddefdbd559baac7ccca3457ee",
+  "text_column": "cleaned_comment",
+  "normalization": [
+    "Unicode NFC",
+    "lowercase",
+    "collapse whitespace",
+    "strip whitespace"
+  ],
+  "representative_rule": "First occurrence in source order; its comment is an example only.",
+  "source_row_definition": "1-based data-record index, excluding header; not a physical CSV line number.",
+  "input_rows": 16355,
+  "nonempty_text_rows": 16354,
+  "empty_text_rows": 1,
+  "unique_texts": 12750,
+  "duplicate_excess_rows": 3604,
+  "repeated_text_groups": 161,
+  "output_dir": "C:\\Users\\PC\\PycharmProjects\\ABSA-T7\\crawl-data\\data\\unique_texts",
+  "output_sha256": {
+    "unique_texts.csv": "7ceca0719394da8246250b885739686fda1275e6b13fd334f46d1d549966ffbc",
+    "review_text_mapping.csv": "14b205ca3daa66b84e6a5fca8b1b1e6002d19930f01d7956934919ab93376f4d"
+  }
+}

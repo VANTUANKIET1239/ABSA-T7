@@ -1,0 +1,6 @@
+Input valid reviews: 16337
+Clusters (excluding -1): 42
+Outliers -1: 598
+Outlier rate: 0.0366
+C_v coherence: 0.7975772926011911
+Suggested_Aspect is keyword-based only. Manual validation required.

@@ -1,0 +1,15 @@
+Text unit: clause
+Input training texts: 29458
+Clusters (excluding -1): 130
+Outliers -1: 6948
+Outlier rate: 0.2359
+C_v coherence: 0.4165853285790084
+Largest topic share (all training texts): 0.0505
+Largest topic share (assigned texts): 0.0661
+Topic diversity: 0.9000
+Keyword overlap mean/max: 0.0009/0.3333
+Valid topic ratio (at least 2 keywords): 1.0000
+Selection metric: balanced; score: 0.26732991839795983
+Counts refer to unique training units; duplicate_count is metadata, not a training weight.
+Input source reviews: 12750
+Suggested_Aspect is keyword-based only. Manual validation required.

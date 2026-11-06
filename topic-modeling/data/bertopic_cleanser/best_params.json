@@ -1,0 +1,96 @@
+{
+  "trial": 20,
+  "c_v": 0.7975772926011911,
+  "params": {
+    "min_cluster_size": 50,
+    "min_samples": 3,
+    "n_neighbors": 20,
+    "min_df": 3,
+    "max_df": 0.85
+  },
+  "model_configuration": {
+    "embedding_model": "keepitreal/vietnamese-sbert",
+    "encode": {
+      "normalize_embeddings": true,
+      "convert_to_numpy": true
+    },
+    "umap": {
+      "n_neighbors": 20,
+      "n_components": 5,
+      "min_dist": 0.0,
+      "metric": "cosine",
+      "random_state": 42
+    },
+    "hdbscan": {
+      "min_cluster_size": 50,
+      "min_samples": 3,
+      "metric": "euclidean",
+      "cluster_selection_method": "eom",
+      "prediction_data": true
+    },
+    "vectorizer": {
+      "stop_words": [
+        "anh",
+        "bạn",
+        "cho",
+        "chị",
+        "các",
+        "có",
+        "của",
+        "em",
+        "ha",
+        "haha",
+        "hehe",
+        "hihi",
+        "kia",
+        "kkk",
+        "là",
+        "mà",
+        "mình",
+        "mọi_người",
+        "một",
+        "nha",
+        "nhé",
+        "những",
+        "này",
+        "nói_chung",
+        "nói_chung_là",
+        "rửa_mặt",
+        "sp",
+        "srm",
+        "sản_phẩm",
+        "sữa",
+        "sữa_rửa_mặt",
+        "thì",
+        "tui",
+        "tôi",
+        "và",
+        "với",
+        "đây",
+        "đó",
+        "để",
+        "ạ",
+        "ấy"
+      ],
+      "ngram_range": [
+        1,
+        2
+      ],
+      "token_pattern": "(?u)\\b\\w\\w+\\b",
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    "ctfidf": {
+      "bm25_weighting": true,
+      "reduce_frequent_words": true
+    },
+    "bertopic": {
+      "calculate_probabilities": false,
+      "top_n_words": 10,
+      "verbose": true
+    }
+  },
+  "n_topics": 42,
+  "outlier_rate": 0.03660402766725837,
+  "coherence_sample": 0
+}

@@ -1,0 +1,30 @@
+{
+  "mode": "single_run",
+  "input": "C:\\Users\\PC\\PycharmProjects\\ABSA-T7\\crawl-data\\data\\unique_texts\\unique_texts.csv",
+  "valid_reviews": 12741,
+  "embedding_column": "cleaned_comment",
+  "topic_column": "cleaned_comment",
+  "requested_device": "cuda",
+  "embedding_device": "cuda",
+  "python_executable": "C:\\Users\\PC\\PycharmProjects\\ABSA-T7\\.venv-bertopic\\Scripts\\python.exe",
+  "batch_size": 32,
+  "coherence_sample": 0,
+  "skip_coherence": false,
+  "reference_params": {
+    "min_cluster_size": 60,
+    "min_samples": 15,
+    "n_neighbors": 20,
+    "min_df": 3,
+    "max_df": 0.9
+  },
+  "candidates": [
+    {
+      "min_cluster_size": 60,
+      "min_samples": 15,
+      "n_neighbors": 20,
+      "min_df": 3,
+      "max_df": 0.9
+    }
+  ],
+  "selection": "Single configuration; no Grid Search."
+}

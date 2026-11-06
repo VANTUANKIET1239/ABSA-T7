@@ -1,0 +1,14 @@
+{
+  "text_unit": "clause",
+  "input_reviews": 1000,
+  "split_units": 3589,
+  "training_unique_units": 2784,
+  "kept_unit_occurrences": 3248,
+  "reviews_with_training_units": 982,
+  "unit_status_counts": {
+    "kept": 3248,
+    "no_keywords": 299,
+    "too_short": 42
+  },
+  "duplicate_count_usage": "Metadata only; units are deduplicated by normalized topic text."
+}

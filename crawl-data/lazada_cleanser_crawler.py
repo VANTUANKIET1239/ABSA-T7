@@ -1,9 +1,4 @@
-"""Lazada facial cleanser reviews crawler (Selenium + existing Chrome 9222).
-
-Only reads public pages that the browser can access. Selectors for the CLOSED
-star filter are based on the supplied Lazada HTML. The OPEN dropdown was not
-supplied, so star selection is checked, with a slower all-stars fallback.
-"""
+"""Crawl Lazada cleanser reviews with Selenium and an existing Chrome session."""
 
 import csv
 import os
@@ -20,22 +15,20 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-# ===================== CONFIG =====================
 DEBUG_PORT = 9222
-TARGET_TOTAL_REVIEWS = 6000  # Có thể sửa thành 12000 nếu cần
+TARGET_TOTAL_REVIEWS = 6000
 MAX_REVIEWS_PER_PRODUCT = 200
 MAX_SEARCH_PAGES = 70
 MAX_FILTERED_REVIEW_PAGES = 100
 MAX_UNFILTERED_REVIEW_PAGES = 80
 MIN_COMMENT_LENGTH = 6
-DEBUG_SAVE_FILTER_HTML = False  # True: lưu DOM dropdown sau khi mở để debug
+DEBUG_SAVE_FILTER_HTML = False
 SEARCH_WAIT_SECONDS = 20
 DETAIL_PRICE_WAIT_SECONDS = 12
 SEARCH_SCROLL_STEPS = 5
 DEBUG_DIR = "data/lazada_debug"
 OUTPUT_FILE = "data/lazada_cleanser_reviews.csv"
 
-# Cùng quota với code Shopee: 1-4 sao trước, sau đó dồn phần thiếu vào 5 sao.
 STAR_QUOTAS = {1: 30, 2: 30, 3: 30, 4: 50}
 
 SEARCH_BASE = "https://www.lazada.vn/tag/sửa-rửa-mặt/"
@@ -46,8 +39,8 @@ HEADERS = [
 ]
 
 PRODUCT_CARD_SELECTORS = (
-    "div.Ms6aG.MefHh",    # Selector từ code Lazada cũ
-    "div.Bm3ON",           # Một số layout danh sách Lazada
+    "div.Ms6aG.MefHh",
+    "div.Bm3ON",
     "div[data-qa-locator='product-item']",
 )
 PRICE_SELECTORS = (
@@ -81,8 +74,7 @@ def normalize_url(url):
 
 
 def review_key(row):
-    # HTML mẫu không có ID review ổn định, nên dùng fingerprint tương đối.
-    # Hai review thật có cùng sản phẩm/ngày/sao/nội dung có thể bị coi là trùng.
+    # Fingerprints can merge distinct reviews with identical product/date/rating/text.
     return (
         normalize_url(row.get("product_url", "")),
         str(row.get("rating", "")).strip(),
@@ -99,10 +91,7 @@ def connect_chrome():
 
 
 def build_search_url(page, source="catalog"):
-    """Thử /catalog/ (ổn định hơn) và link /tag/ do người dùng cung cấp.
-
-    Dùng %20 thay cho dấu + trong query để khớp URL Lazada người dùng đã mở.
-    """
+    """Tạo URL tìm kiếm /catalog/ và /tag/, dùng %20 cho khoảng trắng."""
     if source == "tag":
         params = urlencode({
             "q": "sửa rửa mặt",
@@ -209,11 +198,7 @@ def extract_discount(card):
 
 
 def parse_product_cards(html):
-    """Dựa trên tất cả link sản phẩm, không phụ thuộc duy nhất vào class card.
-
-    Vấn đề phiên bản cũ: tìm thấy class card nhưng selector link bên trong
-    không khớp thì trả về 0 ngay, không bao giờ thử fallback theo link.
-    """
+    """Lấy link sản phẩm, hỗ trợ cả layout không có class card."""
     soup = BeautifulSoup(html, "html.parser")
     results, seen_urls = [], set()
 
@@ -355,12 +340,7 @@ def scroll_to_reviews(driver):
 
 
 def parse_product_detail(html):
-    """Lấy giá / giảm giá / brand từ TRANG CHI TIẾT (PDP) Lazada.
-
-    HTML được cung cấp có các class *-v2 dưới #module_product_price_v2.
-    Không tìm giá qua text của toàn trang vì dễ lấy nhầm phí vận chuyển,
-    giá voucher hoặc sản phẩm gợi ý. Giá là giá hiện tại, không phải giá gốc.
-    """
+    """Đọc giá, giảm giá và thương hiệu trong PDP; tránh giá voucher và phí vận chuyển."""
     soup = BeautifulSoup(html, "html.parser")
     module = soup.select_one("#module_product_price_v2")
     if module is None:
@@ -368,9 +348,9 @@ def parse_product_detail(html):
     price_root = module if module is not None else soup
 
     price = first_text(price_root, (
-        ".pdp-v2-product-price-content-salePrice-amount",   # HTML mẫu mới
-        ".pdp-product-price .pdp-price",                    # Một số giao diện cũ
-        ".pdp-price",                                      # Fallback trong module
+        ".pdp-v2-product-price-content-salePrice-amount",
+        ".pdp-product-price .pdp-price",
+        ".pdp-price",
     ))
     original_price = first_text(price_root, (
         ".pdp-v2-product-price-content-originalPrice-amount",
@@ -382,8 +362,7 @@ def parse_product_detail(html):
         ".pdp-product-price .pdp-product-price__discount",
     ))
 
-    # Chỉ dùng meta khi không có module giá hiển thị; meta có thể không phải
-    # giá theo biến thể đang chọn nên giá trên PDP luôn được ưu tiên.
+    # Prefer the displayed variant price over metadata.
     if not price:
         meta = soup.select_one("meta[property='product:price:amount'], meta[itemprop='price']")
         if meta:
@@ -392,7 +371,7 @@ def parse_product_detail(html):
     discount = ""
     percentage = re.search(r"(-?)\s*(100|\d{1,2})\s*%", raw_discount)
     if percentage:
-        discount = f"{percentage.group(2)}%"  # cùng format với Shopee (23%)
+        discount = f"{percentage.group(2)}%"
     elif price and original_price:
         def vnd_number(text):
             digits = re.sub(r"[^0-9]", "", text or "")
@@ -409,7 +388,7 @@ def parse_product_detail(html):
         discount = "0%"
 
     brand = first_text(soup, (
-        ".pdp-product-brand-v2__brand-link",  # HTML mẫu: Eucerin
+        ".pdp-product-brand-v2__brand-link",
         ".pdp-product-brand__brand-link",
     ))
     if not brand:
@@ -511,11 +490,7 @@ def is_selected_star(text, star):
 
 
 def select_star_filter(driver, star):
-    """Open rating dropdown, click the target and VERIFY that the UI accepted it.
-
-    Open-dropdown markup was not included in the user-supplied HTML; matching
-    text is deliberately best-effort and must be verified before scraping.
-    """
+    """Chọn bộ lọc sao và xác nhận giao diện đã áp dụng đúng."""
     if is_selected_star(selected_filter_text(driver), star):
         return True
 
@@ -531,7 +506,6 @@ def select_star_filter(driver, star):
             with open("data/lazada_open_filter_debug.html", "w", encoding="utf-8") as f:
                 f.write(driver.page_source)
 
-        # Tìm đúng văn bản '1 Sao', '1 Sao (N)', '1 Star', ... trong menu.
         # Leaf matching tránh click một container chứa toàn bộ text của trang.
         js_find_option = r"""
             const star = arguments[0];
@@ -648,11 +622,7 @@ def collect_pages_for_star(driver, product, star, quota, used_keys):
 
 
 def collect_unfiltered_fallback(driver, product, quotas, total_remaining, used_keys):
-    """Fallback khi dropdown sao thay đổi: đọc nhiều trang rồi phân nhóm.
-
-    Có giới hạn số trang, vì vậy chỉ đảm bảo ưu tiên trong phần đã quét,
-    không đảm bảo thu thập toàn bộ các review 1-4 sao của sản phẩm lớn.
-    """
+    """Quét trang và phân nhóm sao khi bộ lọc lỗi; chỉ đảm bảo ưu tiên trong phạm vi đã quét."""
     print("      [!] Fallback: quét các trang 'Tất cả Sao' rồi ưu tiên review <5 sao.")
     driver.get(product["product_url"])
     scroll_to_reviews(driver)
@@ -801,7 +771,6 @@ def main():
                         driver, product, counts, seen_keys,
                         global_remaining=TARGET_TOTAL_REVIEWS - saved_total,
                     )
-                    # Phòng trường hợp review xuất hiện lặp lại giữa các trang.
                     unique_rows = []
                     for row in rows:
                         key = review_key(row)

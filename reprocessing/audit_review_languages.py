@@ -1,8 +1,6 @@
-"""Screen every raw review for English, then export hash-guarded reviewed lists.
+"""Screen raw reviews for English and export hash-guarded review lists.
 
-No source edits. Vietnamese UI labels/rating titles are ignored for language
-decisions; borrowed words and product names alone do not imply an English review.
-"""
+Ignore Vietnamese UI labels, borrowed words and product names in language decisions."""
 
 import argparse
 from collections import Counter

@@ -1,7 +1,8 @@
-"""Khám phá topic review sữa rửa mặt bằng BERTopic và Grid Search theo C_v.
+"""Khám phá topic review sữa rửa mặt bằng BERTopic.
 
 Mỗi text duy nhất học một lần; duplicate_count chỉ là metadata.
-Dùng --check-input để kiểm tra dữ liệu, --single-run để chạy một cấu hình.
+Mặc định chạy một cấu hình; --grid-search bật tìm kiếm tham số theo C_v.
+Dùng --check-input để kiểm tra dữ liệu mà không huấn luyện.
 Các aspect gợi ý cần được kiểm tra thủ công trước khi dùng làm nhãn ABSA.
 """
 from __future__ import annotations
@@ -9,6 +10,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import sys
 from collections import defaultdict
 from itertools import product
 from pathlib import Path
@@ -30,6 +32,14 @@ BASELINE_PARAMS = {
     'max_df': 0.85,
 }
 
+DEFAULT_PARAMS = {
+    'min_cluster_size': 60,
+    'min_samples': 15,
+    'n_neighbors': 20,
+    'min_df': 3,
+    'max_df': 0.9,
+}
+
 # Chỉ lọc ở tầng keyword; giữ phủ định và mô tả trải nghiệm.
 TOPIC_STOPWORDS = {
     'mình', 'tôi', 'tui', 'em', 'anh', 'chị', 'bạn', 'mọi_người',
@@ -38,6 +48,64 @@ TOPIC_STOPWORDS = {
     'nha', 'nhé', 'ạ', 'ha', 'hihi', 'haha', 'hehe', 'kkk',
     'nói_chung', 'nói_chung_là', 'sản_phẩm', 'sp',
     'sữa_rửa_mặt', 'sữa', 'rửa_mặt', 'srm',
+
+    ## lọc đợt 1
+     "cực_kì", "hài_lòng", "ok", "oke", "tốt",
+    "rất", "lắm", "tuyệt", "ưng", "ổn",
+    "cũng", "sẽ", "tiếp_tục", "ủng_hộ",
+    "lần_sau", "thứ", "rồi", "thấy",
+    "biết", "nên", "thế_nào", "đánh_giá",
+    "công_dụng", "dành", "dùng", "sử_dụng",
+    "hàng_ngày", "cảm_thấy", "làm", "ra",
+    "lên", "mặt", "rửa", "bị",
+    "hàng", "sản_phẩm", "cửa_hàng",
+    "mô_tả", "mong_đợi", "được",
+    "như", "đúng", "cho", "với",
+    "số_lượng", "người", "tiếp",
+    "rat", "san", "pham", "dung",
+    "hang", "nhieu", "chua", "co", "nen",
+    "t3", "ml",
+
+    ## dot 3
+
+    "ngoài", "làn", "lại", "trên", "cả",
+    "đã", "mới", "hẳn", "đến", "thứ",
+    "thời_gian", "đã_nhận", "nhu_cầu",
+    "giới_thiệu", "bạn_bè", "giới_thiệu bạn_bè",
+    "quay", "quay_lại", "lần sau",
+    "cảm_ơn", "đáng_yêu", "dễ_thương",
+    "tạm", "đạt", "hình", "chuẩn",
+    "tuyệt_vời", "ổn_định", "rất_tốt",
+    "thích", "chê", "mua_thích",
+    "ngon", "bổ", "ngon_bổ", "bổ_rẻ",
+    "ghi", "trưa", "lam", "tôt",
+    "sao", "5sao", "năm_sao",
+    "tiki", "shopee", "lazada",
+    "t3", "ml", "500ml",
+    "săn", "hàng_ngày",
+    "sử_dụng_hàng_ngày",
+    "cảm_thấy", "công_thức",
+    "giúp", "sự", "sự_xuất_hiện",
+    
+    # dot 4 
+
+     "bên",
+    "lần", "sau", "lần_sau",
+    "mọi", "ơi", "mọi_ơi",
+    "chỉ", "về", "so", "đáng",
+    "như_thế_nào", "nhờ",
+    "hai_long", "thik", "tôt",
+    "kinh_nghiệm",
+    "đã", "mới", "nhận",
+    "mua", "nhiều", "áp",
+
+
+    # dot 5
+
+    "quá_đỉnh",
+    "mọi", "ơi", "vẫn",
+    "mua", "nhiều"
+
 }
 
 ASPECT_KEYWORDS = {
@@ -106,6 +174,30 @@ def resolve_output_path(name: str) -> Path:
     return path if path.is_absolute() else Path.cwd() / path
 
 
+def resolve_embedding_device(requested: str) -> str:
+    import torch
+
+    print(f'[*] Python đang chạy: {sys.executable}', flush=True)
+    print(f'[*] PyTorch: {torch.__version__}; CUDA runtime: {torch.version.cuda}', flush=True)
+    if requested == 'cpu':
+        return 'cpu'
+    if requested not in {'auto', 'cuda'}:
+        raise ValueError('Thiết bị phải là auto, cuda hoặc cpu.')
+    if torch.cuda.is_available():
+        print(f'[*] GPU: {torch.cuda.get_device_name(0)}', flush=True)
+        return 'cuda'
+    reason = ('Bản PyTorch này chỉ hỗ trợ CPU.' if torch.version.cuda is None else
+              'PyTorch có CUDA nhưng tiến trình hiện tại không truy cập được GPU.')
+    if requested == 'cuda':
+        raise RuntimeError(
+            f'{reason} Python: {sys.executable}. Kiểm tra interpreter .venv-bertopic '
+            'và cài requirements-bertopic-cuda.txt để dùng PyTorch CUDA.'
+        )
+    print(f'[!] --device auto chuyển sang CPU: {reason} '
+          'Dùng --device cuda để báo lỗi nếu không có GPU.', flush=True)
+    return 'cpu'
+
+
 def choose_column(df: pd.DataFrame, preferred: str, fallbacks: tuple[str, ...]) -> str:
     for col in (preferred, *fallbacks):
         if col in df.columns:
@@ -120,9 +212,8 @@ def read_dataset(input_path: Path, embedding_column: str, topic_column: str):
     if not input_path.is_file():
         raise FileNotFoundError(f'Không tìm thấy CSV: {input_path}')
     df = pd.read_csv(input_path, encoding='utf-8-sig', low_memory=False)
-    e_col = choose_column(df, embedding_column,
-                          ('normalized_comment', 'representative_comment', 'comment', 'cleaned_comment'))
-    t_col = choose_column(df, topic_column, ('topic_comment', 'cleaned_comment'))
+    e_col = choose_column(df, embedding_column, ('cleaned_comment',))
+    t_col = choose_column(df, topic_column, ('cleaned_comment',))
 
     df = df.copy()
     df['_embedding_text'] = df[e_col].fillna('').astype(str).str.strip()
@@ -396,23 +487,30 @@ def main():
     parser = argparse.ArgumentParser(description='BERTopic cho đánh giá sữa rửa mặt')
     parser.add_argument('--input', default=DEFAULT_INPUT)
     parser.add_argument('--output-dir', default=DEFAULT_OUTPUT)
-    parser.add_argument('--embedding-column', default='normalized_comment',
-                        help='Ưu tiên cột chỉ định; tự dùng representative_comment cho CSV unique')
-    parser.add_argument('--topic-column', default='topic_comment',
-                        help='Ưu tiên cột chỉ định; tự dùng cleaned_comment cho CSV unique')
+    parser.add_argument('--embedding-column', default='cleaned_comment',
+                        help='Cột tạo embeddings; mặc định cleaned_comment, đổi underscore thành khoảng trắng')
+    parser.add_argument('--topic-column', default='cleaned_comment',
+                        help='Cột tạo keyword và tính C_v; mặc định cleaned_comment, giữ underscore')
     parser.add_argument('--check-input', action='store_true', help='Kiểm tra CSV/cột mà không huấn luyện')
-    parser.add_argument('--min-cluster-size', type=int, default=BASELINE_PARAMS['min_cluster_size'])
-    parser.add_argument('--min-samples', type=int, default=BASELINE_PARAMS['min_samples'])
-    parser.add_argument('--n-neighbors', type=int, default=BASELINE_PARAMS['n_neighbors'])
-    parser.add_argument('--min-df', type=int, default=BASELINE_PARAMS['min_df'])
-    parser.add_argument('--max-df', type=float, default=BASELINE_PARAMS['max_df'])
-    parser.add_argument('--single-run', action='store_true', help='Chỉ fit một lần với các tham số CLI, không Grid Search')
+    parser.add_argument('--min-cluster-size', type=int, default=DEFAULT_PARAMS['min_cluster_size'])
+    parser.add_argument('--min-samples', type=int, default=DEFAULT_PARAMS['min_samples'])
+    parser.add_argument('--n-neighbors', type=int, default=DEFAULT_PARAMS['n_neighbors'])
+    parser.add_argument('--min-df', type=int, default=DEFAULT_PARAMS['min_df'])
+    parser.add_argument('--max-df', type=float, default=DEFAULT_PARAMS['max_df'])
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument('--single-run', dest='single_run', action='store_true',
+                      help='Chạy một cấu hình (mặc định)')
+    mode.add_argument('--grid-search', dest='single_run', action='store_false',
+                      help='Bật Grid Search; chỉ dùng khi muốn thử nhiều cấu hình')
+    parser.set_defaults(single_run=True)
     parser.add_argument('--grid-min-cluster-sizes', type=int, nargs='+', default=[15, 30, 50])
-    parser.add_argument('--grid-min-samples', type=int, nargs='+', default=[3, 5, 10])
-    parser.add_argument('--grid-n-neighbors', type=int, nargs='+', default=[10, 20, 30])
+    parser.add_argument('--grid-min-samples', type=int, nargs='+', default=[3, 5, 10, 15])
+    parser.add_argument('--grid-n-neighbors', type=int, nargs='+', default=[10, 15, 20, 30])
     parser.add_argument('--grid-min-df', type=int, nargs='+', help='Mặc định giữ --min-df')
     parser.add_argument('--grid-max-df', type=float, nargs='+', help='Mặc định giữ --max-df')
     parser.add_argument('--batch-size', type=int, default=32)
+    parser.add_argument('--device', choices=['auto', 'cuda', 'cpu'], default='auto',
+                        help='Thiết bị tạo embeddings; auto ưu tiên CUDA khi khả dụng')
     parser.add_argument('--coherence-sample', type=int, default=0,
                         help='0 = full corpus; N > 0 = lấy mẫu N reviews để tính C_v')
     parser.add_argument('--skip-coherence', action='store_true', help='Chỉ dùng với --single-run')
@@ -440,10 +538,12 @@ def main():
 
     if len(df) < 10:
         raise ValueError('Cần tối thiểu 10 review hợp lệ để chạy mô hình; dữ liệu thực tế nên lớn hơn nhiều.')
+    embedding_device = resolve_embedding_device(args.device)
     reference = {key: getattr(args, key) for key in BASELINE_PARAMS}
     candidates = parameter_candidates(args, reference, len(df))
     if args.single_run:
         validate_params(reference, len(df))
+        print(f'[*] Chạy một cấu hình: {reference}')
     else:
         # Kiểm tra Gensim trước bước tạo embeddings.
         from gensim.models import CoherenceModel  # noqa: F401
@@ -461,10 +561,13 @@ def main():
         'mode': 'single_run' if args.single_run else 'grid_search',
         'input': str(resolve_input_path(args.input).resolve()), 'valid_reviews': len(df),
         'embedding_column': embedding_col, 'topic_column': topic_col,
+        'requested_device': args.device, 'embedding_device': embedding_device,
+        'python_executable': sys.executable,
         'batch_size': args.batch_size, 'coherence_sample': args.coherence_sample,
         'skip_coherence': args.skip_coherence, 'reference_params': reference,
         'candidates': candidates,
-        'selection': 'Maximum finite C_v; ties keep the first trial (baseline is tried first).',
+        'selection': ('Single configuration; no Grid Search.' if args.single_run else
+                      'Maximum finite C_v; ties keep the first trial (baseline is tried first).'),
     })
 
     from sentence_transformers import SentenceTransformer
@@ -472,11 +575,13 @@ def main():
     embed_docs = df['_embedding_text'].tolist()
     topic_docs = df['_topic_text'].tolist()
     print('[*] Tải SentenceTransformer:', EMBEDDING_MODEL_NAME)
-    embedding_model = SentenceTransformer(EMBEDDING_MODEL_NAME)
+    embedding_model = SentenceTransformer(EMBEDDING_MODEL_NAME, device=embedding_device)
+    print(f'[*] Thiết bị tạo embeddings: {embedding_device}')
     print(f'[*] Tạo embeddings từ {embedding_col}...')
     embeddings = embedding_model.encode(
         embed_docs,
         batch_size=args.batch_size,
+        device=embedding_device,
         show_progress_bar=True,
         convert_to_numpy=True,
         normalize_embeddings=True,

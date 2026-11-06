@@ -1,0 +1,209 @@
+{
+  "mode": "grid_search",
+  "input": "C:\\Users\\PC\\PycharmProjects\\ABSA-T7\\crawl-data\\data\\combined_reviews_brand_filled_language_filtered.csv",
+  "valid_reviews": 16337,
+  "embedding_column": "comment",
+  "topic_column": "cleaned_comment",
+  "batch_size": 32,
+  "coherence_sample": 0,
+  "skip_coherence": false,
+  "reference_params": {
+    "min_cluster_size": 30,
+    "min_samples": 5,
+    "n_neighbors": 20,
+    "min_df": 3,
+    "max_df": 0.85
+  },
+  "candidates": [
+    {
+      "min_cluster_size": 30,
+      "min_samples": 5,
+      "n_neighbors": 20,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 15,
+      "min_samples": 3,
+      "n_neighbors": 10,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 15,
+      "min_samples": 3,
+      "n_neighbors": 20,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 15,
+      "min_samples": 3,
+      "n_neighbors": 30,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 15,
+      "min_samples": 5,
+      "n_neighbors": 10,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 15,
+      "min_samples": 5,
+      "n_neighbors": 20,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 15,
+      "min_samples": 5,
+      "n_neighbors": 30,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 15,
+      "min_samples": 10,
+      "n_neighbors": 10,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 15,
+      "min_samples": 10,
+      "n_neighbors": 20,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 15,
+      "min_samples": 10,
+      "n_neighbors": 30,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 30,
+      "min_samples": 3,
+      "n_neighbors": 10,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 30,
+      "min_samples": 3,
+      "n_neighbors": 20,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 30,
+      "min_samples": 3,
+      "n_neighbors": 30,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 30,
+      "min_samples": 5,
+      "n_neighbors": 10,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 30,
+      "min_samples": 5,
+      "n_neighbors": 30,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 30,
+      "min_samples": 10,
+      "n_neighbors": 10,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 30,
+      "min_samples": 10,
+      "n_neighbors": 20,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 30,
+      "min_samples": 10,
+      "n_neighbors": 30,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 50,
+      "min_samples": 3,
+      "n_neighbors": 10,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 50,
+      "min_samples": 3,
+      "n_neighbors": 20,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 50,
+      "min_samples": 3,
+      "n_neighbors": 30,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 50,
+      "min_samples": 5,
+      "n_neighbors": 10,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 50,
+      "min_samples": 5,
+      "n_neighbors": 20,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 50,
+      "min_samples": 5,
+      "n_neighbors": 30,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 50,
+      "min_samples": 10,
+      "n_neighbors": 10,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 50,
+      "min_samples": 10,
+      "n_neighbors": 20,
+      "min_df": 3,
+      "max_df": 0.85
+    },
+    {
+      "min_cluster_size": 50,
+      "min_samples": 10,
+      "n_neighbors": 30,
+      "min_df": 3,
+      "max_df": 0.85
+    }
+  ],
+  "selection": "Maximum finite C_v; ties keep the first trial (baseline is tried first)."
+}

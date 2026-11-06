@@ -1,0 +1,855 @@
+{
+  "input": "C:\\Users\\PC\\PycharmProjects\\ABSA-T7\\crawl-data\\data\\unique_texts\\unique_texts.csv",
+  "text_column": "cleaned_comment",
+  "python_executable": "C:\\Users\\PC\\PycharmProjects\\ABSA-T7\\.venv\\Scripts\\python.exe",
+  "valid_documents": 12744,
+  "vocabulary_size": 16104,
+  "candidates": [
+    {
+      "num_topics": 1,
+      "alpha": "symmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 1,
+      "alpha": "symmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 1,
+      "alpha": "asymmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 1,
+      "alpha": "asymmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 2,
+      "alpha": "symmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 2,
+      "alpha": "symmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 2,
+      "alpha": "asymmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 2,
+      "alpha": "asymmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 2,
+      "alpha": "auto",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 2,
+      "alpha": "auto",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 3,
+      "alpha": "symmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 3,
+      "alpha": "symmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 3,
+      "alpha": "asymmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 3,
+      "alpha": "asymmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 3,
+      "alpha": "auto",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 3,
+      "alpha": "auto",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 4,
+      "alpha": "symmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 4,
+      "alpha": "symmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 4,
+      "alpha": "asymmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 4,
+      "alpha": "asymmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 4,
+      "alpha": "auto",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 4,
+      "alpha": "auto",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 5,
+      "alpha": "symmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 5,
+      "alpha": "symmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 5,
+      "alpha": "asymmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 5,
+      "alpha": "asymmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 5,
+      "alpha": "auto",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 5,
+      "alpha": "auto",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 6,
+      "alpha": "symmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 6,
+      "alpha": "symmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 6,
+      "alpha": "asymmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 6,
+      "alpha": "asymmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 6,
+      "alpha": "auto",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 6,
+      "alpha": "auto",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 7,
+      "alpha": "symmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 7,
+      "alpha": "symmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 7,
+      "alpha": "asymmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 7,
+      "alpha": "asymmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 7,
+      "alpha": "auto",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 7,
+      "alpha": "auto",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 8,
+      "alpha": "symmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 8,
+      "alpha": "symmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 8,
+      "alpha": "asymmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 8,
+      "alpha": "asymmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 8,
+      "alpha": "auto",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 8,
+      "alpha": "auto",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 9,
+      "alpha": "symmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 9,
+      "alpha": "symmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 9,
+      "alpha": "asymmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 9,
+      "alpha": "asymmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 9,
+      "alpha": "auto",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 9,
+      "alpha": "auto",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 10,
+      "alpha": "symmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 10,
+      "alpha": "symmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 10,
+      "alpha": "asymmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 10,
+      "alpha": "asymmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 10,
+      "alpha": "auto",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 10,
+      "alpha": "auto",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 11,
+      "alpha": "symmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 11,
+      "alpha": "symmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 11,
+      "alpha": "asymmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 11,
+      "alpha": "asymmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 11,
+      "alpha": "auto",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 11,
+      "alpha": "auto",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 12,
+      "alpha": "symmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 12,
+      "alpha": "symmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 12,
+      "alpha": "asymmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 12,
+      "alpha": "asymmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 12,
+      "alpha": "auto",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 12,
+      "alpha": "auto",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 13,
+      "alpha": "symmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 13,
+      "alpha": "symmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 13,
+      "alpha": "asymmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 13,
+      "alpha": "asymmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 13,
+      "alpha": "auto",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 13,
+      "alpha": "auto",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 14,
+      "alpha": "symmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 14,
+      "alpha": "symmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 14,
+      "alpha": "asymmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 14,
+      "alpha": "asymmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 14,
+      "alpha": "auto",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 14,
+      "alpha": "auto",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 15,
+      "alpha": "symmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 15,
+      "alpha": "symmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 15,
+      "alpha": "asymmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 15,
+      "alpha": "asymmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 15,
+      "alpha": "auto",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 15,
+      "alpha": "auto",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 16,
+      "alpha": "symmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 16,
+      "alpha": "symmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 16,
+      "alpha": "asymmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 16,
+      "alpha": "asymmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 16,
+      "alpha": "auto",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 16,
+      "alpha": "auto",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 17,
+      "alpha": "symmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 17,
+      "alpha": "symmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 17,
+      "alpha": "asymmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 17,
+      "alpha": "asymmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 17,
+      "alpha": "auto",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 17,
+      "alpha": "auto",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 18,
+      "alpha": "symmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 18,
+      "alpha": "symmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 18,
+      "alpha": "asymmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 18,
+      "alpha": "asymmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 18,
+      "alpha": "auto",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 18,
+      "alpha": "auto",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 19,
+      "alpha": "symmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 19,
+      "alpha": "symmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 19,
+      "alpha": "asymmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 19,
+      "alpha": "asymmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 19,
+      "alpha": "auto",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 19,
+      "alpha": "auto",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 20,
+      "alpha": "symmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 20,
+      "alpha": "symmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 20,
+      "alpha": "asymmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 20,
+      "alpha": "asymmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 20,
+      "alpha": "auto",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 20,
+      "alpha": "auto",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    }
+  ],
+  "fixed_params": {
+    "random_state": 42,
+    "chunksize": 2000,
+    "update_every": 0,
+    "minimum_probability": 0.0
+  },
+  "top_n_words": 10,
+  "skip_perplexity": false,
+  "coherence": {
+    "metric": "c_v",
+    "processes": 1,
+    "documents": 12744
+  },
+  "vectorizer": {
+    "min_df": 3,
+    "max_df": 0.85,
+    "ngram_max": 2,
+    "remove_brand_tokens": false
+  },
+  "selection": "Maximum finite C_v; ties keep the first trial."
+}

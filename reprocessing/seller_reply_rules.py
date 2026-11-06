@@ -67,12 +67,9 @@ SELLER_REPLY_PATTERNS = [(name, re.compile(r"(?<!\w)(?:" + pattern + r")", re.I)
 
 
 def strip_seller_reply(text):
-    """Return (exact customer prefix, evidence) for an appended reply or no match.
+    """Return the exact customer prefix and evidence for an appended merchant reply.
 
-    Dataset replies are appended after customer text. Do not remove a whole row
-    just because it contains a merchant reply. The caller decides what to do if
-    no customer text remains. No arbitrary 'cảm ơn shop'/'xin chào' rule is used.
-    """
+    Match known reply patterns; the caller handles an empty customer prefix."""
     folded, offsets = fold_with_offsets(text)
     candidates = []
     for name, pattern in SELLER_REPLY_PATTERNS:
@@ -83,8 +80,7 @@ def strip_seller_reply(text):
         return text, None
     position, name, marker = min(candidates, key=lambda item: item[0])
     start = offsets[position]
-    # Include a preceding sender name when the thanks formula matched first.
-    # Match only a known sender immediately adjacent to the formula.
+    # Include only a known sender immediately preceding the matched reply formula.
     prefix = folded[:position]
     sender = re.search(r"(?:" + _BRAND + r"|shop|gian hang)\s+(?:xin )?(?:chan thanh )?$", prefix)
     if sender:

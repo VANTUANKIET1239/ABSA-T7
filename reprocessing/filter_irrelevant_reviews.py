@@ -1,8 +1,4 @@
-"""Screen all cleanser reviews locally; export candidates without changing source.
-
-Decisions explicitly distinguish unrelated text, mixed reviews, purchase-service
-feedback and generic ratings. A missing keyword is only a manual-review signal.
-"""
+"""Screen cleanser reviews and export candidates; missing keywords require manual review."""
 from __future__ import annotations
 
 import argparse

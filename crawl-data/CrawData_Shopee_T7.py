@@ -11,14 +11,13 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-# --- CẤU HÌNH ---
 TARGET_TOTAL_REVIEWS = 6000
 MAX_REVIEWS_PER_PRODUCT = 200
 OUTPUT_FILE = "data/shopee_reviews.csv"
 
 
 def get_cookies_from_chrome():
-    """BƯỚC 1: Lấy Cookie từ Chrome đang mở qua cổng 9222"""
+    """Lấy cookie từ Chrome đang mở qua cổng 9222."""
     print("=" * 60)
     print("[*] BƯỚC 1: KẾT NỐI VÀ LẤY COOKIE")
     print("=" * 60)
@@ -38,7 +37,7 @@ def get_cookies_from_chrome():
 
 
 def get_product_list(driver, page_index):
-    """BƯỚC 2: Quét danh sách sản phẩm & Lấy Giá, Title, % Giảm giá"""
+    """Lấy danh sách sản phẩm, giá và mức giảm giá."""
     url = f"https://shopee.vn/search?keyword=sửa%20rửa%20mặt&page={page_index}&sortBy=sales"
     print(f"[*] BƯỚC 2: QUÉT SẢN PHẨM TRANG {page_index + 1}")
 
@@ -76,7 +75,6 @@ def get_product_list(driver, page_index):
             text_content = card.get_text(separator=" ")
             card_text_list = card.get_text(separator="\n").split("\n")
 
-            # 1. Lấy Giá
             price_match = re.search(r'(?:₫\s*[\d\.]+|[\d\.]+\s*₫)(?:\s*-\s*(?:₫\s*[\d\.]+|[\d\.]+\s*₫))?', text_content)
 
             if price_match:
@@ -85,11 +83,9 @@ def get_product_list(driver, page_index):
                 print("Không tìm thấy")
             price = price_match.group(0) if price_match else "0₫"
 
-            # 2. Lấy % Giảm Giá (Bắt các chuỗi như -15%, 15%, Giảm 15%)
             discount_match = re.search(r'-?(\d+)%', text_content)
             discount = f"{discount_match.group(1)}%" if discount_match else "0%"
 
-            # 3. Lấy Tên SP
             title_candidates = [t.strip() for t in card_text_list if
                                 len(t.strip()) > 10 and '₫' not in t and 'Đã bán' not in t]
             title = title_candidates[0] if title_candidates else "Unknown Smartphone"
@@ -98,7 +94,7 @@ def get_product_list(driver, page_index):
                 "product_name": title,
                 "product_url": link.split('?')[0],
                 "price": price,
-                "discount": discount,  # <-- Thêm % giảm giá vào dict
+                "discount": discount,
                 "shop_id": shop_id,
                 "item_id": item_id
             })
@@ -110,7 +106,7 @@ def get_product_list(driver, page_index):
 
 
 def fetch_reviews_via_stealth_api(product, driver):
-    """BƯỚC 3: Ưu tiên sao và Bóc tách thêm dữ liệu uy tín Shop"""
+    """Lấy review theo ưu tiên số sao và thông tin cửa hàng."""
     product_reviews = []
 
     print(f"      -> Đang vào trang SP để nạp Token & Dữ liệu Shop...", end="\r", flush=True)
@@ -201,7 +197,7 @@ def fetch_reviews_via_stealth_api(product, driver):
                             "date": date_str,
                             "product_url": product["product_url"],
                             "price": product["price"],
-                            "discount": product["discount"],  # <-- Ghi dữ liệu % giảm giá vào dataset
+                            "discount": product["discount"],
 
                             "shop_reviews": shop_info["shop_reviews"],
                             "shop_response_rate": shop_info["response_rate"],
@@ -229,7 +225,6 @@ def fetch_reviews_via_stealth_api(product, driver):
 
         return True
 
-        # --- CHẠY LOGIC ---
 
     stars_config = [{"star": 1, "max": 30}, {"star": 2, "max": 30}, {"star": 3, "max": 30}, {"star": 4, "max": 50}]
 
@@ -253,7 +248,6 @@ def save_data(new_data):
     df.to_csv(OUTPUT_FILE, mode='a', index=False, header=not file_exists, encoding="utf-8-sig")
 
 
-# ==================== MAIN ====================
 def main():
     cookies_dict, driver = get_cookies_from_chrome()
     total_collected = 0

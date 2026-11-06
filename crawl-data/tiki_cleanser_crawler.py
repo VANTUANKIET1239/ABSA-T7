@@ -1,17 +1,6 @@
-"""Tiki facial-cleanser review crawler using JSON APIs (no HTML scraping).
+"""Crawl Tiki cleanser reviews through JSON APIs with incremental CSV output.
 
-Features
-- Keyword search for "sữa rửa mặt" (not the old smartphone category)
-- Target total / per-product review limits
-- Low-star quotas (1:30, 2:30, 3:30, 4:50); 5-star fills the remainder
-- Price, original price, discount, brand and review text length
-- Incremental CSV append, deduplication, resume/re-run safety
-- API star-filter validation; bounded all-star fallback if unsupported
-
-Tiki's consumer-facing JSON API is not a documented stable public contract.
-Test the API response/logs with your browser session before large crawls.
-The crawler stops on persistent HTTP errors, rather than evading access controls.
-"""
+Verify star filters and use bounded all-star scans when unsupported."""
 
 from __future__ import annotations
 
@@ -38,7 +27,6 @@ except ImportError:
     Options = None
 
 
-# ============================= CONFIG =============================
 SEARCH_KEYWORD = "sữa rửa mặt"
 TARGET_TOTAL_REVIEWS = 6000
 MAX_REVIEWS_PER_PRODUCT = 200
@@ -71,7 +59,6 @@ SEARCH_APIS = (
 DETAIL_API = f"{BASE}/api/v2/products/{{product_id}}"
 REVIEWS_API = f"{BASE}/api/v2/reviews"
 
-# Keep product and review columns explicit to avoid accidental schema changes.
 CSV_HEADERS = [
     "product_name", "brand", "rating", "date", "product_url",
     "price", "discount", "comment", "review_text_length",
@@ -81,7 +68,6 @@ CSV_HEADERS = [
 VN_TZ = timezone(timedelta(hours=7))
 
 
-# ============================= HELPERS ============================
 def pause(delay=REQUEST_DELAY):
     time.sleep(random.uniform(*delay))
 
@@ -262,7 +248,6 @@ def row_key(row):
     return (pid, "fallback", hashlib.sha256(f"{rating}|{date}|{content}".encode()).hexdigest())
 
 
-# ========================== HTTP SESSION ==========================
 class APIError(RuntimeError):
     pass
 
@@ -425,7 +410,6 @@ class TikiClient:
         if star is None:
             params["sort"] = all_star_sort
         elif mode == "sort":
-            # Candidate inferred from the original Tiki sort grammar.
             params["sort"] = f"score|desc,id|desc,stars|{star}"
         elif mode == "stars":
             params["sort"] = "score|desc,id|desc,stars|all"
@@ -437,7 +421,6 @@ class TikiClient:
         return self.extract_reviews(payload)
 
 
-# ======================== INCREMENTAL CSV ========================
 class CSVStore:
     def __init__(self, filename):
         self.path = Path(filename)
@@ -484,8 +467,7 @@ class CSVStore:
         if not new_rows:
             return 0
         write_header = not self.path.exists() or self.path.stat().st_size == 0
-        # UTF-8 BOM belongs only at the beginning of a new CSV file.
-        # Using utf-8-sig for *every* append would inject stray BOMs mid-file.
+        # Append with UTF-8; another BOM would corrupt the middle of the CSV.
         file_encoding = "utf-8-sig" if write_header else "utf-8"
         with self.path.open("a", encoding=file_encoding, newline="") as f:
             writer = csv.DictWriter(f, fieldnames=CSV_HEADERS, extrasaction="ignore")
@@ -502,14 +484,8 @@ class CSVStore:
         return len(new_rows)
 
 
-# =========================== REVIEW LOGIC =========================
 def take_filtered_star(client, product, star, quota, occupied_keys):
-    """Fetch one-star bucket while verifying that every returned rating matches.
-
-    Try the sort expression from the user's existing code, then a stars query
-    parameter. Do not trust an apparently successful HTTP response that ignores
-    the filter. When neither candidate is reliable, fall back to all-star scan.
-    """
+    """Fetch one rating bucket and verify every returned rating; otherwise use all-star fallback."""
     if quota <= 0:
         return [], True
 
@@ -522,7 +498,6 @@ def take_filtered_star(client, product, star, quota, occupied_keys):
                 reviews, paging = client.reviews(product["product_id"], page, star, mode=mode)
                 if not reviews:
                     break
-                # If ANY response rating mismatches, the API is not actually filtering.
                 for record in reviews:
                     rating = integer(record.get("rating"))
                     if rating is not None and rating != star:
@@ -562,16 +537,11 @@ def take_filtered_star(client, product, star, quota, occupied_keys):
 
 
 def take_unfiltered_fallback(client, product, low_star_requirements, occupied_keys, capacity):
-    """Scan ordinary review pages and collect low stars before any 5-star row.
-
-    This can be slower than a valid server-side filter. Bounds prevent an
-    endless scan when a product has very many five-star ratings.
-    """
+    """Scan bounded review pages, collecting low-star reviews before five-star reviews."""
     by_star = {star: [] for star in (1, 2, 3, 4, 5)}
     local_seen = set()
     for page in range(1, MAX_UNFILTERED_REVIEW_PAGES + 1):
         try:
-            # Favor lower ratings in API sorting; correctness does not depend on it.
             reviews, paging = client.reviews(
                 product["product_id"], page,
                 all_star_sort="score|asc,id|desc,stars|all",
@@ -621,7 +591,6 @@ def crawl_product(client, product, store):
     needed = {}
     invalid_filters = set()
 
-    # First: 1/2/3/4 stars, each limited by the Shopee-style quotas.
     for star in (1, 2, 3, 4):
         available = capacity - len(collected)
         if available <= 0:
@@ -639,8 +608,6 @@ def crawl_product(client, product, store):
                 occupied.add(row_key(row))
             collected.extend(rows)
 
-    # If an endpoint ignores rating filters, safely scan all ratings and
-    # take only matching low-star rows for the still-missing quotas.
     five_from_fallback = []
     if invalid_filters and len(collected) < capacity:
         print(f"    [*] Fallback trang review thường cho sao: {sorted(invalid_filters)}")
@@ -655,7 +622,6 @@ def crawl_product(client, product, store):
                 collected.append(row)
         five_from_fallback = scans[5]
 
-    # Second: fill every remaining slot with five-star reviews.
     needed_five = capacity - len(collected)
     if needed_five:
         for row in five_from_fallback:
@@ -677,9 +643,7 @@ def crawl_product(client, product, store):
             scans = take_unfiltered_fallback(client, product, {}, occupied, needed_five)
             collected.extend(scans[5][:needed_five])
 
-    # Some API versions answer HTTP 200 with an empty list when a filter
-    # parameter is unsupported. If every star-specific call found nothing
-    # despite a positive listed review count, try ordinary pages once.
+    # Unsupported filters may return empty lists; retry without a filter.
     if not collected and (product.get("review_count") or 0) > 0 and not invalid_filters:
         print("    [!] Không có review qua filter; thử API review không lọc sao.")
         requirements = {
@@ -700,7 +664,6 @@ def crawl_product(client, product, store):
     return collected[:capacity]
 
 
-# =============================== MAIN ============================
 def main():
     store = CSVStore(OUTPUT_FILE)
     if store.total >= TARGET_TOTAL_REVIEWS:

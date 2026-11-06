@@ -1,0 +1,17 @@
+{
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "cuda_available": false,
+  "packages": {
+    "bertopic": "0.17.4",
+    "gensim": "4.4.0",
+    "sentence-transformers": "5.7.0",
+    "transformers": "4.57.6",
+    "torch": "2.15.0",
+    "numpy": "2.2.6",
+    "scipy": "1.16.3",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.7.2",
+    "umap-learn": "0.5.12",
+    "hdbscan": "0.8.44"
+  }
+}

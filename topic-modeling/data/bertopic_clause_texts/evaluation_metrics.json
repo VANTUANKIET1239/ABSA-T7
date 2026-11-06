@@ -1,0 +1,20 @@
+{
+  "c_v": 0.4165853285790084,
+  "n_topics": 130,
+  "outlier_rate": 0.23586122615248828,
+  "largest_topic_share": 0.05047864756602621,
+  "largest_topic_share_assigned": 0.06605952909817858,
+  "topic_diversity": 0.9,
+  "keyword_overlap_mean": 0.0008984030691857016,
+  "keyword_overlap_max": 0.3333333333333333,
+  "valid_topic_ratio": 1.0,
+  "selection": {
+    "metric": "balanced",
+    "formula": "max(C_v, 0) * topic_diversity * (1 - keyword_overlap_mean) * (1 - largest_topic_share_assigned) * (1 - outlier_rate) * valid_topic_ratio",
+    "note": "Balanced is a heuristic ranking score, not a standardized metric or an aspect-quality guarantee.",
+    "tie_break": "Higher C_v, then earlier trial.",
+    "keyword_top_n": 10
+  },
+  "selection_score": 0.26732991839795983,
+  "text_unit": "clause"
+}

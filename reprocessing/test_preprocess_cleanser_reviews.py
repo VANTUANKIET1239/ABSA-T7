@@ -4,14 +4,17 @@ import unittest
 import unicodedata
 from pathlib import Path
 
-from preprocess_cleanser_reviews import append_cleaned_column, normalize_comment, restore_missing_diacritics
+from preprocess_cleanser_reviews import (
+    WordSegmenter, append_cleaned_column, normalize_comment, remove_punctuation,
+    restore_missing_diacritics,
+)
 
 
 class RestoreMissingDiacriticsTests(unittest.TestCase):
     def test_full_and_partial_unaccented_phrases_with_negation(self):
         self.assertEqual(
             normalize_comment("SAN phẩm ko kich ứng, da dau. dong   goi can than!"),
-            "sản phẩm không kích ứng, da dầu. đóng gói cẩn thận!",
+            "sản phẩm không kích ứng da dầu đóng gói cẩn thận",
         )
         self.assertEqual(restore_missing_diacritics("rat tot; rat da; kho da"),
                          "rất tốt; rát da; khô da")
@@ -60,6 +63,34 @@ class RestoreMissingDiacriticsTests(unittest.TestCase):
         self.assertEqual(restore_missing_diacritics(result), result)
 
 
+class RemovePunctuationTests(unittest.TestCase):
+    def test_sentence_punctuation_is_replaced_without_joining_words(self):
+        self.assertEqual(
+            normalize_comment("Không sạch...da khô, rát: không hợp!?; (thơm) “dịu nhẹ”…"),
+            "không sạch da khô rát không hợp thơm dịu nhẹ",
+        )
+
+    def test_preserves_vietnamese_accents_negation_digits_and_word_joiners(self):
+        source = unicodedata.normalize("NFD", "không_kích_ứng, dưỡng_ẩm: 120ml! 50% + dịu_nhẹ")
+        self.assertEqual(remove_punctuation(source), "không_kích_ứng dưỡng_ẩm 120ml 50 dịu_nhẹ")
+
+    def test_field_diacritics_are_restored_before_colons_are_removed(self):
+        self.assertEqual(
+            normalize_comment("Làm sạch:sach Tạo bọt:min Hương thơm:nhe"),
+            "làm sạch sạch tạo bọt mịn hương thơm nhẹ",
+        )
+
+    def test_punctuation_returned_by_segmenter_is_also_removed(self):
+        class FakeSegmenter:
+            def word_segment(self, text):
+                return ["không_kích_ứng . dưỡng_ẩm , tốt !"]
+
+        segmenter = WordSegmenter(False)
+        segmenter.segmenter = FakeSegmenter()
+        self.assertEqual(segmenter.tokenize("không kích ứng dưỡng ẩm tốt"),
+                         "không_kích_ứng dưỡng_ẩm tốt")
+
+
 class AppendCleanedColumnTests(unittest.TestCase):
     def test_in_place_preserves_duplicates_short_empty_and_metadata(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -85,7 +116,7 @@ class AppendCleanedColumnTests(unittest.TestCase):
                 self.assertEqual(reader.fieldnames, columns + ["cleaned_comment"])
                 result = list(reader)
             self.assertEqual([{key: row[key] for key in columns} for row in result], rows)
-            self.assertEqual(result[0]["cleaned_comment"], "sữa_rửa_mặt không_kích_ứng , ph 5.5")
+            self.assertEqual(result[0]["cleaned_comment"], "sữa_rửa_mặt không_kích_ứng ph 5 5")
             self.assertEqual(result[0]["cleaned_comment"], result[1]["cleaned_comment"])
             self.assertEqual(result[2]["cleaned_comment"], "ok")
             self.assertEqual(result[3]["cleaned_comment"], "")

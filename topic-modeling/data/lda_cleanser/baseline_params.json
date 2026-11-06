@@ -1,0 +1,32 @@
+{
+  "description": "Cấu hình LDA gốc trước Grid Search; K gốc là 6,8,...,20.",
+  "params": {
+    "num_topics": 6,
+    "alpha": "symmetric",
+    "eta": "auto",
+    "passes": 20,
+    "iterations": 200
+  },
+  "fixed_params": {
+    "random_state": 42,
+    "chunksize": 2000,
+    "update_every": 0,
+    "minimum_probability": 0.0
+  },
+  "original_k_range": [
+    6,
+    8,
+    10,
+    12,
+    14,
+    16,
+    18,
+    20
+  ],
+  "vectorizer": {
+    "min_df": 3,
+    "max_df": 0.85,
+    "ngram_max": 2,
+    "remove_brand_tokens": false
+  }
+}

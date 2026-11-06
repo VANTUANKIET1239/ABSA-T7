@@ -1,0 +1,7 @@
+Input valid reviews: 12741
+Clusters (excluding -1): 16
+Outliers -1: 2918
+Outlier rate: 0.2290
+C_v coherence: 0.5757062354607918
+Counts refer to unique texts; duplicate_count is metadata, not a training weight.
+Suggested_Aspect is keyword-based only. Manual validation required.

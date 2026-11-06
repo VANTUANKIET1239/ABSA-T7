@@ -1,9 +1,4 @@
-"""Describe collected reviews and export CSV tables, PNG charts, and an HTML report.
-
-Install: python -m pip install -r crawl-data/requirements-analysis.txt
-Run:     python crawl-data/analyze_reviews.py
-Optional: --input PATH --output-dir PATH --top-brands 15
-"""
+"""Export review statistics as CSV tables, PNG charts, and an HTML report."""
 
 from __future__ import annotations
 
@@ -14,7 +9,7 @@ from pathlib import Path
 
 import matplotlib
 
-matplotlib.use("Agg")  # Also works without a desktop/display.
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import pandas as pd
 

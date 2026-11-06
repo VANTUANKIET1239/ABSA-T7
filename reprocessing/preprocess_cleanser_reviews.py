@@ -1,18 +1,6 @@
-"""Tiền xử lý review SỮA RỬA MẶT (Shopee, Lazada, Tiki).
+"""Tiền xử lý review sữa rửa mặt, giữ comment gốc và metadata.
 
-Giữ raw comment + metadata; tạo normalized_comment, cleaned_comment và topic_comment.
-Không loại từ phủ định / mô tả tác dụng phụ trong cleaned_comment.
-
-Chạy:
-    python preprocess_cleanser_reviews.py
-    python preprocess_cleanser_reviews.py --input data/shopee_test_reviews.csv data/lazada_cleanser_reviews.csv data/tiki_cleanser_reviews.csv
-    python preprocess_cleanser_reviews.py --no-vncorenlp
-    python preprocess_cleanser_reviews.py --input crawl-data/data/combined_reviews_brand_filled.csv --append-text-only
-
-Cài đặt:
-    pip install pandas tqdm demoji py_vncorenlp
-    # VNCoreNLP cần Java; model được tải lần đầu nếu chưa có.
-"""
+Tạo normalized_comment, cleaned_comment và topic_comment; giữ phủ định và _ ghép từ."""
 from __future__ import annotations
 
 import argparse
@@ -35,7 +23,7 @@ from tqdm import tqdm
 
 try:
     from .seller_reply_rules import strip_seller_reply
-except ImportError:  # Chạy trực tiếp script từ command line.
+except ImportError:
     from seller_reply_rules import strip_seller_reply
 
 try:
@@ -49,20 +37,18 @@ except ImportError:
     py_vncorenlp = None
 
 
-# ============================ CẤU HÌNH ============================
 DEFAULT_INPUT_FILES = [
-    "data/shopee_test_reviews.csv",    # đổi nếu file Shopee của bạn tên khác
+    "data/shopee_test_reviews.csv",
     "data/lazada_cleanser_reviews.csv",
     "data/tiki_cleanser_reviews.csv",
 ]
 DEFAULT_OUTPUT_FILE = "data/cleanser_reviews_preprocessed.csv"
-MIN_CLEANED_LENGTH = 6            # ít nhất 6 ký tự sau chuẩn hoá
+MIN_CLEANED_LENGTH = 6
 FILTER_VIETNAMESE = False         # tránh loại review tiếng Việt không dấu
 USE_VNCORENLP = True
 MODEL_DIRECTORY = "vncorenlp_model"
 MODEL_BASE_URL = "https://raw.githubusercontent.com/vncorenlp/VnCoreNLP/master/"
 
-# Các trường từ 3 crawler được giữ nguyên, nếu có.
 COLUMN_ALIASES = {
     "review_text": "comment", "reviewtext": "comment", "text": "comment",
     "review_date": "date", "reviewdate": "date", "created_at": "date",
@@ -70,8 +56,7 @@ COLUMN_ALIASES = {
     "review_star": "rating", "stars": "rating",
 }
 
-# Chỉ giữ ánh xạ an toàn trong ngữ cảnh sữa rửa mặt.
-# Tránh các sửa sai của code cũ như 'in' -> '', 'long' -> '', 'phạm' -> ''.
+# Chỉ ánh xạ teencode ít nhập nhằng.
 CUSTOM_TEENCODE = {
     "srm": "sữa rửa mặt", "sữa rm": "sữa rửa mặt", "sua rua mat": "sữa rửa mặt",
     "rua mat": "rửa mặt", "srmat": "sữa rửa mặt",
@@ -108,8 +93,6 @@ CUSTOM_TEENCODE = {
     "nhej": "nhé", "raats": "rất", "raat": "rất",
 }
 
-# Các tên thương hiệu cần được so khớp riêng, KHÔNG giới hạn ở hãng thuần chay.
-# Có thể bổ sung theo tập sản phẩm thực tế của nghiên cứu.
 BRAND_ALIASES = {
     "la roche posay": "La Roche-Posay", "la roche-posay": "La Roche-Posay",
     "lrp": "La Roche-Posay", "cerave": "CeraVe", "cetaphil": "Cetaphil",
@@ -134,7 +117,6 @@ BRAND_ALIASES = {
     "d program": "d program", "senka perfect whip": "Senka",
 }
 
-# Tập trung vào thành phần, kết cấu, khả năng làm sạch, tình trạng da và trải nghiệm mua.
 PHRASE_UNDERSCORE_DICT = {
     # loại da và biểu hiện
     "da nhạy cảm": "da_nhạy_cảm", "da dầu mụn": "da_dầu_mụn",
@@ -196,14 +178,10 @@ TOPIC_STOPWORDS = frozenset({
     "haha", "hihi", "kkk", "thì",
 })
 
-# Cụm được giữ nguyên dấu gạch dưới để biểu diễn khía cạnh hoàn chỉnh.
 PHRASES_SORTED = sorted(PHRASE_UNDERSCORE_DICT.items(), key=lambda x: len(x[0]), reverse=True)
 
-# Khôi phục dấu theo cụm trước khi mở rộng teencode / phân đoạn từ.
-# Chấp nhận từng tiếng đúng dấu hoặc không dấu, và một số dạng thiếu dấu
-# một phần đã rà riêng; KHÔNG
-# bỏ dấu toàn bộ input rồi đoán lại (vd. 'rát da' phải khác 'rất tốt').
-# Các cụm bổ sung được chọn từ ngữ cảnh của tập combined_reviews_brand_filled.
+# Khôi phục dấu theo cụm; không bỏ dấu toàn bộ vì dễ đổi nghĩa.
+# Ví dụ: 'rát da' phải khác 'rất tốt'.
 MISSING_DIACRITICS_PHRASES = tuple(dict.fromkeys([
     *(phrase for phrase in PHRASE_UNDERSCORE_DICT if phrase not in {"đỏ da", "dễ rửa"}),
     "sản phẩm", "sử dụng", "chất lượng", "chất gel", "chất kem",
@@ -261,9 +239,7 @@ MISSING_DIACRITICS_PHRASES = tuple(dict.fromkeys([
     "sạch lắm", "thơm lắm", "hơi lâu", "hơi khô", "hơi bị",
 ]))
 
-# Từ đơn ít nhập nhằng trong các ngữ cảnh đã rà. Không ánh xạ đơn lẻ
-# da/dung/mat/dau/rat/chat/hang/ban/la/on/it: chúng có nhiều cách hiểu,
-# hoặc là từ Việt/Anh hợp lệ. 'dược sĩ', 'xác minh', 'tẩy trang' giữ nguyên.
+# Tránh ánh xạ từ đơn đa nghĩa như da/dung/mat/dau/rat/chat.
 MISSING_DIACRITICS_WORDS = {
     "khong": "không", "thom": "thơm", "tot": "tốt", "tôt": "tốt",
     "mun": "mụn", "diu": "dịu", "tuyp": "tuýp", "thich": "thích",
@@ -271,8 +247,7 @@ MISSING_DIACRITICS_WORDS = {
     "dep": "đẹp", "mem": "mềm",
 }
 
-# Dạng thiếu một phần dấu đã kiểm tra theo cụm, không sinh mọi tổ hợp dấu:
-# sinh tự do sẽ đổi sai 'hàng ngày' thành 'hằng ngày', 'dược' thành 'được'.
+# Chỉ dùng biến thể đã kiểm tra, không sinh mọi tổ hợp dấu.
 MISSING_DIACRITICS_PARTIAL_PHRASES = {
     "sản phâm": "sản phẩm", "sản phảm": "sản phẩm", "san phâm": "sản phẩm",
     "chất lương": "chất lượng", "chât lượng": "chất lượng",
@@ -319,8 +294,7 @@ _MISSING_ACCENT_PHRASE_PATTERN, _MISSING_ACCENT_TARGETS = _compile_missing_accen
 _MISSING_ACCENT_WORD_PATTERN = re.compile(
     r"(?<!\w)(?:" + "|".join(map(re.escape, MISSING_DIACRITICS_WORDS)) + r")(?!\w)", re.I)
 
-# Giá trị ngắn chỉ rõ nghĩa khi nằm trong một trường review tiếng Việt.
-# Không dùng các ánh xạ này cho từ đơn ở vị trí bất kỳ trong câu.
+# Chỉ khôi phục từ ngắn khi có nhãn trường review rõ nghĩa.
 MISSING_DIACRITICS_FIELD_VALUES = {
     "làm sạch": {"sach": "sạch", "on": "ổn", "min": "mịn"},
     "công dụng": {"sach": "sạch", "on": "ổn"},
@@ -344,11 +318,7 @@ _MISSING_ACCENT_FIELD_PATTERN = re.compile(
 
 
 def restore_missing_diacritics(text: str, *, changes: list | None = None) -> str:
-    """Khôi phục dấu có chọn lọc; changes ghi (cụm gốc, cụm thay thế) để audit.
-
-    Không phải mô hình phục hồi dấu toàn câu. Từ đa nghĩa chỉ sửa khi nằm
-    trong cụm đã chọn, không dùng rating hay nội dung tích cực để đoán dấu.
-    """
+    """Khôi phục dấu theo ngữ cảnh đã chọn; changes ghi các cặp gốc/thay thế."""
     text = unicodedata.normalize("NFC", text)
 
     def replace_phrase(match):
@@ -359,8 +329,7 @@ def restore_missing_diacritics(text: str, *, changes: list | None = None) -> str
                 and re.match(r"\s+(?:khi|đó|do|này|nay|rửa|rua|dùng|dung|sử|su|mỗi|moi|một|mot|vài|vai|\d+)\b",
                              match.string[match.end():], re.I)):
             return source
-        # 'hàng gia công' không có nghĩa là 'hàng giả'. Giữ cả trường hợp
-        # khách dán lặp câu thiếu khoảng trắng: 'côngHàng gia công...'.
+        # Giữ 'hàng gia công', kể cả khi khách dán lặp câu không có khoảng trắng.
         if target == "hàng giả" and re.match(r"\s+(?:công|cong)", match.string[match.end():], re.I):
             return source
         if " ".join(source.lower().split()) == target:
@@ -390,12 +359,10 @@ def restore_missing_diacritics(text: str, *, changes: list | None = None) -> str
     return _MISSING_ACCENT_FIELD_PATTERN.sub(replace_field, text)
 
 
-# ======================== CÁC HÀM HỖ TRỢ ==========================
 def resolve_path(path: str | Path) -> Path:
     p = Path(path).expanduser()
     if p.is_absolute():
         return p
-    # Ưu tiên CWD (PyCharm thường đặt ở thư mục root của project).
     candidates = [Path.cwd() / p, Path(__file__).resolve().parent / p,
                   Path(__file__).resolve().parent.parent / p]
     return next((x for x in candidates if x.exists()), candidates[0])
@@ -414,8 +381,6 @@ def load_teencode_dict(path: Path) -> dict[str, str]:
 
 
 def make_teencode_mapping() -> dict[str, str]:
-    # Các từ riêng do người dùng quản lý có thể đặt trong data/teencode.txt.
-    # Các thay thế nguy hiểm của từ điển legacy không được áp dụng nữa.
     extras = load_teencode_dict(resolve_path("data/teencode.txt"))
     blocked = {"in", "long", "pham", "bi", "su", "mat", "r", "date", "mask", "moi", "dung"}
     extras = {k: v for k, v in extras.items() if k not in blocked and len(k) >= 2}
@@ -461,7 +426,6 @@ def remove_coin_hunting_phrases(text: str) -> str:
 def remove_emoji(text: str) -> str:
     if demoji is not None:
         return demoji.replace(text, " ")
-    # fallback khi không cài demoji; raw comment vẫn luôn được giữ nguyên.
     return re.sub(r"[\U0001F000-\U0001FAFF\U00002600-\U000027BF]", " ", text)
 
 
@@ -470,8 +434,15 @@ def remove_repeated_characters(text: str) -> str:
     return re.sub(r"([a-zà-ỹđ])\1{2,}", r"\1", text, flags=re.IGNORECASE)
 
 
+def remove_punctuation(text: str) -> str:
+    """Thay dấu câu/ký hiệu bằng khoảng trắng; giữ chữ, số và _ ghép từ."""
+    text = unicodedata.normalize("NFC", text)
+    text = re.sub(r"[^\w\s]", " ", text, flags=re.UNICODE)
+    return re.sub(r"\s+", " ", text).strip()
+
+
 def normalize_comment(raw: object) -> str:
-    """Text đọc được cho ABSA: vẫn giữ phủ định, dấu câu và chữ số (pH, giá...)."""
+    """Text cho ABSA/embeddings: giữ phủ định và chữ số, loại dấu câu."""
     if raw is None or pd.isna(raw):
         return ""
     customer_text, _ = strip_seller_reply(str(raw))
@@ -483,10 +454,8 @@ def normalize_comment(raw: object) -> str:
     text = remove_repeated_characters(text)
     text = restore_missing_diacritics(text)
     text = normalize_teencode(text)
-    # Giữ cả số và dấu .,!? để không đổi sắc thái phủ định; làm sạch dấu lạ.
-    text = re.sub(r"[^\w\s,.!?%:/+\-]", " ", text, flags=re.UNICODE)
-    text = re.sub(r"\s+", " ", text).strip()
-    return text
+    # Khôi phục dấu/teencode trước khi bỏ dấu câu (các luật theo trường cần dấu :).
+    return remove_punctuation(text)
 
 
 def apply_phrase_underscore(text: str) -> str:
@@ -512,7 +481,7 @@ class WordSegmenter:
         model_dir = resolve_path(MODEL_DIRECTORY)
         model_dir.mkdir(parents=True, exist_ok=True)
         try:
-            # Chỉ tải tài nguyên wseg cần dùng; không phụ thuộc lệnh wget trên Windows.
+            # Chỉ tải tài nguyên cần cho phân đoạn từ.
             resources = ("models/wordsegmenter/vi-vocab",
                          "models/wordsegmenter/wordsegmenter.rdr", "VnCoreNLP-1.2.jar")
             for resource in resources:
@@ -540,7 +509,6 @@ class WordSegmenter:
         if not text:
             return ""
         prepared = apply_phrase_underscore(text)
-        # Phân đoạn từ có thể bị ảnh hưởng bởi dấu câu trong review.
         if self.segmenter is not None:
             try:
                 segments = self.segmenter.word_segment(prepared)
@@ -550,7 +518,7 @@ class WordSegmenter:
                     warnings.warn(f"Lỗi word_segment ({exc}); dùng text trước phân đoạn.")
                     self._warned = True
         prepared = re.sub(r"\s*_\s*", "_", prepared)
-        return re.sub(r"\s+", " ", prepared).strip()
+        return remove_punctuation(prepared)
 
 
 def to_topic_text(cleaned_comment: str) -> str:
@@ -561,7 +529,7 @@ def to_topic_text(cleaned_comment: str) -> str:
 
 
 def clean_and_tokenize(text: object, segmenter: WordSegmenter | None = None) -> str:
-    """Tên hàm tương thích ý tưởng pipeline cũ; dùng VnCoreNLP nếu được truyền vào."""
+    """Chuẩn hóa và phân đoạn từ với segmenter được truyền vào."""
     normalized = normalize_comment(text)
     return (segmenter or WordSegmenter(False)).tokenize(normalized)
 
@@ -672,10 +640,9 @@ def load_inputs(paths: list[str]) -> pd.DataFrame:
 
 
 def remove_duplicates(df: pd.DataFrame) -> pd.DataFrame:
-    """Ưu tiên review_id ổn định; nếu thiếu dùng product+date+rating+raw text.
+    """Ưu tiên review_id; nếu thiếu dùng sản phẩm, ngày, rating và text gốc.
 
-    Không loại trùng toàn cục theo comment: nhiều khách có thể viết 'dùng tốt'.
-    """
+    Giữ các review giống text của những khách hàng khác nhau."""
     df = df.copy()
     for key in ("review_id", "product_id", "product_url", "product_name", "date", "rating", "platform"):
         if key not in df.columns:
@@ -684,7 +651,6 @@ def remove_duplicates(df: pd.DataFrame) -> pd.DataFrame:
         return df[col].fillna("").astype(str).str.strip()
     platform = txt("platform").str.lower()
     product = txt("product_url").map(normalize_url)
-    # Tiki có product_id và review_id; dùng làm ID ưu tiên.
     product = product.mask(product.eq(""), txt("product_id"))
     product = product.mask(product.eq(""), txt("product_name").str.lower())
     rid = txt("review_id").str.replace(r"\.0$", "", regex=True)
@@ -704,14 +670,13 @@ def remove_duplicates(df: pd.DataFrame) -> pd.DataFrame:
 def process_csv_file(input_file, output_file, text_column="comment", *,
                      use_vncorenlp: bool = USE_VNCORENLP,
                      filter_vietnamese: bool = FILTER_VIETNAMESE) -> pd.DataFrame:
-    """Tương thích lối gọi cũ: input_file có thể là str hoặc list[str]."""
+    """Tiền xử lý một CSV hoặc danh sách CSV nguồn."""
     files = [str(input_file)] if isinstance(input_file, (str, Path)) else list(input_file)
     df = load_inputs(files)
     if text_column != "comment" and text_column in df.columns:
         df["comment"] = df[text_column]
     print(f"[*] Tổng số dòng đầu vào: {len(df):,}.")
     df = df.copy()
-    # Giữ raw comment, metadata; chỉ bỏ đánh giá thiếu text.
     df["comment"] = df["comment"].fillna("").astype(str).str.strip()
     df = df.loc[df["comment"].ne("")].copy()
     df = remove_duplicates(df)
@@ -752,7 +717,6 @@ def process_csv_file(input_file, output_file, text_column="comment", *,
                                df["original_price_vnd"].replace(0, pd.NA).astype(float))).round(2)
             df["discount_pct"] = df["discount_pct"].fillna(possible.where(possible.between(0, 100)))
 
-    # Cột quan trọng đầu file; giữ toàn bộ metadata khác của cả ba sàn ở phía sau.
     leading = ["platform", "product_name", "brand", "rating", "date", "product_url",
                "price", "price_vnd", "original_price", "original_price_vnd",
                "discount", "discount_pct", "comment", "review_text_length",
@@ -773,11 +737,7 @@ def process_csv_file(input_file, output_file, text_column="comment", *,
 def append_cleaned_column(input_file, output_file=None, *, text_column="comment",
                           output_column="cleaned_comment",
                           use_vncorenlp: bool = USE_VNCORENLP) -> dict:
-    """Chỉ thêm text đã xử lý; giữ nguyên từng giá trị và thứ tự dòng nguồn.
-
-    Không lọc dòng ngắn, dòng trùng hay sửa metadata. Khi cập nhật trực tiếp,
-    sao lưu bản gốc và thay thế file sau khi đã kiểm tra CSV kết quả.
-    """
+    """Thêm cột text, giữ nguyên giá trị/thứ tự dòng nguồn; xác minh và sao lưu trước khi ghi đè."""
     source = resolve_path(input_file).resolve()
     output = resolve_path(output_file).resolve() if output_file else source
     original_bytes = source.read_bytes()
