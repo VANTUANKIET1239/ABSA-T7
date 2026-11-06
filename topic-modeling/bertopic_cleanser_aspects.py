@@ -1,35 +1,36 @@
-"""BERTopic khám phá chủ đề trong reviews SỮA RỬA MẶT (Shopee, Lazada, Tiki).
+"""Khám phá topic review sữa rửa mặt bằng BERTopic và Grid Search theo C_v.
 
-Đầu vào từ preprocess_cleanser_reviews.py:
-    data/cleanser_reviews_preprocessed.csv
-    - normalized_comment: câu tự nhiên, thích hợp để tạo sentence embeddings
-    - topic_comment: đã tách từ/ghép cụm _, dùng cho c-TF-IDF/keywords
-    - cleaned_comment: fallback nếu không có topic_comment
-
-Chạy:
-    python bertopic_cleanser_aspects.py --check-input
-    python bertopic_cleanser_aspects.py
-    python bertopic_cleanser_aspects.py --input data/cleanser_reviews_preprocessed.csv --output-dir data/bertopic_cleanser
-
-Coherence c_v tính trên analyzer của CountVectorizer (giữ cùng unigram/bigram).
-Lưu ý: topics là các cụm ngữ nghĩa, KHÔNG tự động là aspect nhãn chuẩn.
+Mỗi text duy nhất học một lần; duplicate_count chỉ là metadata.
+Dùng --check-input để kiểm tra dữ liệu, --single-run để chạy một cấu hình.
+Các aspect gợi ý cần được kiểm tra thủ công trước khi dùng làm nhãn ABSA.
 """
 from __future__ import annotations
 
 import argparse
+import json
+import math
 from collections import defaultdict
+from itertools import product
 from pathlib import Path
+from time import perf_counter
 
 import pandas as pd
 
 BASE_DIR = Path(__file__).resolve().parent
-DEFAULT_INPUT = 'data/cleanser_reviews_preprocessed.csv'
-DEFAULT_OUTPUT = 'data/bertopic_cleanser'
+PROJECT_DIR = BASE_DIR.parent
+DEFAULT_INPUT = 'crawl-data/data/unique_texts/unique_texts.csv'
+DEFAULT_OUTPUT = str(BASE_DIR / 'data' / 'bertopic_unique_texts')
 EMBEDDING_MODEL_NAME = 'keepitreal/vietnamese-sbert'
 
-# Chỉ dọn từ hư / lời thoại và các từ chung quá phổ biến ở tầng *biểu diễn topic*.
-# KHÔNG xóa phủ định/đánh giá hoặc chi tiết đặc trưng sữa rửa mặt.
-# 'sữa_rửa_mặt' quá chung trong một corpus toàn sữa rửa mặt; bỏ riêng khỏi keywords.
+BASELINE_PARAMS = {
+    'min_cluster_size': 30,
+    'min_samples': 5,
+    'n_neighbors': 20,
+    'min_df': 3,
+    'max_df': 0.85,
+}
+
+# Chỉ lọc ở tầng keyword; giữ phủ định và mô tả trải nghiệm.
 TOPIC_STOPWORDS = {
     'mình', 'tôi', 'tui', 'em', 'anh', 'chị', 'bạn', 'mọi_người',
     'cho', 'với', 'để', 'thì', 'là', 'và', 'của', 'mà', 'có',
@@ -39,8 +40,6 @@ TOPIC_STOPWORDS = {
     'sữa_rửa_mặt', 'sữa', 'rửa_mặt', 'srm',
 }
 
-# Danh mục aspect dùng để GỢI Ý cho người nghiên cứu, không phải nhãn dự đoán ABSA.
-# Từ khóa được lấy từ ngữ cảnh sữa rửa mặt, không giới hạn mỹ phẩm thuần chay.
 ASPECT_KEYWORDS = {
     'Cleansing_Effectiveness': {
         'làm_sạch', 'làm_sạch_sâu', 'sạch_sâu', 'sạch_da', 'không_sạch',
@@ -89,10 +88,17 @@ ASPECT_KEYWORDS = {
 
 def resolve_input_path(name: str) -> Path:
     path = Path(name).expanduser()
-    if path.is_absolute():
-        return path
-    candidates = [Path.cwd() / path, BASE_DIR / path, BASE_DIR.parent / path]
-    return next((p for p in candidates if p.exists()), candidates[0])
+    candidates = [path] if path.is_absolute() else [Path.cwd() / path, BASE_DIR / path, PROJECT_DIR / path]
+    candidates = list(dict.fromkeys(p.resolve() for p in candidates))
+    for candidate in candidates:
+        if candidate.is_file():
+            return candidate
+    checked = '\n'.join(f'    - {candidate}' for candidate in candidates)
+    raise FileNotFoundError(
+        f'Không tìm thấy CSV: {name}\n'
+        f'Các đường dẫn đã kiểm tra:\n{checked}\n'
+        'Dùng --input "đường/dẫn/đến/file.csv" để chỉ định CSV hiện có.'
+    )
 
 
 def resolve_output_path(name: str) -> Path:
@@ -107,19 +113,22 @@ def choose_column(df: pd.DataFrame, preferred: str, fallbacks: tuple[str, ...]) 
                 print(f'[!] Không có {preferred!r}; sử dụng {col!r}.')
             return col
     raise ValueError(f'Không tìm thấy cột {preferred!r} hoặc một trong {fallbacks}. '
-                     'Hãy chạy preprocess_cleanser_reviews.py trước.')
+                     'Kiểm tra các cột CSV và tùy chọn --embedding-column/--topic-column.')
 
 
 def read_dataset(input_path: Path, embedding_column: str, topic_column: str):
     if not input_path.is_file():
         raise FileNotFoundError(f'Không tìm thấy CSV: {input_path}')
     df = pd.read_csv(input_path, encoding='utf-8-sig', low_memory=False)
-    e_col = choose_column(df, embedding_column, ('normalized_comment', 'comment'))
+    e_col = choose_column(df, embedding_column,
+                          ('normalized_comment', 'representative_comment', 'comment', 'cleaned_comment'))
     t_col = choose_column(df, topic_column, ('topic_comment', 'cleaned_comment'))
 
-    # Dùng cùng mask cho embedding + topic để thứ tự index gắn ngược chính xác.
     df = df.copy()
     df['_embedding_text'] = df[e_col].fillna('').astype(str).str.strip()
+    if e_col in ('cleaned_comment', 'topic_comment'):
+        df['_embedding_text'] = df['_embedding_text'].str.replace('_', ' ', regex=False)
+        df['_embedding_text'] = df['_embedding_text'].str.replace(r'\s+', ' ', regex=True).str.strip()
     df['_topic_text'] = df[t_col].fillna('').astype(str).str.strip()
     mask = df['_embedding_text'].str.len().ge(6) & df['_topic_text'].str.len().ge(3)
     valid = df.loc[mask].copy().reset_index(drop=True)
@@ -130,7 +139,7 @@ def read_dataset(input_path: Path, embedding_column: str, topic_column: str):
 
 
 def aspect_suggestions(topic_words: list[str]) -> str:
-    """Tối đa hai gợi ý dựa trên trùng khớp từ khóa, KHÔNG là aspect nhãn chính thức."""
+    """Gợi ý tối đa hai aspect từ keyword để kiểm tra thủ công."""
     tokens = set(topic_words)
     scores = sorted(
         ((len(tokens & keywords), name) for name, keywords in ASPECT_KEYWORDS.items()),
@@ -159,7 +168,6 @@ def coherence_cv(topic_model, docs: list[str], max_docs: int):
         return None
 
     if max_docs > 0 and len(docs) > max_docs:
-        # Coherence trên mẫu chỉ là ƯỚC TÍNH. Mặc định 0 = toàn bộ dữ liệu.
         sampled = pd.Series(docs).sample(n=max_docs, random_state=42).tolist()
         print(f'[*] C_v dùng mẫu {max_docs:,}/{len(docs):,} reviews (không phải full-corpus).')
     else:
@@ -170,7 +178,7 @@ def coherence_cv(topic_model, docs: list[str], max_docs: int):
     tokenized_docs = [analyzer(doc) for doc in sampled]
     tokenized_docs = [tokens for tokens in tokenized_docs if tokens]
     dictionary = corpora.Dictionary(tokenized_docs)
-    # Có thể có từ top topic chưa có mặt nếu corpus đã bị sampling.
+    # Corpus lấy mẫu có thể thiếu keyword của một số topic.
     filtered = [[w for w in words if w in dictionary.token2id] for words in topic_words]
     filtered = [words for words in filtered if len(words) >= 2]
     if not filtered:
@@ -179,9 +187,135 @@ def coherence_cv(topic_model, docs: list[str], max_docs: int):
 
     score = CoherenceModel(
         topics=filtered, texts=tokenized_docs, dictionary=dictionary,
-        coherence='c_v', processes=1,  # thuận tiện trên Windows / PyCharm
+        coherence='c_v', processes=1,  # Tránh multiprocessing trên Windows.
     ).get_coherence()
     return float(score)
+
+
+def model_configuration(params: dict, n_docs: int | None = None) -> dict:
+    """Cấu hình dùng chung khi tạo mô hình và lưu JSON."""
+    return {
+        'embedding_model': EMBEDDING_MODEL_NAME,
+        'encode': {'normalize_embeddings': True, 'convert_to_numpy': True},
+        'umap': {
+            'n_neighbors': min(params['n_neighbors'], n_docs - 1) if n_docs else params['n_neighbors'],
+            'n_components': 5, 'min_dist': 0.0, 'metric': 'cosine', 'random_state': 42,
+        },
+        'hdbscan': {
+            'min_cluster_size': params['min_cluster_size'], 'min_samples': params['min_samples'],
+            'metric': 'euclidean', 'cluster_selection_method': 'eom', 'prediction_data': True,
+        },
+        'vectorizer': {
+            'stop_words': sorted(TOPIC_STOPWORDS), 'ngram_range': (1, 2),
+            'token_pattern': r'(?u)\b\w\w+\b', 'min_df': params['min_df'], 'max_df': params['max_df'],
+        },
+        'ctfidf': {'bm25_weighting': True, 'reduce_frequent_words': True},
+        'bertopic': {'calculate_probabilities': False, 'top_n_words': 10, 'verbose': True},
+    }
+
+
+def write_json(path: Path, payload: dict):
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+
+def create_model(params: dict, embedding_model, n_docs: int):
+    from bertopic import BERTopic
+    from bertopic.vectorizers import ClassTfidfTransformer
+    from umap import UMAP
+    from hdbscan import HDBSCAN
+    from sklearn.feature_extraction.text import CountVectorizer
+
+    config = model_configuration(params, n_docs)
+    return BERTopic(
+        embedding_model=embedding_model,
+        umap_model=UMAP(**config['umap']),
+        hdbscan_model=HDBSCAN(**config['hdbscan']),
+        vectorizer_model=CountVectorizer(**config['vectorizer']),
+        ctfidf_model=ClassTfidfTransformer(**config['ctfidf']),
+        **config['bertopic'],
+    )
+
+
+def parameter_candidates(args, reference: dict, n_docs: int) -> list[dict]:
+    """Thử baseline trước, sau đó duyệt lưới và bỏ tổ hợp trùng."""
+    if args.single_run:
+        return [reference.copy()]
+    grid = {
+        'min_cluster_size': args.grid_min_cluster_sizes,
+        'min_samples': args.grid_min_samples,
+        'n_neighbors': args.grid_n_neighbors,
+        'min_df': args.grid_min_df or [reference['min_df']],
+        'max_df': args.grid_max_df or [reference['max_df']],
+    }
+    combinations = [BASELINE_PARAMS.copy(), reference.copy()]
+    combinations.extend(dict(zip(grid, values)) for values in product(*grid.values()))
+    unique = {}
+    for params in combinations:
+        params['n_neighbors'] = min(params['n_neighbors'], n_docs - 1)
+        unique.setdefault(tuple(params[key] for key in BASELINE_PARAMS), params)
+    return list(unique.values())
+
+
+def validate_params(params: dict, n_docs: int):
+    if not 2 <= params['min_cluster_size'] <= n_docs:
+        raise ValueError(f'min_cluster_size phải từ 2 đến số review ({n_docs}).')
+    if not 1 <= params['min_samples'] < n_docs:
+        raise ValueError(f'min_samples phải từ 1 đến {n_docs - 1}.')
+    if params['n_neighbors'] < 2:
+        raise ValueError('n_neighbors phải >= 2.')
+    if params['min_df'] < 1 or not (0 < params['max_df'] <= 1):
+        raise ValueError('min_df >= 1 và 0 < max_df <= 1.')
+
+
+def grid_search(candidates, embedding_model, embeddings, topic_docs, args, out: Path):
+    """Chọn lần fit có C_v cao nhất, bỏ qua tổ hợp lỗi."""
+    rows = []
+    best = None
+    best_score = -math.inf
+    for trial, params in enumerate(candidates, start=1):
+        print(f'\n[*] Grid Search {trial}/{len(candidates)}: {params}')
+        started = perf_counter()
+        row = {'trial': trial, **params, 'c_v': None, 'n_topics': None,
+               'outlier_rate': None, 'status': 'failed', 'error': ''}
+        model = topics = probabilities = None
+        try:
+            validate_params(params, len(topic_docs))
+            model = create_model(params, embedding_model, len(topic_docs))
+            topics, probabilities = model.fit_transform(topic_docs, embeddings=embeddings)
+            row['n_topics'] = len(set(topics) - {-1})
+            row['outlier_rate'] = sum(topic == -1 for topic in topics) / len(topics)
+            score = coherence_cv(model, topic_docs, args.coherence_sample)
+            if score is None or not math.isfinite(score):
+                row['status'] = 'invalid_coherence'
+                row['error'] = 'Không có C_v hữu hạn để so sánh.'
+                print('[!] Bỏ qua cấu hình không có C_v hữu hạn.')
+            else:
+                row.update(c_v=score, status='ok')
+                print(f'[+] C_v={score:.4f}; topics={row["n_topics"]}; outliers={row["outlier_rate"]:.2%}')
+                if score > best_score:
+                    write_json(out / 'best_params.json', {
+                        'trial': trial, 'c_v': score, 'params': params,
+                        'model_configuration': model_configuration(params, len(topic_docs)),
+                        'n_topics': row['n_topics'], 'outlier_rate': row['outlier_rate'],
+                        'coherence_sample': args.coherence_sample,
+                    })
+                    best_score = score
+                    best = (model, topics, probabilities, score)
+        except Exception as exc:
+            row['status'] = 'failed'
+            row['error'] = f'{type(exc).__name__}: {exc}'
+            print(f'[!] Tổ hợp {trial} thất bại: {row["error"]}')
+        finally:
+            model = topics = probabilities = None
+        row['elapsed_seconds'] = round(perf_counter() - started, 3)
+        rows.append(row)
+        # Lưu từng trial để giữ tiến độ khi chương trình bị ngắt.
+        pd.DataFrame(rows).to_csv(out / 'grid_search_results.csv', index=False, encoding='utf-8-sig')
+
+    if best is None:
+        raise RuntimeError(f'Không có cấu hình nào tính được C_v hợp lệ. Xem {out / "grid_search_results.csv"}')
+    print(f'\n[+] C_v tốt nhất trong {len(candidates)} cấu hình: {best_score:.4f}')
+    return best
 
 
 def export_outputs(df, docs_for_topic, topic_model, topics, probabilities, out: Path, coherence_score):
@@ -201,9 +335,8 @@ def export_outputs(df, docs_for_topic, topic_model, topics, probabilities, out: 
     info.to_csv(out / 'topic_info.csv', index=False, encoding='utf-8-sig')
 
     text_to_raw = defaultdict(list)
-    raw_col = 'comment' if 'comment' in result.columns else (
-        'normalized_comment' if 'normalized_comment' in result.columns else 'cleaned_comment'
-    )
+    raw_col = next(col for col in ('comment', 'representative_comment', 'normalized_comment', 'cleaned_comment')
+                   if col in result.columns)
     for topic_text, raw in zip(docs_for_topic, result[raw_col].astype(str)):
         if len(text_to_raw[topic_text]) < 4 and raw not in text_to_raw[topic_text]:
             text_to_raw[topic_text].append(raw)
@@ -214,7 +347,7 @@ def export_outputs(df, docs_for_topic, topic_model, topics, probabilities, out: 
         if tid == -1:
             continue
         scored_words = topic_model.get_topic(tid) or []
-        words = [word for word, _ in scored_words]
+        words = [word for word, score in scored_words if word and score > 0]
         representation = topic_model.get_representative_docs(tid) or []
         representative_comments = []
         for topic_doc in representation:
@@ -225,7 +358,6 @@ def export_outputs(df, docs_for_topic, topic_model, topics, probabilities, out: 
                     break
             if len(representative_comments) >= 3:
                 break
-        # Nếu không có representative docs, dùng bình luận thuộc cluster.
         if not representative_comments:
             representative_comments = result.loc[result['Topic'].eq(tid), raw_col].dropna().astype(str).head(3).tolist()
         rows.append({
@@ -233,7 +365,7 @@ def export_outputs(df, docs_for_topic, topic_model, topics, probabilities, out: 
             'Count': int(entry.Count),
             'Keywords': ', '.join(words),
             'Suggested_Aspect': aspect_suggestions(words),
-            'Manual_Aspect': '',  # do nghiên cứu viên xác định
+            'Manual_Aspect': '',
             'Representative_Review_1': representative_comments[0] if len(representative_comments) > 0 else '',
             'Representative_Review_2': representative_comments[1] if len(representative_comments) > 1 else '',
             'Representative_Review_3': representative_comments[2] if len(representative_comments) > 2 else '',
@@ -243,12 +375,15 @@ def export_outputs(df, docs_for_topic, topic_model, topics, probabilities, out: 
         'Representative_Review_1', 'Representative_Review_2', 'Representative_Review_3',
     ]).to_csv(out / 'aspect_candidates.csv', index=False, encoding='utf-8-sig')
 
+    counts_note = ('Counts refer to unique texts; duplicate_count is metadata, not a training weight.\n'
+                   if 'text_group_id' in result.columns else '')
     (out / 'training_summary.txt').write_text(
         f'Input valid reviews: {len(result)}\n'
         f'Clusters (excluding -1): {len(rows)}\n'
         f'Outliers -1: {int(result["Topic"].eq(-1).sum())}\n'
         f'Outlier rate: {result["Topic"].eq(-1).mean():.4f}\n'
         f'C_v coherence: {coherence_score if coherence_score is not None else "N/A"}\n'
+        f'{counts_note}'
         'Suggested_Aspect is keyword-based only. Manual validation required.\n',
         encoding='utf-8',
     )
@@ -261,24 +396,38 @@ def main():
     parser = argparse.ArgumentParser(description='BERTopic cho đánh giá sữa rửa mặt')
     parser.add_argument('--input', default=DEFAULT_INPUT)
     parser.add_argument('--output-dir', default=DEFAULT_OUTPUT)
-    parser.add_argument('--embedding-column', default='normalized_comment')
-    parser.add_argument('--topic-column', default='topic_comment')
+    parser.add_argument('--embedding-column', default='normalized_comment',
+                        help='Ưu tiên cột chỉ định; tự dùng representative_comment cho CSV unique')
+    parser.add_argument('--topic-column', default='topic_comment',
+                        help='Ưu tiên cột chỉ định; tự dùng cleaned_comment cho CSV unique')
     parser.add_argument('--check-input', action='store_true', help='Kiểm tra CSV/cột mà không huấn luyện')
-    parser.add_argument('--min-cluster-size', type=int, default=30)
-    parser.add_argument('--min-samples', type=int, default=5)
-    parser.add_argument('--n-neighbors', type=int, default=20)
-    parser.add_argument('--min-df', type=int, default=3)
-    parser.add_argument('--max-df', type=float, default=0.85)
+    parser.add_argument('--min-cluster-size', type=int, default=BASELINE_PARAMS['min_cluster_size'])
+    parser.add_argument('--min-samples', type=int, default=BASELINE_PARAMS['min_samples'])
+    parser.add_argument('--n-neighbors', type=int, default=BASELINE_PARAMS['n_neighbors'])
+    parser.add_argument('--min-df', type=int, default=BASELINE_PARAMS['min_df'])
+    parser.add_argument('--max-df', type=float, default=BASELINE_PARAMS['max_df'])
+    parser.add_argument('--single-run', action='store_true', help='Chỉ fit một lần với các tham số CLI, không Grid Search')
+    parser.add_argument('--grid-min-cluster-sizes', type=int, nargs='+', default=[15, 30, 50])
+    parser.add_argument('--grid-min-samples', type=int, nargs='+', default=[3, 5, 10])
+    parser.add_argument('--grid-n-neighbors', type=int, nargs='+', default=[10, 20, 30])
+    parser.add_argument('--grid-min-df', type=int, nargs='+', help='Mặc định giữ --min-df')
+    parser.add_argument('--grid-max-df', type=float, nargs='+', help='Mặc định giữ --max-df')
     parser.add_argument('--batch-size', type=int, default=32)
     parser.add_argument('--coherence-sample', type=int, default=0,
                         help='0 = full corpus; N > 0 = lấy mẫu N reviews để tính C_v')
-    parser.add_argument('--skip-coherence', action='store_true')
+    parser.add_argument('--skip-coherence', action='store_true', help='Chỉ dùng với --single-run')
     args = parser.parse_args()
+    if args.skip_coherence and not args.single_run:
+        parser.error('Grid Search cần C_v để chọn tham số; --skip-coherence chỉ dùng với --single-run.')
+    if args.coherence_sample < 0 or args.batch_size < 1:
+        parser.error('--coherence-sample phải >= 0 và --batch-size phải >= 1.')
 
     df, embedding_col, topic_col = read_dataset(
         resolve_input_path(args.input), args.embedding_column, args.topic_column
     )
     print(f'[*] Embedding source: {embedding_col}; topic keyword source: {topic_col}')
+    if 'text_group_id' in df.columns:
+        print('[*] Mỗi dòng là một text duy nhất; giữ text_group_id/duplicate_count, không nhân bản theo tần suất.')
     print(f'[*] Top 3 mẫu embedding: {df["_embedding_text"].head(3).tolist()}')
     print(f'[*] Top 3 mẫu topic text: {df["_topic_text"].head(3).tolist()}')
     if args.check_input:
@@ -291,23 +440,40 @@ def main():
 
     if len(df) < 10:
         raise ValueError('Cần tối thiểu 10 review hợp lệ để chạy mô hình; dữ liệu thực tế nên lớn hơn nhiều.')
-    if len(df) < args.min_cluster_size:
-        raise ValueError(f'Số review hợp lệ ({len(df)}) phải >= min_cluster_size ({args.min_cluster_size}).')
-    if args.min_df < 1 or not (0 < args.max_df <= 1):
-        raise ValueError('min_df >= 1 và 0 < max_df <= 1')
+    reference = {key: getattr(args, key) for key in BASELINE_PARAMS}
+    candidates = parameter_candidates(args, reference, len(df))
+    if args.single_run:
+        validate_params(reference, len(df))
+    else:
+        # Kiểm tra Gensim trước bước tạo embeddings.
+        from gensim.models import CoherenceModel  # noqa: F401
+        print(f'[*] Sẽ thử {len(candidates)} cấu hình, chọn theo C_v cao nhất.')
+
+    out = resolve_output_path(args.output_dir)
+    out.mkdir(parents=True, exist_ok=True)
+    write_json(out / 'baseline_params.json', {
+        'description': 'Cấu hình gốc trước khi thêm Grid Search, không bị thay bằng params thắng.',
+        'params': BASELINE_PARAMS,
+        'model_configuration': model_configuration(BASELINE_PARAMS),
+        'batch_size': 32, 'coherence_sample': 0,
+    })
+    write_json(out / 'run_config.json', {
+        'mode': 'single_run' if args.single_run else 'grid_search',
+        'input': str(resolve_input_path(args.input).resolve()), 'valid_reviews': len(df),
+        'embedding_column': embedding_col, 'topic_column': topic_col,
+        'batch_size': args.batch_size, 'coherence_sample': args.coherence_sample,
+        'skip_coherence': args.skip_coherence, 'reference_params': reference,
+        'candidates': candidates,
+        'selection': 'Maximum finite C_v; ties keep the first trial (baseline is tried first).',
+    })
 
     from sentence_transformers import SentenceTransformer
-    from bertopic import BERTopic
-    from bertopic.vectorizers import ClassTfidfTransformer
-    from umap import UMAP
-    from hdbscan import HDBSCAN
-    from sklearn.feature_extraction.text import CountVectorizer
 
     embed_docs = df['_embedding_text'].tolist()
     topic_docs = df['_topic_text'].tolist()
     print('[*] Tải SentenceTransformer:', EMBEDDING_MODEL_NAME)
     embedding_model = SentenceTransformer(EMBEDDING_MODEL_NAME)
-    print('[*] Tạo embeddings từ câu chuẩn hóa, KHÔNG underscore...')
+    print(f'[*] Tạo embeddings từ {embedding_col}...')
     embeddings = embedding_model.encode(
         embed_docs,
         batch_size=args.batch_size,
@@ -316,56 +482,37 @@ def main():
         normalize_embeddings=True,
     )
 
-    umap_model = UMAP(
-        n_neighbors=min(args.n_neighbors, len(df) - 1),
-        n_components=5, min_dist=0.0, metric='cosine', random_state=42,
-    )
-    hdbscan_model = HDBSCAN(
-        min_cluster_size=args.min_cluster_size,
-        min_samples=args.min_samples,
-        metric='euclidean', cluster_selection_method='eom',
-        prediction_data=True,
-    )
-    vectorizer = CountVectorizer(
-        stop_words=sorted(TOPIC_STOPWORDS),
-        ngram_range=(1, 2),  # giữ cả bigrams cho từ chưa được ghép _
-        token_pattern=r'(?u)\b\w\w+\b',
-        min_df=args.min_df, max_df=args.max_df,
-    )
-    ctfidf = ClassTfidfTransformer(bm25_weighting=True, reduce_frequent_words=True)
-    model = BERTopic(
-        embedding_model=embedding_model,
-        umap_model=umap_model,
-        hdbscan_model=hdbscan_model,
-        vectorizer_model=vectorizer,
-        ctfidf_model=ctfidf,
-        calculate_probabilities=False,  # tránh matrix lớn N x N_topics
-        top_n_words=10,
-        verbose=True,
-    )
-    print('[*] Huấn luyện BERTopic trên topic_comment, dùng embeddings từ normalized_comment...')
-    topics, probabilities = model.fit_transform(topic_docs, embeddings=embeddings)
+    if args.single_run:
+        model = create_model(reference, embedding_model, len(df))
+        print(f'[*] Huấn luyện BERTopic trên {topic_col}, dùng embeddings từ {embedding_col}...')
+        topics, probabilities = model.fit_transform(topic_docs, embeddings=embeddings)
+        cv = None
+        if not args.skip_coherence:
+            try:
+                cv = coherence_cv(model, topic_docs, args.coherence_sample)
+                if cv is not None and not math.isfinite(cv):
+                    cv = None
+                if cv is not None:
+                    print(f'[+] C_v: {cv:.4f}')
+            except Exception as exc:
+                print(f'[!] Không tính được C_v: {type(exc).__name__}: {exc}')
+        write_json(out / 'single_run_params.json', {
+            'params': reference, 'model_configuration': model_configuration(reference, len(df)), 'c_v': cv,
+        })
+    else:
+        model, topics, probabilities, cv = grid_search(
+            candidates, embedding_model, embeddings, topic_docs, args, out,
+        )
 
     info = model.get_topic_info()
     print('\n' + info[['Topic', 'Count', 'Name']].to_string(index=False))
     for topic_id in model.get_topics():
         if topic_id == -1:
             continue
-        words = [word for word, _ in (model.get_topic(topic_id) or [])]
+        words = [word for word, score in (model.get_topic(topic_id) or []) if word and score > 0]
         print(f'Topic {topic_id}: {", ".join(words)}')
 
-    cv = None
-    if not args.skip_coherence:
-        print('\n[*] Tính C_v coherence...')
-        try:
-            cv = coherence_cv(model, topic_docs, args.coherence_sample)
-            if cv is not None:
-                print(f'[+] C_v: {cv:.4f}')
-        except Exception as exc:
-            print(f'[!] Không tính được C_v: {type(exc).__name__}: {exc}')
-
-    export_outputs(df, topic_docs, model, topics, probabilities,
-                   resolve_output_path(args.output_dir), cv)
+    export_outputs(df, topic_docs, model, topics, probabilities, out, cv)
 
 
 if __name__ == '__main__':
