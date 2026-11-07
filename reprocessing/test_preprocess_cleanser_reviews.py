@@ -1,4 +1,6 @@
 import csv
+import hashlib
+import json
 import tempfile
 import unittest
 import unicodedata
@@ -7,6 +9,7 @@ from pathlib import Path
 from preprocess_cleanser_reviews import (
     WordSegmenter, append_cleaned_column, normalize_comment, remove_punctuation,
     restore_missing_diacritics,
+    audit_review_languages, remove_reviewed_records,
 )
 
 
@@ -130,6 +133,70 @@ class AppendCleanedColumnTests(unittest.TestCase):
                 append_cleaned_column(path, use_vncorenlp=False)
             self.assertEqual(path.read_bytes(), original)
             self.assertEqual(list(Path(directory).glob("*.tmp")), [])
+
+
+class LanguageReviewTests(unittest.TestCase):
+    def test_reviewed_removal_preserves_unaccented_mixed_and_metadata(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / "source.csv"
+            columns = ["comment", "platform", "review_id", "gemini_label"]
+            rows = [
+                {"comment": "Great product, fast delivery", "platform": "Tiki", "review_id": "001", "gemini_label": "old"},
+                {"comment": "san pham tot", "platform": "Tiki", "review_id": "002", "gemini_label": "keep"},
+                {"comment": "Great product nhưng hơi khô da", "platform": "Tiki", "review_id": "003", "gemini_label": "keep"},
+                {"comment": "Great product, fast delivery", "platform": "Tiki", "review_id": "004", "gemini_label": "old"},
+            ]
+            with source.open("w", encoding="utf-8-sig", newline="") as stream:
+                writer = csv.DictWriter(stream, fieldnames=columns)
+                writer.writeheader()
+                writer.writerows(rows)
+            original = source.read_bytes()
+            out = root / "audit"
+            audit_review_languages(source, out)
+            self.assertEqual(source.read_bytes(), original)
+            candidates = json.loads((out / "candidates.json").read_text(encoding="utf-8"))
+            self.assertEqual({r["source_record"] for r in candidates}, {2, 3, 4, 5})
+            decisions = root / "decisions.json"
+            digest = hashlib.sha256(original).hexdigest()
+            manifest = {"source_sha256": digest, "decisions": {
+                "2": {"status": "english", "reason": "English review"},
+                "3": {"status": "retained", "reason": "Vietnamese without accents"},
+                "4": {"status": "mixed", "reason": "Mixed Vietnamese and English"},
+                "5": {"status": "english", "reason": "English review"},
+            }}
+            decisions.write_text(json.dumps(manifest), encoding="utf-8")
+            audit_review_languages(source, out, decisions)
+            self.assertEqual(source.read_bytes(), original)
+            report = remove_reviewed_records(source, [out / "english_reviews.csv"],
+                                             record_column="language_source_record",
+                                             removal_label="language", expected_sha256=digest)
+            self.assertEqual(report["rows_removed"], 2)
+            self.assertEqual(Path(report["backup"]).read_bytes(), original)
+            with source.open(encoding="utf-8-sig", newline="") as stream:
+                self.assertEqual(list(csv.DictReader(stream)), rows[1:3])
+            with self.assertRaises(ValueError):
+                audit_review_languages(source, out, decisions)
+            with self.assertRaises(ValueError):
+                remove_reviewed_records(source, [out / "english_reviews.csv"],
+                                        record_column="language_source_record", expected_sha256=digest)
+
+    def test_incomplete_decisions_and_changed_source_row_are_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / "source.csv"
+            source.write_text('comment,platform\nGreat product,Tiki\n', encoding="utf-8")
+            original = source.read_bytes()
+            decisions = root / "decisions.json"
+            decisions.write_text(json.dumps({"source_sha256": hashlib.sha256(original).hexdigest(),
+                                             "decisions": {}}), encoding="utf-8")
+            with self.assertRaises(ValueError):
+                audit_review_languages(source, root / "audit", decisions)
+            flagged = root / "flagged.csv"
+            flagged.write_text('comment,platform,language_source_record\nChanged,Tiki,2\n', encoding="utf-8")
+            with self.assertRaises(ValueError):
+                remove_reviewed_records(source, [flagged], record_column="language_source_record")
+            self.assertEqual(source.read_bytes(), original)
 
 
 if __name__ == "__main__":

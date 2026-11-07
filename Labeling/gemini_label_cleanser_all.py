@@ -21,8 +21,6 @@ import time
 from pathlib import Path
 
 import pandas as pd
-from google import genai
-from google.genai import types
 
 
 # ===================== CONFIG =====================
@@ -31,7 +29,7 @@ PROJECT_DIR = BASE_DIR.parent
 INPUT_FILE = str(PROJECT_DIR / "crawl-data" / "data" / "unique_texts" / "unique_texts.csv")
 OUTPUT_FILE = str(BASE_DIR / "data" / "unique_texts_gemini_labeled.csv")
 TEXT_COLUMN = "cleaned_comment" 
-MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-3.6-flash")
+MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
 BATCH_SIZE = 70
 REQUEST_DELAY_SECONDS = 15
 MAX_RETRIES = 3
@@ -213,7 +211,8 @@ def get_text_column(df: pd.DataFrame, preferred: str) -> str:
 
 
 def fingerprint(text: str) -> str:
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()[:20]
+    # Tien to chu tranh Excel doi hash dang so/e... thanh scientific notation.
+    return "sha256_" + hashlib.sha256(text.encode("utf-8")).hexdigest()[:20]
 
 
 def save_csv_atomic(df: pd.DataFrame, target: Path) -> None:
@@ -241,15 +240,30 @@ def prepare_working_df(input_file: Path, output_file: Path, preferred_text_col: 
                 raise ValueError(
                     f"File output cu khong co cot {col}. Dung file output khac hoac sao luu file cu."
                 )
+        # Row IDs remain stable after reviewed records are removed. Match the
+        # surviving source rows by content/group identity rather than renumbering.
+        row_ids = working["absa_row_id"].tolist()
+        valid_ids = len(set(row_ids)) == len(row_ids) and all(
+            value.isdecimal() for value in row_ids
+        )
+        groups_match = (
+            source["text_group_id"].tolist() == working["text_group_id"].tolist()
+            if "text_group_id" in source and "text_group_id" in working
+            else row_ids == identifiers
+        )
         if (
             len(working) != len(source)
-            or working["absa_row_id"].tolist() != identifiers
-            or working["absa_text_hash"].tolist() != source_hashes
+            or not valid_ids
+            or not groups_match
+            or working["absa_text_hash"].str.removeprefix("sha256_").tolist()
+            != [value.removeprefix("sha256_") for value in source_hashes]
         ):
             raise ValueError(
                 "Du lieu input da thay doi/dao dong so voi output cu. "
-                "Hay su dung output file moi de tranh gan nham nhan cho review."
+                "Kiem tra cot text va absa_text_hash (Excel co the doi hash thanh so). "
+                "Khong xoa output cu neu da co nhan; dung file output moi neu doi du lieu."
             )
+        working["absa_text_hash"] = source_hashes
         for i, row in working.iterrows():
             status = row["absa_status"]
             if status not in ("pending", "done", "skipped"):
@@ -303,6 +317,8 @@ def decode_response(content: str, expected_ids: set[int]) -> dict[int, str]:
 
 
 def request_batch(client, model: str, records: list[dict]) -> dict[int, str]:
+    from google.genai import types
+
     expected_ids = {record["id"] for record in records}
     prompt = (
         RULES + "\n\n" + BATCH_INSTRUCTIONS
@@ -357,6 +373,8 @@ def run(args, client=None) -> tuple[int, int]:
         return completed, eligible
 
     if client is None:
+        from google import genai
+
         api_key = os.getenv("GEMINI_API_KEY", "").strip()
         if not api_key:
             raise RuntimeError(

@@ -6,6 +6,10 @@ from __future__ import annotations
 import argparse
 import csv
 import html
+import hashlib
+import io
+import json
+from collections import Counter
 import os
 import re
 import numbers
@@ -22,9 +26,9 @@ import pandas as pd
 from tqdm import tqdm
 
 try:
-    from .seller_reply_rules import strip_seller_reply
+    from .seller_reply_rules import strip_seller_reply, fold_with_offsets
 except ImportError:
-    from seller_reply_rules import strip_seller_reply
+    from seller_reply_rules import strip_seller_reply, fold_with_offsets
 
 try:
     import demoji
@@ -815,6 +819,260 @@ def append_cleaned_column(input_file, output_file=None, *, text_column="comment"
     return result
 
 
+
+# Language screening and reviewed removal are local, explicit operations.
+ENGLISH_WORDS = set("""
+good great nice excellent perfect amazing lovely wonderful horrible terrible bad worse worst
+product products quality delivery delivered deliver package packaging packaged packing packed
+received receive arrived arrive ordered order seller picture description described exactly
+thank thanks recommend recommended happy disappointed purchase shopping experience online
+cheap price prices expensive refund replacement missing wrong original authentic fake
+skin sensitive dry drying mature gentle cleanser cleansers cleanse cleanses cleansing wash
+face facial foaming foam acne breakouts prevents prevent future daily enough use useful
+leaves leave matte finish gives deep helps controls production cooling sensation smooth soft
+suitable fresh clean feeling looking radiant glowing formula types moisturizing effect deeply
+pores clearer complexion easily removes makeup impurities dirt effectively hydrating
+hyaluronic whitening brightening improves overall texture refreshed alcohol care non
+delicate fragrance smell smells scented smell efficient products long term effects
+beautiful bust cleavage enhances lifts soothing soothes redness natural effective
+effective effective effective exellent efective cleancer gentel everething realy verry
+seems love liked lovely super best before sealed sample kit oily water cream lotion
+buy bought fast free gifts gift use using used tried try easy works expected
+the this that these those it its is are was were be been being does doesn do don
+and or but with without for from into of out off to too my me i im your you our
+very so really really also definitely again everything well safely quickly
+can could would should will have has had not no yes just like as than then now
+an a all any each every in on at by about after before when where who which
+first second third time week weeks month months years more less high low open
+took back give split minimum consumption says sure repeat worth job made china
+information introduced removing rich suffer someone able pretty smell late check aging lifting
+""".split())
+STRONG_WORDS = ENGLISH_WORDS - set("""
+the this that these those it its is are was were be been being does doesn do don
+and or but with without for from into of out off to too my me i im your you our
+very so also again well can could would should will have has had not no yes
+just like as than then now an a all any each every in on at by about after before
+when where who which time more less skin care face facial wash cleanser cleansing
+foam gel cream lotion makeup product products natural original fake free gift gifts
+recommend recommended love super best mini sample kit oil non made china
+""".split())
+FUNCTION_WORDS = ENGLISH_WORDS - STRONG_WORDS
+NEUTRAL_ONLY = re.compile(r"(?:ok(?:ay|e|ie|i)?[a-z]*|k+|h+|hi|ha|hic|bt|sp|srm|nsx|hsd|ml|g|date|shop|tiki|lazada|shopee|\d+)", re.I)
+LABEL = re.compile(r"(?<!\w)(?:chat luong|ket cau|hieu qua|gia ca|thanh phan|cong dung|danh cho da|"
+                   r"phu hop voi loai da|huong thom|mui huong|loi ich|meo|bao bi|kinh nghiem su dung|"
+                   r"lam sach|tao bot|duong am|lam dep|do diu nhe|diu nhe|da kho|da mem min)\s*[:：]", re.I)
+RATING_TITLE = re.compile(r"^\s*(?:(?:cuc ki|cuc ky|rat)(?: khong)? hai long|khong hai long|hai long|binh thuong|tot)\s*[.!:]\s*", re.I)
+
+
+def content_for_language(text):
+    text = unicodedata.normalize("NFC", text)
+    folded, offsets = fold_with_offsets(text)
+    spans = [(match.start(), match.end()) for match in LABEL.finditer(folded)]
+    title = RATING_TITLE.match(folded)
+    if title:
+        spans.append((title.start(), title.end()))
+    for start, end in sorted(spans, reverse=True):
+        text = text[:offsets[start]] + " " + text[offsets[end - 1] + 1:]
+    return text.strip()
+
+
+def signals(text):
+    content = content_for_language(text)
+    tokens = re.findall(r"[^\W\d_]+", content.lower())
+    strong = sorted(set(tokens) & STRONG_WORDS)
+    function = sorted(set(tokens) & FUNCTION_WORDS)
+    meaningful = [token for token in tokens if not NEUTRAL_ONLY.fullmatch(token)]
+    latin_only = bool(meaningful) and all(token.isascii() for token in meaningful)
+    candidate = bool(strong or latin_only or len(function) >= 3)
+    return {"candidate": candidate, "content": content, "strong_words": strong,
+            "function_words": function, "latin_only": latin_only}
+
+
+def export(path, columns, rows):
+    with path.open("w", encoding="utf-8-sig", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=columns)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def audit_review_languages(input_file, output_dir, decisions_file=None):
+    input_file = Path(input_file)
+    out = Path(output_dir).resolve()
+    original = input_file.read_bytes()
+    digest = hashlib.sha256(original).hexdigest()
+    with input_file.open(encoding="utf-8-sig", newline="") as stream:
+        reader = csv.DictReader(stream)
+        columns = list(reader.fieldnames)
+        rows = list(reader)
+    candidates = []
+    for record, row in enumerate(rows, 2):
+        info = signals(row["comment"])
+        if info["candidate"]:
+            candidates.append({"source_record": record, "platform": row.get("platform", ""),
+                               "comment": row["comment"], **info})
+    out = out
+    out.mkdir(parents=True, exist_ok=True)
+    (out / "candidates.json").write_text(json.dumps(candidates, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    summary = {"source": str(input_file.resolve()), "source_sha256": digest,
+               "rows_scanned": len(rows), "candidate_records": len(candidates)}
+    if decisions_file:
+        manifest = json.loads(Path(decisions_file).read_text(encoding="utf-8"))
+        if manifest["source_sha256"] != digest:
+            raise ValueError("Language decisions refer to a different source snapshot")
+        decisions = {int(key): value for key, value in manifest["decisions"].items()}
+        candidate_ids = {entry["source_record"] for entry in candidates}
+        if set(decisions) != candidate_ids:
+            raise ValueError("Every screened candidate must have a reviewed decision")
+        groups = {"english": [], "english_short": [], "mixed": [], "english_other_language": [], "uncertain": []}
+        counts = Counter()
+        for record, row in enumerate(rows, 2):
+            decision = decisions.get(record, {"status": "retained", "reason": "No English language signals"})
+            status = decision["status"]
+            counts[status] += 1
+            if status == "retained":
+                continue
+            if status not in groups:
+                raise ValueError(f"Unknown language decision: {status}")
+            groups[status].append({**row, "language_source_record": record,
+                                   "language_status": status, "language_reason": decision["reason"]})
+        extra = ["language_source_record", "language_status", "language_reason"]
+        english = groups["english"] + groups["english_short"]
+        english.sort(key=lambda row: row["language_source_record"])
+        export(out / "english_reviews.csv", columns + extra, english)
+        export(out / "mixed_language_reviews.csv", columns + extra, groups["mixed"])
+        export(out / "english_other_language_reviews.csv", columns + extra, groups["english_other_language"])
+        export(out / "language_reviews_to_check.csv", columns + extra, groups["uncertain"])
+        summary.update({"classification_counts": dict(counts), "english_total_including_short": len(english),
+                        "english_by_platform": dict(Counter(row.get("platform", "") for row in english)),
+                        "definition": "English substantive content; Vietnamese field labels and generic rating "
+                                      "titles do not count as Vietnamese review text. Single-word English "
+                                      "ratings are separate. Vietnamese loanwords/product names alone are retained.",
+                        "method": "Local lexical screening of all raw comments, followed by manual reading "
+                                  "of every screened candidate; no trained language identification model.",
+                        "source_record_definition": "1-based CSV record including header; first review=2"})
+    if input_file.read_bytes() != original:
+        raise ValueError("Source changed during audit")
+    summary["source_unchanged"] = True
+    (out / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(summary, ensure_ascii=False, indent=2))
+
+    return summary
+
+
+def read_csv_bytes(data):
+    with io.StringIO(data.decode("utf-8-sig"), newline="") as stream:
+        reader = csv.DictReader(stream)
+        rows = list(reader)
+        fields = reader.fieldnames
+    if not fields or len(set(fields)) != len(fields):
+        raise ValueError("Missing or duplicate CSV column names")
+    if any(None in row or any(value is None for value in row.values()) for row in rows):
+        raise ValueError("Malformed CSV record")
+    return fields, rows
+
+
+def remove_reviewed_records(source, lists, *, output=None,
+                            record_column="filter_source_record",
+                            removal_label="relevance", expected_sha256=None):
+    source = Path(source)
+    lists = [Path(p) for p in lists]
+    output = Path(output) if output else None
+    if not re.fullmatch(r"[a-z][a-z0-9_]*", removal_label):
+        raise ValueError("Invalid removal label")
+    source = source.resolve()
+    output = output.resolve() if output else source
+    if output != source and output.exists():
+        raise ValueError(f"Output already exists: {output}")
+    original = source.read_bytes()
+    if expected_sha256 and hashlib.sha256(original).hexdigest() != expected_sha256:
+        raise ValueError("Source differs from the reviewed snapshot; no update applied")
+    fields, rows = read_csv_bytes(original)
+    removals = set()
+    counts = {}
+    for flagged_path in lists:
+        flagged_path = flagged_path.resolve()
+        if flagged_path == source:
+            raise ValueError("A removal list cannot be the source file")
+        flagged_fields, flagged_rows = read_csv_bytes(flagged_path.read_bytes())
+        if flagged_fields[:len(fields)] != fields:
+            raise ValueError(f"Original columns differ: {flagged_path}")
+        if record_column not in flagged_fields:
+            raise ValueError(f"Missing original record position: {flagged_path}")
+        indices = set()
+        for flagged in flagged_rows:
+            index = int(flagged[record_column]) - 2
+            if not 0 <= index < len(rows):
+                raise ValueError(f"Invalid record position: {flagged_path}")
+            if any(rows[index][field] != flagged[field] for field in fields):
+                raise ValueError(f"Source record changed at record {index + 2}")
+            indices.add(index)
+        counts[str(flagged_path)] = {
+            "listed_rows": len(flagged_rows),
+            "unique_source_rows": len(indices),
+            "overlap_with_prior_lists": len(indices & removals),
+        }
+        removals.update(indices)
+    if not removals:
+        raise ValueError("No matching records to remove")
+    retained = [row for index, row in enumerate(rows) if index not in removals]
+    stamp = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
+    backup = (source.with_name(f"{source.stem}.before_{removal_label}_removal_{stamp}{source.suffix}")
+              if output == source else None)
+    report = lists[0].resolve().parent / f"removal_summary_{stamp}.json"
+    staged_path = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w", encoding="utf-8-sig", newline="", suffix=".csv",
+            prefix=f"{removal_label}_removal_", dir=output.parent, delete=False,
+        ) as staged:
+            staged_path = Path(staged.name)
+            writer = csv.DictWriter(staged, fieldnames=fields)
+            writer.writeheader()
+            writer.writerows(retained)
+            staged.flush()
+            os.fsync(staged.fileno())
+        expected = staged_path.read_bytes()
+        if read_csv_bytes(expected) != (fields, retained):
+            raise ValueError("Staging verification failed")
+        if source.read_bytes() != original:
+            raise ValueError("Source changed during processing; no update applied")
+        if backup is not None:
+            with backup.open("xb") as stream:
+                stream.write(original)
+                stream.flush()
+                os.fsync(stream.fileno())
+            if backup.read_bytes() != original:
+                raise ValueError("Backup verification failed; no update applied")
+        if source.read_bytes() != original:
+            raise ValueError("Source changed before replacement; no update applied")
+        os.replace(staged_path, output)
+        staged_path = None
+        actual = output.read_bytes()
+        if actual != expected or read_csv_bytes(actual) != (fields, retained):
+            raise ValueError(f"Post-write verification failed; backup: {backup}")
+        summary = {
+            "source": str(source), "output": str(output),
+            "updated_in_place": output == source,
+            "backup": str(backup) if backup else None,
+            "removal_label": removal_label, "record_column": record_column,
+            "rows_before": len(rows), "rows_removed": len(removals),
+            "rows_after": len(retained), "columns": len(fields),
+            "removal_lists": counts,
+            "sha256_before": hashlib.sha256(original).hexdigest(),
+            "sha256_after": hashlib.sha256(actual).hexdigest(),
+            "backup_matches_original": True if backup else None,
+            "retained_values_and_order_verified": True,
+        }
+        with report.open("x", encoding="utf-8") as stream:
+            json.dump(summary, stream, ensure_ascii=False, indent=2)
+            stream.write("\n")
+        print(json.dumps({**summary, "report": str(report)}, ensure_ascii=False, indent=2))
+        return summary
+    finally:
+        if staged_path is not None:
+            staged_path.unlink(missing_ok=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Preprocess review sữa rửa mặt trên các sàn TMĐT")
     parser.add_argument("--input", nargs="+", default=DEFAULT_INPUT_FILES,
@@ -829,7 +1087,39 @@ def main():
                         help="Chạy không cần Java/VnCoreNLP (giữ cụm từ underscore)")
     parser.add_argument("--filter-vietnamese", action="store_true",
                         help="Bật lọc ngôn ngữ heuristic (không khuyến nghị cho review không dấu)")
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument("--audit-languages", action="store_true",
+                       help="Xuất ứng viên ngôn ngữ để duyệt; không sửa CSV nguồn")
+    modes.add_argument("--remove-reviewed", nargs="+", type=Path,
+                       help="Loại đúng các dòng trong danh sách CSV đã duyệt")
+    parser.add_argument("--output-dir", type=Path, help="Thư mục báo cáo rà soát ngôn ngữ")
+    parser.add_argument("--language-decisions", type=Path,
+                        help="JSON quyết định ngôn ngữ, gắn SHA-256 của CSV nguồn")
+    parser.add_argument("--record-column", default="language_source_record")
+    parser.add_argument("--removal-label", default="language")
+    parser.add_argument("--expected-sha256", help="SHA-256 nguồn đã duyệt trước khi loại dòng")
     args = parser.parse_args()
+    if args.audit_languages or args.remove_reviewed:
+        if len(args.input) != 1:
+            parser.error("Rà soát/loại dòng yêu cầu đúng một file --input")
+        if args.append_text_only or args.filter_vietnamese or args.no_vncorenlp:
+            parser.error("Không kết hợp rà soát/loại dòng với tùy chọn tiền xử lý")
+        if args.audit_languages:
+            if not args.output_dir:
+                parser.error("--audit-languages yêu cầu --output-dir")
+            if args.output:
+                parser.error("Rà soát không ghi CSV --output; dùng --output-dir")
+            audit_review_languages(args.input[0], args.output_dir, args.language_decisions)
+        else:
+            if args.language_decisions or args.output_dir:
+                parser.error("--language-decisions/--output-dir chỉ dùng khi rà soát")
+            remove_reviewed_records(args.input[0], args.remove_reviewed, output=args.output,
+                                   record_column=args.record_column,
+                                   removal_label=args.removal_label,
+                                   expected_sha256=args.expected_sha256)
+        return
+    if args.language_decisions or args.output_dir or args.expected_sha256:
+        parser.error("Các tùy chọn rà soát/loại dòng cần chế độ tương ứng")
     if args.append_text_only:
         if len(args.input) != 1:
             parser.error("--append-text-only yêu cầu đúng một file --input")

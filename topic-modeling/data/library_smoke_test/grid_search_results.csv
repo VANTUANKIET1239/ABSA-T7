@@ -1,3 +1,0 @@
-﻿trial,min_cluster_size,min_samples,n_neighbors,min_df,max_df,c_v,n_topics,outlier_rate,status,error,elapsed_seconds
-1,30,5,20,3,0.85,,4,0.0,invalid_coherence,Không có C_v hữu hạn để so sánh.,41.753
-2,15,3,10,3,0.85,0.6685173473244524,5,0.012,ok,,5.161

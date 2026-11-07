@@ -2,10 +2,10 @@
 
 Nguồn: `combined_reviews_brand_filled_language_filtered.csv`, cột `cleaned_comment`.
 
-- Review nguồn: 16,355.
-- Text khác rỗng: 16,354.
-- Nội dung duy nhất: 12,750.
-- Bản lặp dư: 3,604.
+- Review nguồn: 16,293.
+- Text khác rỗng: 16,292.
+- Nội dung duy nhất: 12,690.
+- Bản lặp dư: 3,602.
 - Text rỗng: 1, giữ trong bảng ánh xạ với trạng thái `empty_text`.
 
 ## Cách tạo nhóm
