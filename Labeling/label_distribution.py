@@ -47,11 +47,11 @@ def summarize(input_path):
     total_rows = empty_rows = 0
     with input_path.open(encoding="utf-8-sig", newline="") as stream:
         reader = csv.DictReader(stream)
-        if "gemini_label" not in (reader.fieldnames or []):
-            raise ValueError("CSV must contain a gemini_label column")
+        if "label" not in (reader.fieldnames or []):
+            raise ValueError("CSV must contain a label column")
         for record_number, row in enumerate(reader, 1):
             try:
-                pairs = parse_label(row.get("gemini_label") or "")
+                pairs = parse_label(row.get("label") or "")
             except ValueError as exc:
                 raise ValueError(f"CSV record {record_number}: {exc}") from exc
             counts.update(pairs)

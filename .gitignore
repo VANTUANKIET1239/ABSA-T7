@@ -1,3 +1,12 @@
 .venv-bertopic/
 __pycache__/
 *.py[cod]
+
+# Trained model checkpoints and downloaded NLP model resources.
+/train-models/Models/
+/vncorenlp_model/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx

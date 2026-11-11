@@ -1,0 +1,6 @@
+﻿Metric,Value
+Input rows,16293
+Rows after numeric and required-label cleaning,16292
+Excluded rows,1
+Conflicting aspect-review label assignments,925
+Features,24

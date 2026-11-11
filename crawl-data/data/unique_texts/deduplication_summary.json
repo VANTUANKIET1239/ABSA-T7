@@ -1,7 +1,7 @@
 {
   "created_at_utc": "2026-11-07T11:02:13.902407+00:00",
   "source": "C:\\Users\\PC\\PycharmProjects\\ABSA-T7\\crawl-data\\data\\combined_reviews_brand_filled_language_filtered.csv",
-  "source_sha256": "b4d6561f47af5e292212167aacfd9d5518d9974a9603e93b26c88c07f47281fb",
+  "source_sha256": "e165b059506668f84b98b21bc2ca6c67f177d64f892bc656af14ae0433811884",
   "text_column": "cleaned_comment",
   "normalization": [
     "Unicode NFC",
@@ -20,7 +20,7 @@
   "output_dir": "C:\\Users\\PC\\PycharmProjects\\ABSA-T7\\crawl-data\\data\\unique_texts",
   "output_sha256": {
     "unique_texts.csv": "311976ffa5038a9a19529e1473dc28b8462b5c5bdb58d415bb90a404aa9060d2",
-    "review_text_mapping.csv": "200d2472c4fd7dc0b185361a398f785f9d7f7a29322fa96c0b8fb391fad81ac8"
+    "review_text_mapping.csv": "b16ad5ccc703ae9a26bb1157ba00f7bab66675a16c5c94257e912b72785aad0f"
   },
   "manual_cleanup_log": "unlabeled_cleanup_log.json",
   "label_sync": {

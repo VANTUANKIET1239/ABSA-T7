@@ -140,12 +140,12 @@ class LanguageReviewTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             source = root / "source.csv"
-            columns = ["comment", "platform", "review_id", "gemini_label"]
+            columns = ["comment", "platform", "review_id", "label"]
             rows = [
-                {"comment": "Great product, fast delivery", "platform": "Tiki", "review_id": "001", "gemini_label": "old"},
-                {"comment": "san pham tot", "platform": "Tiki", "review_id": "002", "gemini_label": "keep"},
-                {"comment": "Great product nhưng hơi khô da", "platform": "Tiki", "review_id": "003", "gemini_label": "keep"},
-                {"comment": "Great product, fast delivery", "platform": "Tiki", "review_id": "004", "gemini_label": "old"},
+                {"comment": "Great product, fast delivery", "platform": "Tiki", "review_id": "001", "label": "old"},
+                {"comment": "san pham tot", "platform": "Tiki", "review_id": "002", "label": "keep"},
+                {"comment": "Great product nhưng hơi khô da", "platform": "Tiki", "review_id": "003", "label": "keep"},
+                {"comment": "Great product, fast delivery", "platform": "Tiki", "review_id": "004", "label": "old"},
             ]
             with source.open("w", encoding="utf-8-sig", newline="") as stream:
                 writer = csv.DictWriter(stream, fieldnames=columns)

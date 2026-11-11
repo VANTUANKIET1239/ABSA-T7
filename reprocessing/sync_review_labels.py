@@ -26,7 +26,7 @@ SOURCE = ROOT / "crawl-data/data/combined_reviews_brand_filled_language_filtered
 MAPPING = ROOT / "crawl-data/data/unique_texts/review_text_mapping.csv"
 LABELED = ROOT / "Labeling/data/unique_texts_gemini_labeled.csv"
 SUMMARY = MAPPING.with_name("deduplication_summary.json")
-LABEL_COLUMNS = ["gemini_label", "absa_status"]
+LABEL_COLUMNS = ["label", "absa_status"]
 
 
 def digest(raw):
@@ -62,7 +62,7 @@ def main():
     by_group = {r["text_group_id"]: r for r in labeled}
     assert len(by_group) == len(labeled)
     for r in labeled:
-        assert r["absa_status"] == "done" and parse_label(r["gemini_label"])
+        assert r["absa_status"] == "done" and parse_label(r["label"])
         assert text_group_id(normalize_text_key(r["cleaned_comment"])) == r["text_group_id"]
     assert len(source) == len(mapping)
     base_cols = [c for c in source_cols if c not in LABEL_COLUMNS]
@@ -81,7 +81,7 @@ def main():
             counts[group] += 1
         else:
             assert not m["text_group_id"] and m["text_status"] == "empty_text"
-            labels = {"gemini_label": "", "absa_status": "empty_text"}
+            labels = {"label": "", "absa_status": "empty_text"}
         out_source.append({**s, **labels})
         out_mapping.append({**m, **labels})
     assert set(counts) == set(by_group)
