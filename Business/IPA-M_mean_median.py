@@ -1,6 +1,6 @@
 """Facial cleanser IPA: compare mean/median cutoffs and signed SHAP distributions.
 
-Run this file directly, including with PyCharm Run. Keep IPA-M.py beside it.
+Run this file directly, including with PyCharm Run. Keep ipa_shap_cleanser.py beside it.
 The original module supplies preprocessing, models, 10-fold CV, SHAP, performance,
 quadrant classification and existing figures without modifying its source.
 
@@ -21,6 +21,8 @@ Additional outputs (PNG at 300 dpi plus PDF for every figure):
 
 The model is fitted once for SHAP; both IPA methods use those same predictions,
 SHAP values and aspect performance scores. All outputs use a separate folder.
+The shared pipeline excludes General from its 10 IPA aspects and model inputs,
+while retaining General-only reviews and their original labels.
 """
 from __future__ import annotations
 
@@ -35,7 +37,7 @@ import numpy as np
 import pandas as pd
 
 
-BASE_SCRIPT = Path(__file__).resolve().with_name("IPA-M.py")
+BASE_SCRIPT = Path(__file__).resolve().with_name("ipa_shap_cleanser.py")
 OUTPUT_DIR = Path(__file__).resolve().parent / "customer_satisfaction_xai_ipa_mean_median_results_cleanser"
 QUADRANT_COLORS = {
     "Concentrate Here": "#c2410c",
@@ -122,7 +124,7 @@ def plot_ipa_cutoff_comparison(pipeline, mean_table, median_table, comparison):
     x_max = min(100, max(valid["Performance_0_100"].max(), *cuts_p) + 6)
     y_max = max(valid["Importance_Pct"].max(), *cuts_i) * 1.22
     changed = set(comparison.loc[comparison["Quadrant_Changed"], "Aspect"])
-    offsets = {"General": (6, 7), "Packaging": (6, -15), "ShopService": (-7, 11),
+    offsets = {"Packaging": (6, -15), "ShopService": (-7, 11),
                "SkinCompatibilitySafety": (-7, -15), "Fragrance": (-7, 8),
                "TextureFoaming": (-7, 8)}
     # Spread the dense lower-right cluster over separate label rows.
@@ -172,6 +174,8 @@ def plot_ipa_cutoff_comparison(pipeline, mean_table, median_table, comparison):
     fig.text(.5, .025, "* Black outline: aspect changes quadrant. Importance and performance are identical in both panels.",
              ha="center", fontsize=9, color="#475569")
     fig.tight_layout(rect=(0, .13, 1, .94))
+    for ax in axes:
+        pipeline.arrange_ipa_labels(fig, ax=ax)
     pipeline.save_figure(fig, "ipa_mean_median_comparison")
 
 

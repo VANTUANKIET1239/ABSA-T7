@@ -1,0 +1,11 @@
+.venv/
+.cache/
+.env
+.docker/
+extension/api_config.local.json
+__pycache__/
+*.py[cod]
+*.zip
+node_modules/
+backend/models/*
+!backend/models/README.md

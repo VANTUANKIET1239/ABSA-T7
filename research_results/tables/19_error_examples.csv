@@ -1,0 +1,7 @@
+﻿Test_Row_1based,Aspect,Gold,Predicted,Error_Type,Review,Token_Length
+222,TextureFoaming,positive,neutral,Nhầm sentiment,sản_phẩm làm_sạch tạo_bọt gel kiểm_soát_dầu,10
+1198,ShopService,neutral,negative,Nhầm sentiment,mong cửa_hàng lưu_ý cho những đơn hàng sau,10
+95,General,positive,None,Bỏ sót aspect,làm cho da trông rạng_rỡ và sáng bóng,10
+174,ShopService,positive,None,Bỏ sót aspect,chưa dùng chưa biết tặng cửa_hàng 5sao,10
+190,CleansingEffectiveness,None,positive,Phát hiện dư aspect,thành_phần làm_sạch tự_nhiên dưỡng_ẩm sâu cho da,11
+256,Packaging,None,negative,Phát hiện dư aspect,cửa_hàng đóng_gói thì chậm nhắn_tin rep cũng chậm,11

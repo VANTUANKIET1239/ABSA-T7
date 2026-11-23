@@ -1,0 +1,89 @@
+﻿Group_Type,Group,Aspect,Review_N,Mentioned,Positive,Negative,Neutral,Negative_Rate_Pct
+Platform,Lazada,CleansingEffectiveness,4400,1409,1373,26,14,1.8452803406671399
+Platform,Lazada,HydrationSkinComfort,4400,1500,1456,45,2,3.0
+Platform,Lazada,SkinCompatibilitySafety,4400,1684,1577,62,48,3.681710213776722
+Platform,Lazada,TextureFoaming,4400,531,341,35,162,6.5913370998116765
+Platform,Lazada,Fragrance,4400,401,291,72,40,17.955112219451372
+Platform,Lazada,IngredientsFormulation,4400,780,630,12,143,1.5384615384615385
+Platform,Lazada,Packaging,4400,947,656,294,25,31.045406546990495
+Platform,Lazada,PriceValue,4400,777,704,42,36,5.405405405405405
+Platform,Lazada,ShopService,4400,708,480,224,11,31.638418079096045
+Platform,Lazada,Delivery,4400,830,755,75,8,9.036144578313253
+Platform,Lazada,General,4400,2070,1633,164,325,7.9227053140096615
+Platform,Shopee,CleansingEffectiveness,5934,2282,1764,79,457,3.461875547765118
+Platform,Shopee,HydrationSkinComfort,5934,1592,1389,201,26,12.625628140703517
+Platform,Shopee,SkinCompatibilitySafety,5934,2771,1812,328,720,11.836881992060627
+Platform,Shopee,TextureFoaming,5934,1134,594,110,485,9.700176366843033
+Platform,Shopee,Fragrance,5934,2549,1705,235,642,9.219301686936053
+Platform,Shopee,IngredientsFormulation,5934,136,49,14,74,10.294117647058824
+Platform,Shopee,Packaging,5934,2593,1808,755,111,29.11685306594678
+Platform,Shopee,PriceValue,5934,1270,1129,133,25,10.472440944881889
+Platform,Shopee,ShopService,5934,1635,1064,558,31,34.12844036697248
+Platform,Shopee,Delivery,5934,1842,1710,122,19,6.623235613463627
+Platform,Shopee,General,5934,3285,2379,412,621,12.54185692541857
+Platform,Tiki,CleansingEffectiveness,5958,454,420,39,5,8.590308370044053
+Platform,Tiki,HydrationSkinComfort,5958,544,422,130,2,23.897058823529413
+Platform,Tiki,SkinCompatibilitySafety,5958,500,374,127,21,25.4
+Platform,Tiki,TextureFoaming,5958,191,98,20,76,10.471204188481675
+Platform,Tiki,Fragrance,5958,279,188,68,26,24.372759856630825
+Platform,Tiki,IngredientsFormulation,5958,44,18,6,21,13.636363636363637
+Platform,Tiki,Packaging,5958,666,416,259,18,38.888888888888886
+Platform,Tiki,PriceValue,5958,287,243,43,7,14.982578397212544
+Platform,Tiki,ShopService,5958,409,208,209,1,51.100244498777506
+Platform,Tiki,Delivery,5958,651,551,106,0,16.282642089093702
+Platform,Tiki,General,5958,5816,5410,400,241,6.87757909215956
+Brand,Hada Labo,CleansingEffectiveness,1525,336,328,10,0,2.9761904761904763
+Brand,Hada Labo,HydrationSkinComfort,1525,385,355,29,3,7.532467532467533
+Brand,Hada Labo,SkinCompatibilitySafety,1525,488,442,38,10,7.786885245901639
+Brand,Hada Labo,TextureFoaming,1525,165,140,13,14,7.878787878787879
+Brand,Hada Labo,Fragrance,1525,88,33,38,19,43.18181818181818
+Brand,Hada Labo,IngredientsFormulation,1525,353,305,6,42,1.6997167138810199
+Brand,Hada Labo,Packaging,1525,269,139,135,4,50.185873605947954
+Brand,Hada Labo,PriceValue,1525,190,173,12,9,6.315789473684211
+Brand,Hada Labo,ShopService,1525,141,73,67,2,47.5177304964539
+Brand,Hada Labo,Delivery,1525,210,185,26,0,12.380952380952381
+Brand,Hada Labo,General,1525,995,850,104,85,10.452261306532664
+Brand,La Roche-Posay,CleansingEffectiveness,1150,178,166,4,9,2.247191011235955
+Brand,La Roche-Posay,HydrationSkinComfort,1150,115,92,28,0,24.347826086956523
+Brand,La Roche-Posay,SkinCompatibilitySafety,1150,173,145,22,13,12.716763005780347
+Brand,La Roche-Posay,TextureFoaming,1150,88,62,3,23,3.409090909090909
+Brand,La Roche-Posay,Fragrance,1150,64,46,12,6,18.75
+Brand,La Roche-Posay,IngredientsFormulation,1150,16,15,0,1,0.0
+Brand,La Roche-Posay,Packaging,1150,271,149,126,9,46.494464944649444
+Brand,La Roche-Posay,PriceValue,1150,117,96,22,2,18.803418803418804
+Brand,La Roche-Posay,ShopService,1150,209,108,102,1,48.803827751196174
+Brand,La Roche-Posay,Delivery,1150,217,184,31,3,14.285714285714286
+Brand,La Roche-Posay,General,1150,969,849,108,56,11.145510835913313
+Brand,Cetaphil,CleansingEffectiveness,1112,307,177,24,110,7.817589576547231
+Brand,Cetaphil,HydrationSkinComfort,1112,156,143,14,1,8.974358974358974
+Brand,Cetaphil,SkinCompatibilitySafety,1112,519,346,58,125,11.175337186897881
+Brand,Cetaphil,TextureFoaming,1112,108,14,16,81,14.814814814814815
+Brand,Cetaphil,Fragrance,1112,421,186,87,159,20.665083135391924
+Brand,Cetaphil,IngredientsFormulation,1112,25,11,0,14,0.0
+Brand,Cetaphil,Packaging,1112,559,293,267,30,47.76386404293381
+Brand,Cetaphil,PriceValue,1112,172,144,21,7,12.209302325581396
+Brand,Cetaphil,ShopService,1112,278,162,108,9,38.84892086330935
+Brand,Cetaphil,Delivery,1112,322,275,46,5,14.285714285714286
+Brand,Cetaphil,General,1112,622,391,113,142,18.167202572347268
+Brand,Acnes,CleansingEffectiveness,1025,154,146,8,1,5.194805194805195
+Brand,Acnes,HydrationSkinComfort,1025,133,121,12,0,9.022556390977444
+Brand,Acnes,SkinCompatibilitySafety,1025,155,134,20,3,12.903225806451612
+Brand,Acnes,TextureFoaming,1025,26,14,1,11,3.8461538461538463
+Brand,Acnes,Fragrance,1025,18,16,1,1,5.555555555555555
+Brand,Acnes,IngredientsFormulation,1025,23,15,3,5,13.043478260869565
+Brand,Acnes,Packaging,1025,72,63,6,3,8.333333333333334
+Brand,Acnes,PriceValue,1025,75,68,4,3,5.333333333333333
+Brand,Acnes,ShopService,1025,51,42,9,0,17.647058823529413
+Brand,Acnes,Delivery,1025,98,89,9,0,9.183673469387756
+Brand,Acnes,General,1025,899,869,21,27,2.335928809788654
+Brand,CeraVe,CleansingEffectiveness,799,246,227,5,14,2.032520325203252
+Brand,CeraVe,HydrationSkinComfort,799,207,186,20,3,9.66183574879227
+Brand,CeraVe,SkinCompatibilitySafety,799,271,166,23,84,8.487084870848708
+Brand,CeraVe,TextureFoaming,799,150,85,5,69,3.3333333333333335
+Brand,CeraVe,Fragrance,799,190,76,38,79,20.0
+Brand,CeraVe,IngredientsFormulation,799,28,12,3,13,10.714285714285714
+Brand,CeraVe,Packaging,799,345,203,136,18,39.42028985507246
+Brand,CeraVe,PriceValue,799,133,114,11,8,8.270676691729323
+Brand,CeraVe,ShopService,799,177,111,64,2,36.15819209039548
+Brand,CeraVe,Delivery,799,256,236,19,2,7.421875
+Brand,CeraVe,General,799,395,278,62,65,15.69620253164557

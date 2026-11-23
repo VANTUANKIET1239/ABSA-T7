@@ -2,6 +2,8 @@
 
 Requires: pip install pandas numpy scikit-learn xgboost matplotlib
 No dependency on the external `shap` Python package: XGBoost computes Tree SHAP natively.
+General is excluded from model inputs, SHAP-Kano and pairwise interactions.
+The source ABSA labels and reviews mentioning only General are retained.
 """
 from pathlib import Path
 import re
@@ -31,6 +33,7 @@ N_SPLITS = 10
 INDIFFERENT_THRESHOLD = 0.10
 MIN_PAIR_SUPPORT = 20    # Minimum reviews with both sentiment features active
 TOP_N_PAIRS = 20
+# Analyze the same 10 concrete aspects as IPA, excluding overall sentiment.
 ASPECTS = [
     "CleansingEffectiveness",
     "HydrationSkinComfort",
@@ -42,7 +45,6 @@ ASPECTS = [
     "PriceValue",
     "ShopService",
     "Delivery",
-    "General",
 ]
 NUMERIC_COLS = ["price", "discount"]
 SCALED_COLS = ["price_scaled", "discount_scaled"]
@@ -93,6 +95,7 @@ def preprocess_data(path):
             elif sentiment == "negative":
                 df.at[i, f"{aspect}_Neg"] = 1
 
+    # Do not filter rows by the retained aspect flags: General-only reviews stay.
     sentiment_cols = [f"{aspect}_{pol}" for aspect in ASPECTS for pol in ("Pos", "Neg")]
     raw_features = df[NUMERIC_COLS + sentiment_cols].copy()
     target = df["rating"].astype(float)

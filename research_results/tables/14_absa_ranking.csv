@@ -1,0 +1,13 @@
+﻿Model,Scenario,Task,Precision_Macro,Recall_Macro,F1_Macro,F1_Micro
+birnn,focal_loss,ACD+SPC,74.85000000000001,69.28,70.00999999999999,88.6
+multitask,focal_loss,ACD+SPC,74.42,68.63,69.82000000000001,87.38
+multitask,class_weights,ACD+SPC,73.08,68.56,69.39,88.42999999999999
+bigru,focal_loss,ACD+SPC,69.63000000000001,68.54,68.53,88.08
+bilstm,focal_loss,ACD+SPC,70.64,67.99,68.45,87.44
+multitask,baseline,ACD+SPC,68.94,67.33,67.75,88.62
+birnn,class_weights,ACD+SPC,66.03,66.38,65.83,87.88
+bigru,class_weights,ACD+SPC,65.61,65.36999999999999,65.19,87.92
+bigru,baseline,ACD+SPC,67.49000000000001,63.980000000000004,65.14,88.29
+birnn,baseline,ACD+SPC,66.81,63.7,64.4,88.21
+bilstm,class_weights,ACD+SPC,64.72,63.67,63.73,86.91
+bilstm,baseline,ACD+SPC,66.88,62.38,63.62,88.11

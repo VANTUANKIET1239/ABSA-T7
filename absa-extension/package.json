@@ -1,0 +1,8 @@
+{
+  "name": "shopee-review-analyzer-local",
+  "version": "1.4.0",
+  "private": true,
+  "description": "Dev tests only; the unpacked extension needs no npm/build step.",
+  "scripts": {"test": "node --test tests/extension.test.cjs tests/shopee_api.test.cjs", "test:e2e": "node tests/e2e.cjs", "test:api-browser": "node tests/api-browser.cjs"},
+  "devDependencies": {"playwright": "1.62.1"}
+}

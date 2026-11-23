@@ -8,6 +8,8 @@ CSV fields: price, discount, rating, label
 ABSA label example:
     {CleansingEffectiveness#positive};{SkinCompatibilitySafety#negative}
 Other columns (product_name, brand, cleaned_comment, ...) are retained but not used in modeling.
+The 11-aspect ABSA labels are preserved. General is excluded from the IPA model
+and tables; reviews mentioning only General remain in the modeling dataset.
 
 Outputs
 -------
@@ -27,7 +29,7 @@ Interpretation notes
    not automatically from a trained PhoBERT model.
 2. Model-derived SHAP importance is NOT a causal effect or stated importance.
 3. Performance reflects sentiment among reviews MENTIONING a specific aspect.
-4. The IPA cutoffs are relative to the 11 analyzed aspects, not absolute standards.
+4. The IPA cutoffs are relative to the 10 analyzed aspects, not absolute standards.
 5. The final XGBoost model is deliberately chosen for native Tree SHAP;
    do not call it the best predictive model if CV results show otherwise.
 """
@@ -70,7 +72,7 @@ XAI_SCATTER_TOP_FEATURES = 12
 LOCAL_WATERFALL_REVIEW_INDEX = 0  # Zero-based index; a fixed, reproducible example.
 LOCAL_WATERFALL_MAX_FEATURES = 10
 
-ASPECTS = [
+LABEL_ASPECTS = [
     "CleansingEffectiveness",
     "HydrationSkinComfort",
     "SkinCompatibilitySafety",
@@ -83,6 +85,9 @@ ASPECTS = [
     "Delivery",
     "General",
 ]
+# Overall sentiment remains a valid ABSA label but is not an IPA attribute.
+EXCLUDED_IPA_ASPECTS = {"General"}
+ASPECTS = [aspect for aspect in LABEL_ASPECTS if aspect not in EXCLUDED_IPA_ASPECTS]
 NUMERIC_COLS = ["price", "discount"]
 SCALED_COLS = ["price_scaled", "discount_scaled"]
 LABEL_PATTERN = re.compile(r"\{\s*([^#{}]+?)\s*#\s*([^{}]+?)\s*\}")
@@ -155,7 +160,7 @@ def preprocess_data(path: Path):
     if len(df) < N_SPLITS:
         raise ValueError(f"Need >= {N_SPLITS} valid reviews for {N_SPLITS}-fold CV")
 
-    # Preserve the original encoding for the 22 cleanser sentiment features:
+    # Preserve the original encoding for the 20 retained sentiment features:
     # Positive and Negative = binary; Neutral and None = both zero.
     # For IPA, retain four sentiment states per aspect separately.
     # A review with conflicting sentiments for the same aspect is marked MIXED,
@@ -163,6 +168,7 @@ def preprocess_data(path: Path):
     # sentiment-derived performance score (no arbitrary sentiment assignment).
     unknown_labels: set[tuple[str, str]] = set()
     label_issues = 0
+    excluded_only_reviews = 0
     for aspect in ASPECTS:
         df[f"{aspect}_Pos"] = np.zeros(len(df), dtype=np.int8)
         df[f"{aspect}_Neg"] = np.zeros(len(df), dtype=np.int8)
@@ -170,12 +176,19 @@ def preprocess_data(path: Path):
 
     for row_id, raw in enumerate(df["label"]):
         state_map: dict[str, set[str]] = {}
+        recognized_aspects: set[str] = set()
         for aspect, sentiment in extract_aspects(raw):
             aspect, sentiment = aspect.strip(), sentiment.strip().lower()
-            if aspect not in ASPECTS or sentiment not in SENTIMENTS:
+            if aspect not in LABEL_ASPECTS or sentiment not in SENTIMENTS:
                 unknown_labels.add((aspect, sentiment))
                 continue
+            recognized_aspects.add(aspect)
+            if aspect in EXCLUDED_IPA_ASPECTS:
+                continue
             state_map.setdefault(aspect, set()).add(sentiment)
+        if recognized_aspects and recognized_aspects.issubset(EXCLUDED_IPA_ASPECTS):
+            # Keep these rows: the remaining aspect flags are all zero.
+            excluded_only_reviews += 1
         for aspect, sentiments in state_map.items():
             if "positive" in sentiments:
                 df.at[row_id, f"{aspect}_Pos"] = 1
@@ -201,6 +214,10 @@ def preprocess_data(path: Path):
         {"Metric": "Excluded rows", "Value": raw_count - len(df)},
         {"Metric": "Conflicting aspect-review label assignments", "Value": label_issues},
         {"Metric": "Features", "Value": len(raw_features.columns)},
+        {"Metric": "Modeled IPA aspects", "Value": len(ASPECTS)},
+        {"Metric": "Sentiment features", "Value": len(sentiment_cols)},
+        {"Metric": "Excluded IPA aspects", "Value": ", ".join(sorted(EXCLUDED_IPA_ASPECTS))},
+        {"Metric": "Reviews mentioning only excluded IPA aspects retained", "Value": excluded_only_reviews},
     ])
     overview.to_csv(OUTPUT_DIR / "modeling_data_summary.csv", index=False, encoding="utf-8-sig")
     return df, raw_features, target, sentiment_cols
@@ -523,11 +540,48 @@ def save_figure(fig, stem):
     plt.close(fig)
 
 
+def arrange_ipa_labels(fig, *, ax=None):
+    """Place aspect names inside the axes without changing IPA coordinates."""
+    from matplotlib.text import Annotation
+
+    ax = fig.axes[0] if ax is None else ax
+    annotations = [(text.get_text(), text.xy) for text in ax.texts if isinstance(text, Annotation)]
+    for text in list(ax.texts):
+        if isinstance(text, Annotation):
+            text.remove()
+    fig.canvas.draw()
+    renderer = fig.canvas.get_renderer()
+    bounds = ax.get_window_extent(renderer)
+    occupied = [text.get_window_extent(renderer).padded(3) for text in ax.texts]
+    candidates = [(dx, dy) for dy in (8, 24, 40, 58, 78, 100, 126, 156, -14, -30, -50, -76)
+                  for dx in (6, -6, 24, -24)]
+    for raw_label, point in annotations:
+        label = re.sub(r"(?<=[a-z])(?=[A-Z])", " ", raw_label)
+        probe = ax.annotate(label, point, xytext=(6, 8), textcoords="offset points", fontsize=8.5)
+        selected = (6, 8)
+        for dx, dy in candidates:
+            probe.set_position((dx, dy))
+            probe.set_horizontalalignment("left" if dx > 0 else "right")
+            box = probe.get_window_extent(renderer).padded(3)
+            inside = (box.x0 >= bounds.x0 + 2 and box.x1 <= bounds.x1 - 2
+                      and box.y0 >= bounds.y0 + 2 and box.y1 <= bounds.y1 - 2)
+            if inside and not any(box.overlaps(other) for other in occupied):
+                selected = (dx, dy)
+                occupied.append(box)
+                break
+        probe.remove()
+        dx, dy = selected
+        ax.annotate(label, point, xytext=(dx, dy), textcoords="offset points", fontsize=8.5,
+                    ha="left" if dx > 0 else "right",
+                    arrowprops=dict(arrowstyle="-", color="#94a3b8", lw=.6),
+                    bbox=dict(facecolor="white", edgecolor="none", alpha=.88, pad=.8))
+
+
 def plot_importance(ipa):
     d = ipa.sort_values("Importance_Pct", ascending=True)
     fig, ax = plt.subplots(figsize=(10, 5.5))
     ax.barh(d["Aspect"].str.replace("_", " ", regex=False), d["Importance_Pct"])
-    ax.set_xlabel("Relative aspect importance (% of the 11 aspect scores)")
+    ax.set_xlabel(f"Relative aspect importance (% of the {len(ASPECTS)} aspect scores)")
     ax.set_title("Global Attribute Importance from Mean Absolute SHAP")
     ax.grid(axis="x", alpha=0.15)
     fig.tight_layout()
@@ -602,6 +656,7 @@ def plot_ipa(ipa):
     ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.13), ncol=2, fontsize=8)
     ax.grid(alpha=0.11)
     fig.tight_layout()
+    arrange_ipa_labels(fig)
     save_figure(fig, "ipa_matrix")
 
 
@@ -781,6 +836,7 @@ def plot_ipa_penalty_bubble(ipa: pd.DataFrame):
              fontsize=8, color="#555555")
     ax.grid(alpha=.10)
     fig.tight_layout(rect=(0, .035, 1, 1))
+    arrange_ipa_labels(fig)
     save_figure(fig, "ipa_penalty_bubble")
 
 

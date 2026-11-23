@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Shopee Review Analyzer",
+  "version": "1.4.0",
+  "description": "Phân tích cảm xúc đánh giá sữa rửa mặt trên Shopee.",
+  "minimum_chrome_version": "109",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:8000/*",
+    "https://opens-power-thereafter-food.trycloudflare.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Shopee Review Analyzer",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' http://127.0.0.1:8000 https://opens-power-thereafter-food.trycloudflare.com"
+  }
+}

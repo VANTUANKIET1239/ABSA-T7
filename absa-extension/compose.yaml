@@ -1,0 +1,78 @@
+name: absa-api
+
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: absa-extension/Dockerfile
+    restart: unless-stopped
+    init: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    environment:
+      ABSA_DEVICE: cuda
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility
+      LD_LIBRARY_PATH: /usr/lib/wsl/lib
+      ABSA_TORCH_THREADS: "4"
+      ABSA_BATCH_SIZE: "16"
+      ABSA_MAX_REVIEWS: "20"
+      ABSA_RESEARCH_ROOT: /app
+      ABSA_CHECKPOINT: /models/best_model_birnn_cleanser_focal_loss_VI.pt
+      ABSA_MODEL_NAME: /models/phobert
+      VNCORENLP_DIR: /models/vncorenlp
+      ABSA_ALLOWED_HOSTS: localhost,127.0.0.1,api,*.trycloudflare.com
+      ABSA_API_KEY_FILE: /run/secrets/api_key
+    ports:
+      - "127.0.0.1:${ABSA_PORT:-8082}:8000"
+    secrets:
+      - api_key
+    volumes:
+      # This Windows/WSL2 host needs the complete matching driver libraries.
+      # They stay on the host and are mounted read-only, never copied into the image.
+      - type: bind
+        source: /usr/lib/wsl/lib
+        target: /usr/lib/wsl/lib
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: /usr/lib/wsl/drivers
+        target: /usr/lib/wsl/drivers
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ./.docker/assets/phobert
+        target: /models/phobert
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ../train-models/Models/Cleanser/best_model_birnn_cleanser_focal_loss_VI.pt
+        target: /models/best_model_birnn_cleanser_focal_loss_VI.pt
+        read_only: true
+        bind:
+          create_host_path: false
+    healthcheck:
+      test: ["CMD", "python", "-c", "import json,urllib.request; r=json.load(urllib.request.urlopen('http://127.0.0.1:8000/health',timeout=5)); assert r['model_loaded'] and r['device'].startswith('cuda')"]
+      interval: 20s
+      timeout: 8s
+      start_period: 120s
+      retries: 5
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    profiles: ["tunnel"]
+    command: ["tunnel", "--no-autoupdate", "--url", "http://api:8000"]
+    depends_on:
+      api:
+        condition: service_healthy
+
+secrets:
+  api_key:
+    file: ./.docker/api_key.txt

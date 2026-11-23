@@ -1,0 +1,17 @@
+**
+!absa-extension/
+!absa-extension/backend/
+!absa-extension/backend/**
+!reprocessing/
+!reprocessing/preprocess_cleanser_reviews.py
+!reprocessing/seller_reply_rules.py
+!vncorenlp_model/
+!vncorenlp_model/VnCoreNLP-1.2.jar
+!vncorenlp_model/models/
+!vncorenlp_model/models/wordsegmenter/
+!vncorenlp_model/models/wordsegmenter/vi-vocab
+!vncorenlp_model/models/wordsegmenter/wordsegmenter.rdr
+**/__pycache__/
+**/*.py[cod]
+**/.env
+absa-extension/backend/models/
