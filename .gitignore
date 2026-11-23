@@ -10,3 +10,8 @@ __pycache__/
 *.ckpt
 *.safetensors
 *.onnx
+
+# Topic-model binaries and temporary figure verification.
+/topic-modeling/data/**/best_lda_model*
+/topic-modeling/data/**/lda_dictionary
+/topic-modeling/.cache/
