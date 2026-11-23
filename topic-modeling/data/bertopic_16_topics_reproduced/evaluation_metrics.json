@@ -1,0 +1,12 @@
+{
+  "model": "BERTopic",
+  "coherence_cv": 0.5757062354607918,
+  "n_topics": 16,
+  "n_documents": 12741,
+  "n_outliers": 2918,
+  "top_n_words": 10,
+  "coherence_sample": 0,
+  "ordered_corpus_sha256": "b0de723dc65d7200549ec5cc08bddb062f41e4d3d67e14e55af0e8a3e2f75383",
+  "keyword_weight": "c-TF-IDF; not a frequency or a probability",
+  "frequency_unit": "unique reviews; duplicate_count is not a weight"
+}

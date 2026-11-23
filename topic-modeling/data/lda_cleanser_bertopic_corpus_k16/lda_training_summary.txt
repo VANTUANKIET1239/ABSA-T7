@@ -1,0 +1,7 @@
+Fixed K: 16
+Valid LDA documents: 12741
+Vocabulary: 16104
+Trials: 6
+Best params: {'num_topics': 16, 'alpha': 'asymmetric', 'eta': 'auto', 'passes': 20, 'iterations': 200}
+Best C_v: 0.6447784548214361
+Reference corpus matches: True

@@ -1,0 +1,22 @@
+LDA – SỮA RỬA MẶT
+Input: C:\Users\PC\PycharmProjects\ABSA-T7\topic-modeling\data\bertopic_16_topics_reproduced\reviews_with_topics.csv
+Text column: cleaned_comment
+Valid LDA documents: 12,741
+Vocabulary: 16,104
+Search strategy: select K first, then tune hyperparameters at fixed K.
+K tested: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+Stage 1 selected K: 12; C_v: 0.666352
+Stage 1 fixed params: {'num_topics': 12, 'alpha': 'symmetric', 'eta': 'auto', 'passes': 20, 'iterations': 200}
+Stage 1 trials: 20; stage 2 trials: 6
+Trials: 26; successful: 26
+Best K: 12
+Best params: {'num_topics': 12, 'alpha': 'symmetric', 'eta': 'auto', 'passes': 20, 'iterations': 200}
+Best C_v: 0.666352
+Topic diversity (best): 0.683333
+n-gram: (1,2)
+min_df: 3, max_df: 0.85
+passes: 20, iterations: 200
+remove_brand_tokens: False
+Suggested_Aspect không phải nhãn ABSA; cần kiểm định thủ công.
+LDA là mô hình topic hỗn hợp; một review có thể liên quan nhiều chủ đề.
+C_v chỉ so sánh trực tiếp với BERTopic khi dùng cùng corpus, tokenization, n-grams, stopwords, và cách tính coherence.

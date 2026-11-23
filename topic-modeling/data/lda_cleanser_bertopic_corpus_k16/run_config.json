@@ -1,0 +1,121 @@
+{
+  "search_strategy": "fixed_k_hyperparameters",
+  "fixed_k": 16,
+  "bertopic_reference": "C:\\Users\\PC\\PycharmProjects\\ABSA-T7\\topic-modeling\\data\\bertopic_16_topics_reproduced",
+  "input": "C:\\Users\\PC\\PycharmProjects\\ABSA-T7\\topic-modeling\\data\\bertopic_16_topics_reproduced\\reviews_with_topics.csv",
+  "input_sha256": "656e9699de4c9ae0e0ce6968d7e9d0e0bacaaa4cfa74854c867df4d39803f213",
+  "ordered_corpus_sha256": "b0de723dc65d7200549ec5cc08bddb062f41e4d3d67e14e55af0e8a3e2f75383",
+  "reference_corpus_matches": true,
+  "corpus_policy": "Exact BERTopic IDs, texts and order; retain empty bag-of-words rows.",
+  "workers": 3,
+  "text_column": "cleaned_comment",
+  "reference_dir": "C:\\Users\\PC\\PycharmProjects\\ABSA-T7\\topic-modeling\\data\\bertopic_16_topics_reproduced",
+  "valid_documents": 12741,
+  "vocabulary_size": 16104,
+  "candidates": [
+    {
+      "num_topics": 16,
+      "alpha": "symmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 16,
+      "alpha": "symmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 16,
+      "alpha": "asymmetric",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 16,
+      "alpha": "asymmetric",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 16,
+      "alpha": "auto",
+      "eta": "auto",
+      "passes": 20,
+      "iterations": 200
+    },
+    {
+      "num_topics": 16,
+      "alpha": "auto",
+      "eta": "symmetric",
+      "passes": 20,
+      "iterations": 200
+    }
+  ],
+  "fixed_params": {
+    "random_state": 42,
+    "chunksize": 2000,
+    "update_every": 0,
+    "minimum_probability": 0.0
+  },
+  "top_n_words": 10,
+  "vectorizer": {
+    "min_df": 3,
+    "max_df": 0.85,
+    "ngram_max": 2,
+    "remove_brand_tokens": false,
+    "stop_words": [
+      "anh",
+      "bạn",
+      "cho",
+      "chị",
+      "các",
+      "có",
+      "của",
+      "em",
+      "ha",
+      "haha",
+      "hehe",
+      "hihi",
+      "kia",
+      "kkk",
+      "là",
+      "mà",
+      "mình",
+      "mọi_người",
+      "một",
+      "nha",
+      "nhé",
+      "những",
+      "này",
+      "nói_chung",
+      "nói_chung_là",
+      "rửa_mặt",
+      "sp",
+      "srm",
+      "sản_phẩm",
+      "sữa",
+      "sữa_rửa_mặt",
+      "thì",
+      "tui",
+      "tôi",
+      "và",
+      "với",
+      "đây",
+      "đó",
+      "để",
+      "ạ",
+      "ấy"
+    ]
+  },
+  "selection": "Maximum finite C_v at fixed K; first trial wins ties.",
+  "package_versions": {
+    "gensim": "4.4.0",
+    "numpy": "2.2.6",
+    "scikit-learn": "1.7.2"
+  }
+}

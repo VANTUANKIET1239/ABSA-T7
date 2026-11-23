@@ -70,6 +70,6 @@ docker compose -f absa-extension/compose.yaml stop cloudflared
 docker compose -f absa-extension/compose.yaml --profile tunnel down
 ```
 
-Các lệnh này chỉ tác động project `absa-api`, không dừng web `cleanser-insight`. Máy, Docker Desktop và Internet phải tiếp tục hoạt động. Quick Tunnel là URL tạm, có thể đổi khi tạo lại tunnel, không có cam kết uptime; muốn địa chỉ cố định cần named tunnel và hostname riêng. Xem [tài liệu Cloudflare Quick Tunnels](https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/).
+Các lệnh này chỉ tác động project `absa-api`. Máy, Docker Desktop và Internet phải tiếp tục hoạt động. Quick Tunnel là URL tạm, có thể đổi khi tạo lại tunnel, không có cam kết uptime; muốn địa chỉ cố định cần named tunnel và hostname riêng. Xem [tài liệu Cloudflare Quick Tunnels](https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/).
 
 Để kiểm tra trực tiếp container thay vì tunnel, chạy `configure_extension.py --url http://127.0.0.1:8082`, rồi Reload extension. Để quay về Python local không có khóa, bỏ file `extension/api_config.local.json` và Reload; mặc định sẽ gọi `http://127.0.0.1:8000`.

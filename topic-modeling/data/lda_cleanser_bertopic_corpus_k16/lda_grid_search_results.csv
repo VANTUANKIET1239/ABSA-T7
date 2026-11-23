@@ -1,0 +1,7 @@
+﻿Trial,K,alpha,eta,passes,iterations,Coherence_Cv,Log_Perplexity,Topic_Diversity,Status,Error,Elapsed_Seconds,Stage
+1,16,symmetric,auto,20,200,0.6283158983060808,-7.613334701867165,0.55625,ok,,191.95124110000006,fixed_k_hyperparameter_search
+2,16,symmetric,symmetric,20,200,0.6283158983060808,-7.642940441721869,0.55625,ok,,190.79478569999992,fixed_k_hyperparameter_search
+3,16,asymmetric,auto,20,200,0.6447784548214361,-7.6281668505198414,0.5625,ok,,195.7216354000002,fixed_k_hyperparameter_search
+4,16,asymmetric,symmetric,20,200,0.6447784548214361,-7.655768119364839,0.5625,ok,,199.29639719999977,fixed_k_hyperparameter_search
+5,16,auto,auto,20,200,0.6374475579295902,-7.610169860647115,0.55625,ok,,244.0453368999997,fixed_k_hyperparameter_search
+6,16,auto,symmetric,20,200,0.6374475579295902,-7.639101207366553,0.55625,ok,,241.9429140000002,fixed_k_hyperparameter_search

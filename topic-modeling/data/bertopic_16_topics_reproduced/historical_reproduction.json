@@ -1,0 +1,9 @@
+{
+  "expected_topics": 16,
+  "actual_topics": 16,
+  "expected_cv": 0.5757062354607918,
+  "actual_cv": 0.5757062354607918,
+  "topic_count_matches": true,
+  "assignments_match": true,
+  "input_matches_historical": true
+}

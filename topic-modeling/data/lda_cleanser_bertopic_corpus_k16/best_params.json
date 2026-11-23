@@ -1,0 +1,18 @@
+{
+  "params": {
+    "num_topics": 16,
+    "alpha": "asymmetric",
+    "eta": "auto",
+    "passes": 20,
+    "iterations": 200
+  },
+  "fixed_params": {
+    "random_state": 42,
+    "chunksize": 2000,
+    "update_every": 0,
+    "minimum_probability": 0.0
+  },
+  "coherence_cv": 0.6447784548214361,
+  "trial": 3,
+  "stage": "fixed_k_hyperparameter_search"
+}

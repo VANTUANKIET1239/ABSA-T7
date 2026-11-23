@@ -33,6 +33,7 @@ import pandas as pd
 BASE_DIR = Path(__file__).resolve().parent
 DEFAULT_INPUT = 'crawl-data/data/unique_texts/unique_texts.csv'
 DEFAULT_OUTPUT = str(BASE_DIR / 'data' / 'lda_cleanser')
+DEFAULT_BERTOPIC_REFERENCE = str(BASE_DIR / 'data' / 'bertopic_16_topics_reproduced')
 RANDOM_STATE = 42
 BASELINE_PARAMS = {
     'num_topics': 6, 'alpha': 'symmetric', 'eta': 'auto',
@@ -152,8 +153,35 @@ def load_dataset(path: Path, requested_column: str) -> tuple[pd.DataFrame, str]:
     return df, column
 
 
+def load_bertopic_corpus(folder: Path, requested_column: str):
+    """Use the exact ordered BERTopic documents, including unassigned reviews."""
+    import hashlib
+    from topic_model_figures import corpus_hash
+
+    source = folder / 'reviews_with_topics.csv'
+    df = pd.read_csv(source, encoding='utf-8-sig', keep_default_na=False)
+    if requested_column not in df or 'text_group_id' not in df:
+        raise ValueError('BERTopic reference requires text_group_id and the requested text column.')
+    if df['text_group_id'].duplicated().any() or df[requested_column].eq('').any():
+        raise ValueError('BERTopic reference must contain unique IDs and nonempty texts.')
+    metrics = json.loads((folder / 'evaluation_metrics.json').read_text(encoding='utf-8-sig'))
+    digest = corpus_hash(df[requested_column].tolist())
+    if len(df) != metrics['n_documents'] or digest != metrics['ordered_corpus_sha256']:
+        raise ValueError('BERTopic reference rows/text order differ from its recorded metrics.')
+    # Topic and probability are BERTopic outputs, not LDA training inputs.
+    df = df.drop(columns=['Topic', 'Topic_Probability'], errors='ignore').copy()
+    df['LDA_Source_Row'] = np.arange(len(df), dtype=int)
+    df['_lda_text'] = df[requested_column].astype(str).str.strip().str.lower()
+    metadata = {'bertopic_reference': str(folder.resolve()),
+                'input': str(source.resolve()),
+                'input_sha256': hashlib.sha256(source.read_bytes()).hexdigest(),
+                'ordered_corpus_sha256': digest, 'reference_corpus_matches': True,
+                'corpus_policy': 'Exact BERTopic IDs, texts and order; retain empty bag-of-words rows.'}
+    return df, requested_column, metadata
+
+
 def build_tokens(df: pd.DataFrame, *, min_df: int, max_df: float,
-                 ngram_max: int, remove_brand_tokens: bool):
+                 ngram_max: int, remove_brand_tokens: bool, preserve_empty: bool = False):
     from sklearn.feature_extraction.text import CountVectorizer
 
     stops = set(TOPIC_STOPWORDS)
@@ -178,11 +206,15 @@ def build_tokens(df: pd.DataFrame, *, min_df: int, max_df: float,
     analyzer = vectorizer.build_analyzer()
     tokens = [[w for w in analyzer(doc) if w in vocabulary] for doc in docs]
     valid_mask = np.array([bool(words) for words in tokens], dtype=bool)
-    kept = df.iloc[np.flatnonzero(valid_mask)].copy().reset_index(drop=True)
-    kept_tokens = [words for words, valid in zip(tokens, valid_mask) if valid]
+    keep_mask = np.ones(len(df), dtype=bool) if preserve_empty else valid_mask
+    kept = df.iloc[np.flatnonzero(keep_mask)].copy().reset_index(drop=True)
+    kept_tokens = [words for words, valid in zip(tokens, keep_mask) if valid]
     print(f'[*] Review có text: {len(df):,}; đưa vào LDA: {len(kept):,}; '
-          f'bỏ do không còn token: {int((~valid_mask).sum()):,}.')
+          f'không còn token: {int((~valid_mask).sum()):,}.')
     print(f'[*] Vocab size: {len(vocabulary):,}; n-grams = (1, {ngram_max}).')
+    if preserve_empty:
+        print(f'[*] Exact-corpus mode: retained {int((~valid_mask).sum())} empty BOW rows; '
+              'their exported topic is -1 (no vocabulary evidence).', flush=True)
     if not kept_tokens:
         raise ValueError('Không còn văn bản để huấn luyện LDA sau lọc từ vựng.')
     return kept, kept_tokens, vectorizer
@@ -248,59 +280,85 @@ def write_json(path: Path, data: dict) -> None:
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2, allow_nan=False), encoding='utf-8')
 
 
+def evaluate_candidate(params, corpus, dictionary, tokenized_docs, topn, skip_perplexity):
+    """Original single-trial fit and scoring, shared by serial and process runs."""
+    from gensim.models import CoherenceModel, LdaModel
+
+    started = perf_counter()
+    row = {'K': params['num_topics'],
+           **{key: value for key, value in params.items() if key != 'num_topics'},
+           'Coherence_Cv': float('nan'), 'Log_Perplexity': float('nan'),
+           'Topic_Diversity': float('nan'), 'Status': 'ok', 'Error': ''}
+    model = None
+    try:
+        model = LdaModel(corpus=corpus, id2word=dictionary, **params, **FIXED_PARAMS)
+        if (not np.isfinite(model.alpha).all() or not np.isfinite(model.eta).all()
+                or not np.isfinite(model.get_topics()).all()):
+            raise FloatingPointError('Model có alpha/eta/topic probabilities không hữu hạn.')
+        topic_words = [[w for w, _ in model.show_topic(tid, topn=topn)]
+                       for tid in range(model.num_topics)]
+        coherence = float(CoherenceModel(
+            topics=topic_words, texts=tokenized_docs, dictionary=dictionary,
+            coherence='c_v', processes=1).get_coherence())
+        row['Coherence_Cv'] = coherence
+        row['Topic_Diversity'] = topic_diversity(model, topn)
+        if not skip_perplexity:
+            row['Log_Perplexity'] = float(model.log_perplexity(corpus))
+        if not math.isfinite(coherence):
+            row.update(Status='invalid_coherence', Error='C_v không hữu hạn.')
+    except (ValueError, RuntimeError, ArithmeticError) as exc:
+        row.update(Status='failed', Error=f'{type(exc).__name__}: {exc}')
+    row['Elapsed_Seconds'] = perf_counter() - started
+    return model, row
+
+
+def _initialize_trial_worker(*inputs):
+    global _TRIAL_INPUTS
+    _TRIAL_INPUTS = inputs
+
+
+def _evaluate_trial_worker(params):
+    return evaluate_candidate(params, *_TRIAL_INPUTS)
+
+
 def run_grid_search(candidates, corpus, dictionary, tokenized_docs,
                     output_dir: Path, *, topn: int, skip_perplexity: bool,
                     results_filename: str = 'lda_grid_search_results.csv',
-                    stage: str | None = None, previous_results=None):
-    from gensim.models import CoherenceModel, LdaModel
+                    stage: str | None = None, previous_results=None, workers: int = 1):
+    from contextlib import ExitStack
+    from concurrent.futures import ProcessPoolExecutor
 
     scores = []
     best_score = -float('inf')
     best_model = best_params = None
-    for trial, params in enumerate(candidates, 1):
-        print(f'\n[*] Trial {trial}/{len(candidates)}: {params}', flush=True)
-        started = perf_counter()
-        row = {'Trial': trial, 'K': params['num_topics'],
-               **{key: value for key, value in params.items() if key != 'num_topics'},
-               'Coherence_Cv': float('nan'), 'Log_Perplexity': float('nan'),
-               'Topic_Diversity': float('nan'), 'Status': 'ok', 'Error': ''}
-        if stage is not None:
-            row['Stage'] = stage
-        try:
-            model = LdaModel(corpus=corpus, id2word=dictionary, **params, **FIXED_PARAMS)
-            if (not np.isfinite(model.alpha).all() or not np.isfinite(model.eta).all()
-                    or not np.isfinite(model.get_topics()).all()):
-                raise FloatingPointError('Model có alpha/eta/topic probabilities không hữu hạn.')
-            topic_words = [[w for w, _ in model.show_topic(tid, topn=topn)]
-                           for tid in range(model.num_topics)]
-            coherence = float(CoherenceModel(
-                topics=topic_words, texts=tokenized_docs, dictionary=dictionary,
-                coherence='c_v', processes=1,
-            ).get_coherence())
-            row['Coherence_Cv'] = coherence
-            row['Topic_Diversity'] = topic_diversity(model, topn)
-            if not skip_perplexity:
-                row['Log_Perplexity'] = float(model.log_perplexity(corpus))
-            if math.isfinite(coherence):
-                if coherence > best_score:
-                    best_score, best_model, best_params = coherence, model, params.copy()
-            else:
-                row.update(Status='invalid_coherence', Error='C_v không hữu hạn.')
-        except (ValueError, RuntimeError, ArithmeticError) as exc:
-            row.update(Status='failed', Error=f'{type(exc).__name__}: {exc}')
-        row['Elapsed_Seconds'] = perf_counter() - started
-        scores.append(row)
-        current_results = pd.DataFrame(scores)
-        current_results.to_csv(output_dir / results_filename, index=False, encoding='utf-8-sig')
-        if results_filename != 'lda_grid_search_results.csv':
-            combined = (pd.concat([previous_results, current_results], ignore_index=True)
-                        if previous_results is not None else current_results)
-            combined.to_csv(output_dir / 'lda_grid_search_results.csv',
-                            index=False, encoding='utf-8-sig')
-        print(f'    C_v={row["Coherence_Cv"]:.4f}; diversity={row["Topic_Diversity"]:.4f}; '
-              f'status={row["Status"]}; {row["Elapsed_Seconds"]:.1f}s', flush=True)
-        if row['Error']:
-            print(f'    [!] {row["Error"]}', flush=True)
+    with ExitStack() as stack:
+        inputs = (corpus, dictionary, tokenized_docs, topn, skip_perplexity)
+        if workers > 1:
+            pool = stack.enter_context(ProcessPoolExecutor(
+                max_workers=workers, initializer=_initialize_trial_worker, initargs=inputs))
+            # Consume in candidate order: identical first-trial tie breaking.
+            outcomes = pool.map(_evaluate_trial_worker, candidates)
+            print(f'[*] {workers} independent trial processes; original fit/scoring and seed retained.', flush=True)
+        else:
+            outcomes = (evaluate_candidate(params, *inputs) for params in candidates)
+        for trial, (params, (model, row)) in enumerate(zip(candidates, outcomes), 1):
+            print(f'\n[*] Trial {trial}/{len(candidates)}: {params}', flush=True)
+            row = {'Trial': trial, **row}
+            if stage is not None:
+                row['Stage'] = stage
+            if row['Status'] == 'ok' and row['Coherence_Cv'] > best_score:
+                best_score, best_model, best_params = row['Coherence_Cv'], model, params.copy()
+            scores.append(row)
+            current_results = pd.DataFrame(scores)
+            current_results.to_csv(output_dir / results_filename, index=False, encoding='utf-8-sig')
+            if results_filename != 'lda_grid_search_results.csv':
+                combined = (pd.concat([previous_results, current_results], ignore_index=True)
+                            if previous_results is not None else current_results)
+                combined.to_csv(output_dir / 'lda_grid_search_results.csv', index=False, encoding='utf-8-sig')
+            print(f'    C_v={row["Coherence_Cv"]:.4f}; diversity={row["Topic_Diversity"]:.4f}; '
+                  f'status={row["Status"]}; {row["Elapsed_Seconds"]:.1f}s', flush=True)
+            if row['Error']:
+                print(f'    [!] {row["Error"]}', flush=True)
     if best_model is None:
         raise RuntimeError(f'Không có cấu hình có C_v hợp lệ. Xem {results_filename}.')
     return best_model, best_params, best_score, pd.DataFrame(scores)
@@ -312,7 +370,7 @@ def run_two_stage_search(args, corpus, dictionary, tokenized_docs, output_dir: P
     k_model, selected_params, k_score, k_results = run_grid_search(
         k_candidates(args), corpus, dictionary, tokenized_docs, output_dir,
         topn=args.top_n_words, skip_perplexity=args.skip_perplexity,
-        results_filename='lda_k_coherence_results.csv', stage='k_search')
+        results_filename='lda_k_coherence_results.csv', stage='k_search', workers=getattr(args, 'workers', 1))
     selected_k = selected_params['num_topics']
     valid_k_results = k_results.loc[k_results['Status'].eq('ok') &
                                     np.isfinite(k_results['Coherence_Cv'])]
@@ -337,7 +395,7 @@ def run_two_stage_search(args, corpus, dictionary, tokenized_docs, output_dir: P
         candidates, corpus, dictionary, tokenized_docs, output_dir,
         topn=args.top_n_words, skip_perplexity=args.skip_perplexity,
         results_filename='lda_hyperparameter_results.csv', stage='hyperparameter_search',
-        previous_results=k_results)
+        previous_results=k_results, workers=getattr(args, 'workers', 1))
     results = pd.concat([k_results, tuning_results], ignore_index=True)
     return model, params, score, results, selection
 
@@ -387,7 +445,8 @@ def write_figures(results_df: pd.DataFrame, best_k: int, best_model,
 
 
 def export_best(best_model, dictionary, corpus, df: pd.DataFrame,
-                output_dir: Path, topn: int, representative_n: int) -> None:
+                output_dir: Path, topn: int, representative_n: int,
+                mark_empty_unassigned: bool = False) -> None:
     topic_rows = []
     aspect_rows = []
     doc_distributions: list[list[tuple[int, float]]] = []
@@ -429,6 +488,13 @@ def export_best(best_model, dictionary, corpus, df: pd.DataFrame,
     df['LDA_Second_Probability'] = runner_up_prob
     df['LDA_Third_Topic'] = third
     df['LDA_Third_Probability'] = third_prob
+    if mark_empty_unassigned:
+        has_tokens = np.array([bool(bow) for bow in corpus])
+        df['LDA_Has_Vocabulary_Tokens'] = has_tokens
+        df.loc[~has_tokens, 'LDA_Topic'] = -1
+        df.loc[~has_tokens, ['LDA_Second_Topic', 'LDA_Third_Topic']] = pd.NA
+        df.loc[~has_tokens, ['LDA_Topic_Probability', 'LDA_Second_Probability',
+                            'LDA_Third_Probability']] = np.nan
     df.to_csv(output_dir / 'lda_document_topics.csv', index=False, encoding='utf-8-sig')
 
     distribution = (df['LDA_Topic'].value_counts().sort_index()
@@ -470,6 +536,10 @@ def main() -> None:
     parser.add_argument('--input', default=DEFAULT_INPUT)
     parser.add_argument('--output-dir', default=DEFAULT_OUTPUT)
     parser.add_argument('--text-column', default='cleaned_comment')
+    parser.add_argument('--match-bertopic', nargs='?', const=DEFAULT_BERTOPIC_REFERENCE,
+                        help='Use the exact BERTopic corpus, optionally specify its output folder.')
+    parser.add_argument('--workers', type=int, default=1,
+                        help='Independent trial processes; training and selection remain unchanged.')
     parser.add_argument('--check-input', action='store_true')
     parser.add_argument('--min-k', type=int, default=1)
     parser.add_argument('--max-k', type=int, default=20)
@@ -504,6 +574,8 @@ def main() -> None:
 
     if not (1 <= args.min_k <= args.max_k and args.k_step >= 1):
         parser.error('Cần 1 <= min-k <= max-k và k-step >= 1.')
+    if args.workers < 1:
+        parser.error('workers must be positive.')
     if args.min_df < 1 or not (0 < args.max_df <= 1):
         parser.error('min-df >= 1 và 0 < max-df <= 1.')
     if args.ngram_max not in (1, 2):
@@ -519,8 +591,15 @@ def main() -> None:
     first_candidates = k_candidates(args)
     ks = [params['num_topics'] for params in first_candidates]
 
-    data_path = resolve_input(args.input)
-    df, column = load_dataset(data_path, args.text_column)
+    corpus_metadata = {}
+    if args.match_bertopic:
+        df, column, corpus_metadata = load_bertopic_corpus(Path(args.match_bertopic), args.text_column)
+        data_path = Path(corpus_metadata['input'])
+        if args.output_dir == DEFAULT_OUTPUT:
+            args.output_dir = str(BASE_DIR / 'data' / 'lda_cleanser_bertopic_corpus')
+    else:
+        data_path = resolve_input(args.input)
+        df, column = load_dataset(data_path, args.text_column)
     print(f'[*] File: {data_path.resolve()}')
     print(f'[*] Tổng số review có text: {len(df):,}; dùng cột: {column!r}')
     print('[*] Sample:', df['_lda_text'].iloc[:2].tolist())
@@ -542,7 +621,8 @@ def main() -> None:
 
     df, tokenized_docs, vectorizer = build_tokens(
         df, min_df=args.min_df, max_df=args.max_df,
-        ngram_max=args.ngram_max, remove_brand_tokens=args.remove_brand_tokens)
+        ngram_max=args.ngram_max, remove_brand_tokens=args.remove_brand_tokens,
+        preserve_empty=bool(args.match_bertopic))
     if len(df) < max(ks):
         raise ValueError('Số review hợp lệ phải >= max K. Giảm --max-k.')
     dictionary = corpora.Dictionary(tokenized_docs)
@@ -564,6 +644,7 @@ def main() -> None:
     })
     run_config = {
         'search_strategy': 'k_then_hyperparameters',
+        **corpus_metadata, 'workers': args.workers,
         'input': str(data_path.resolve()), 'text_column': column,
         'python_executable': sys.executable, 'valid_documents': len(df),
         'vocabulary_size': len(dictionary),
@@ -607,9 +688,18 @@ def main() -> None:
     print(f'\n[+] Best params tại K={best_k}: {best_params}; C_v = {best_score:.4f}')
 
     export_best(best_model, dictionary, corpus, df,
-                output, args.top_n_words, args.representative_n)
+                output, args.top_n_words, args.representative_n,
+                mark_empty_unassigned=bool(args.match_bertopic))
+    if args.match_bertopic:
+        write_json(output / 'evaluation_metrics.json', {
+            'model': 'LDA (Best C_v)', 'n_topics': best_k,
+            'n_documents': len(df), 'n_empty_bow': sum(not bow for bow in corpus),
+            'coherence_cv': best_score, 'top_n_words': args.top_n_words,
+            **corpus_metadata})
     if not args.skip_figures:
         write_figures(results_df, best_k, best_model, output, args.top_n_words)
+        from topic_model_figures import export_lda_figures
+        export_lda_figures(output, best_k, 'LDA (Best C_v)')
 
     summary = (f'LDA – SỮA RỬA MẶT\n'
                f'Input: {data_path.resolve()}\n'

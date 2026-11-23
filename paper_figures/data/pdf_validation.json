@@ -1,0 +1,70 @@
+{
+  "status": "passed",
+  "renderers": [
+    "PDFium",
+    "Poppler"
+  ],
+  "visual_review": "All 10 figures reviewed; Vietnamese labels and dense IPA panels checked.",
+  "figures": [
+    {
+      "file": "fig01_review_length.pdf",
+      "pages": 1,
+      "raster_images": 0,
+      "text_characters": 241
+    },
+    {
+      "file": "fig02_rating_distribution.pdf",
+      "pages": 1,
+      "raster_images": 0,
+      "text_characters": 153
+    },
+    {
+      "file": "fig03_sentiment_distribution.pdf",
+      "pages": 1,
+      "raster_images": 0,
+      "text_characters": 546
+    },
+    {
+      "file": "fig04_birnn_focal_loss.pdf",
+      "pages": 1,
+      "raster_images": 0,
+      "text_characters": 180
+    },
+    {
+      "file": "fig05_shap_importance_frequency.pdf",
+      "pages": 1,
+      "raster_images": 0,
+      "text_characters": 403
+    },
+    {
+      "file": "fig06_ipa_overall.pdf",
+      "pages": 1,
+      "raster_images": 0,
+      "text_characters": 190
+    },
+    {
+      "file": "fig07_ipa_platforms.pdf",
+      "pages": 1,
+      "raster_images": 0,
+      "text_characters": 369
+    },
+    {
+      "file": "fig08_ipa_brands.pdf",
+      "pages": 1,
+      "raster_images": 0,
+      "text_characters": 786
+    },
+    {
+      "file": "fig09_ipa_comparison_heatmap.pdf",
+      "pages": 1,
+      "raster_images": 0,
+      "text_characters": 1038
+    },
+    {
+      "file": "fig10_ipa_sensitivity.pdf",
+      "pages": 1,
+      "raster_images": 0,
+      "text_characters": 221
+    }
+  ]
+}

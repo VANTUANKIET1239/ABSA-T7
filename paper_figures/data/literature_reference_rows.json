@@ -1,0 +1,5 @@
+{
+  "source": "Transcribed from the table screenshots supplied by the user; not independently verified against the papers.",
+  "absa": {"Architecture": "BERT + BiGRU (Lê và cộng sự, 2024)", "Weighted_F1": 63.20, "Accuracy": 73.00},
+  "regression": {"Model": "GBM (Park và cộng sự, 2022)", "RMSE": 0.403}
+}

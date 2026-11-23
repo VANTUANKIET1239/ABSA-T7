@@ -1,0 +1,14 @@
+{
+  "model": "LDA (Matched K)",
+  "n_topics": 16,
+  "n_documents": 12741,
+  "coherence_cv": 0.6447784548214361,
+  "top_n_words": 10,
+  "ordered_corpus_sha256": "b0de723dc65d7200549ec5cc08bddb062f41e4d3d67e14e55af0e8a3e2f75383",
+  "reference_corpus_matches": true,
+  "n_empty_bow": 3,
+  "bertopic_reference": "C:\\Users\\PC\\PycharmProjects\\ABSA-T7\\topic-modeling\\data\\bertopic_16_topics_reproduced",
+  "input": "C:\\Users\\PC\\PycharmProjects\\ABSA-T7\\topic-modeling\\data\\bertopic_16_topics_reproduced\\reviews_with_topics.csv",
+  "input_sha256": "656e9699de4c9ae0e0ce6968d7e9d0e0bacaaa4cfa74854c867df4d39803f213",
+  "corpus_policy": "Exact BERTopic IDs, texts and order; retain empty bag-of-words rows."
+}

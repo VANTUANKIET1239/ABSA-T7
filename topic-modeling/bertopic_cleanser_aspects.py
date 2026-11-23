@@ -8,6 +8,8 @@ Các aspect gợi ý cần được kiểm tra thủ công trước khi dùng l�
 from __future__ import annotations
 
 import argparse
+import hashlib
+import importlib.metadata
 import json
 import math
 import sys
@@ -21,7 +23,7 @@ import pandas as pd
 BASE_DIR = Path(__file__).resolve().parent
 PROJECT_DIR = BASE_DIR.parent
 DEFAULT_INPUT = 'crawl-data/data/unique_texts/unique_texts.csv'
-DEFAULT_OUTPUT = str(BASE_DIR / 'data' / 'bertopic_unique_texts')
+DEFAULT_OUTPUT = str(BASE_DIR / '.cache' / 'experiments' / 'bertopic_reviews')
 EMBEDDING_MODEL_NAME = 'keepitreal/vietnamese-sbert'
 
 BASELINE_PARAMS = {
@@ -33,7 +35,7 @@ BASELINE_PARAMS = {
 }
 
 DEFAULT_PARAMS = {
-    'min_cluster_size': 60,
+    'min_cluster_size': 70,
     'min_samples': 15,
     'n_neighbors': 20,
     'min_df': 3,
@@ -487,6 +489,9 @@ def main():
     parser = argparse.ArgumentParser(description='BERTopic cho đánh giá sữa rửa mặt')
     parser.add_argument('--input', default=DEFAULT_INPUT)
     parser.add_argument('--output-dir', default=DEFAULT_OUTPUT)
+    parser.add_argument('--reproduce-16-topics', action='store_true',
+                        help='Restore the historical corpus and configuration of the saved 16-topic run')
+    parser.add_argument('--skip-figures', action='store_true', help='Skip additional publication figures')
     parser.add_argument('--embedding-column', default='cleaned_comment',
                         help='Cột tạo embeddings; mặc định cleaned_comment, đổi underscore thành khoảng trắng')
     parser.add_argument('--topic-column', default='cleaned_comment',
@@ -515,6 +520,26 @@ def main():
                         help='0 = full corpus; N > 0 = lấy mẫu N reviews để tính C_v')
     parser.add_argument('--skip-coherence', action='store_true', help='Chỉ dùng với --single-run')
     args = parser.parse_args()
+    if args.reproduce_16_topics:
+        if not args.single_run:
+            parser.error('--reproduce-16-topics uses the historical single-run configuration.')
+        if args.output_dir == DEFAULT_OUTPUT:
+            args.output_dir = str(BASE_DIR / 'data' / 'bertopic_16_topics_reproduced')
+        out = resolve_output_path(args.output_dir)
+        out.mkdir(parents=True, exist_ok=True)
+        historical = BASE_DIR / 'data' / 'bertopic_16_topics_reproduced'
+        snapshot = json.loads((historical / 'single_run_params.json').read_text(encoding='utf-8'))
+        for key, value in snapshot['params'].items():
+            setattr(args, key, value)
+        if snapshot['model_configuration'] != json.loads(json.dumps(model_configuration(snapshot['params']))):
+            raise ValueError('Current model configuration differs from the historical snapshot.')
+        original = historical / 'input_unique_texts.csv'
+        restored = out / 'input_unique_texts.csv'
+        if restored.resolve() != original.resolve():
+            restored.write_bytes(original.read_bytes())
+        args.input = str(restored)
+        args.embedding_column = args.topic_column = 'cleaned_comment'
+        print('[*] Historical 16-topic preset: restored original input and configuration.')
     if args.skip_coherence and not args.single_run:
         parser.error('Grid Search cần C_v để chọn tham số; --skip-coherence chỉ dùng với --single-run.')
     if args.coherence_sample < 0 or args.batch_size < 1:
@@ -523,6 +548,11 @@ def main():
     df, embedding_col, topic_col = read_dataset(
         resolve_input_path(args.input), args.embedding_column, args.topic_column
     )
+    if args.reproduce_16_topics:
+        previous = pd.read_csv(historical / 'reviews_with_topics.csv', encoding='utf-8-sig')
+        if (df['text_group_id'].tolist() != previous['text_group_id'].tolist()
+                or df['_topic_text'].tolist() != previous['cleaned_comment'].tolist()):
+            raise ValueError('Restored input does not exactly match the historical training corpus.')
     print(f'[*] Embedding source: {embedding_col}; topic keyword source: {topic_col}')
     if 'text_group_id' in df.columns:
         print('[*] Mỗi dòng là một text duy nhất; giữ text_group_id/duplicate_count, không nhân bản theo tần suất.')
@@ -565,6 +595,11 @@ def main():
         'python_executable': sys.executable,
         'batch_size': args.batch_size, 'coherence_sample': args.coherence_sample,
         'skip_coherence': args.skip_coherence, 'reference_params': reference,
+        'input_sha256': hashlib.sha256(resolve_input_path(args.input).read_bytes()).hexdigest(),
+        'historical_16_topic_preset': args.reproduce_16_topics,
+        'package_versions': {name: importlib.metadata.version(name) for name in
+                             ('bertopic', 'sentence-transformers', 'umap-learn', 'hdbscan',
+                              'torch', 'gensim', 'numpy', 'scikit-learn')},
         'candidates': candidates,
         'selection': ('Single configuration; no Grid Search.' if args.single_run else
                       'Maximum finite C_v; ties keep the first trial (baseline is tried first).'),
@@ -618,6 +653,20 @@ def main():
         print(f'Topic {topic_id}: {", ".join(words)}')
 
     export_outputs(df, topic_docs, model, topics, probabilities, out, cv)
+    if not args.skip_figures:
+        from topic_model_figures import export_bertopic_figures
+        export_bertopic_figures(model, topic_docs, topics, cv, out,
+                               coherence_sample=args.coherence_sample)
+    if args.reproduce_16_topics:
+        reproduced_topics = len(set(topics) - {-1})
+        print(f'[*] Historical target: 16 topics; actual rerun: {reproduced_topics} topics.')
+        write_json(out / 'historical_reproduction.json', {
+            'expected_topics': 16, 'actual_topics': reproduced_topics,
+            'expected_cv': snapshot['c_v'], 'actual_cv': cv,
+            'topic_count_matches': reproduced_topics == 16,
+            'assignments_match': list(topics) == previous['Topic'].tolist(),
+            'input_matches_historical': True,
+        })
 
 
 if __name__ == '__main__':

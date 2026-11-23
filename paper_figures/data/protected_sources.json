@@ -1,0 +1,179 @@
+{
+  "sha256": {
+    "crawl-data/data/combined_reviews.csv": "a434e88e674d23dc824b9240c4811ebc37da6da8053e2849495f8fe6d6d28260",
+    "crawl-data/data/combined_reviews_brand_filled.csv": "b3e635e296c4ed86a112d71db53bba2038e17959a744369bdc551cf9c7c07ba1",
+    "crawl-data/data/combined_reviews_brand_filled_language_filtered.csv": "e165b059506668f84b98b21bc2ca6c67f177d64f892bc656af14ae0433811884",
+    "crawl-data/data/lazada_cleanser_reviews.csv": "ee6e0adea1f4e90ed9a0054cffb581b8feb5a7e8b606b9994f717c9210eacd84",
+    "crawl-data/data/shopee_reviews.csv": "b1d92b27fa3971cfd8c5eb61ea6fcef78ca98c82a230e47c4a4650943dccfc03",
+    "crawl-data/data/tiki_cleanser_reviews.csv": "eba287939e96301a5b8d16294819707ef9dfb2414a45fcd73c190e3d6a595539",
+    "crawl-data/data/unique_texts/deduplication_summary.json": "5950dbc640c5ed210d94dd2a35e0ee0dd206f31516d2e2322e8d2173c1d6766b",
+    "crawl-data/data/unique_texts/README.md": "e270da9d5c0a6fc49354d5c5b757b070c799c65245c866376b20f1e80926cfd4",
+    "crawl-data/data/unique_texts/review_text_mapping.csv": "b16ad5ccc703ae9a26bb1157ba00f7bab66675a16c5c94257e912b72785aad0f",
+    "crawl-data/data/unique_texts/unique_texts.csv": "311976ffa5038a9a19529e1473dc28b8462b5c5bdb58d415bb90a404aa9060d2",
+    "Labeling/data/unique_texts_gemini_labeled.csv": "47e35adfd6a390e6ea3e1a4f5a1ce65dc0c58a0e4fc29bbbc8028b15ed9fe0f1",
+    "train-models/data/test_cleanser.csv": "c73c37713d51beacacf90a2b06c1fa8ec2bd818b01cdda51b2fd0c965b26abca",
+    "train-models/data/train_cleanser.csv": "b0d8382252f02b7d4fc5de37648cb944827774e1521e5f79c1a19e71a6490edd",
+    "train-models/data/val_cleanser.csv": "81b3eb447721441281ca9dd6926d089d7598071a1e8149ade5df34cc9dae8827",
+    "train-models/Histories/Cleanser/training_history_bigru_cleanser_baseline_VI.csv": "15ba73585f69d5824781cec6eb2f3b6f3e043af81bd10d63c982e2f43698dec8",
+    "train-models/Histories/Cleanser/training_history_bigru_cleanser_class_weights_VI.csv": "c2f7752efb39607cc9d4b0bb45550779316eed2271dae5859bf2bbaf95ab7740",
+    "train-models/Histories/Cleanser/training_history_bigru_cleanser_focal_loss_VI.csv": "080edd50fae55efff9848976e398edce87a6832a55137128b3f6a35dd35dd333",
+    "train-models/Histories/Cleanser/training_history_bilstm_cleanser_baseline_VI.csv": "904f9abdce286495601f427fc76a580ba864070843e56e4709e9c51f98b8abaf",
+    "train-models/Histories/Cleanser/training_history_bilstm_cleanser_class_weights_VI.csv": "589792234a1fed2c8adbc8e9dc8278c0f773b2414df724dc2259614e9d169fa1",
+    "train-models/Histories/Cleanser/training_history_bilstm_cleanser_focal_loss_VI.csv": "8fc90c745739e81683875f81e5f5ad0e6bac1245246c054b604c2045aeed0e46",
+    "train-models/Histories/Cleanser/training_history_birnn_cleanser_baseline_VI.csv": "6a8016ebe0ab33ea5ca81c1be616d2a08d6399021cdaf22bea4fe6aef32ea7f1",
+    "train-models/Histories/Cleanser/training_history_birnn_cleanser_class_weights_VI.csv": "430d32bfca640a68312184df76dacbee9d88ebf3dd9d01282714f38dad99f1cf",
+    "train-models/Histories/Cleanser/training_history_birnn_cleanser_focal_loss_VI.csv": "19ceb1a9cd5b0bef2408a203374a7447fb0b9f80894c68ce89b9da041ec313a9",
+    "train-models/Histories/Cleanser/training_history_multitask_cleanser_baseline_VI.csv": "718c8d53de0307a3e0695b6a8f49238ac5654eab7a8078f571d1e767efcc8646",
+    "train-models/Histories/Cleanser/training_history_multitask_cleanser_class_weights_VI.csv": "fa278cf25263973be129b560fa94ab982264c9672bc14468344a1f47f4d2fa2a",
+    "train-models/Histories/Cleanser/training_history_multitask_cleanser_focal_loss_VI.csv": "664330ab2108ffffd264d48807fd0886ecd26f04c8bd2a0b8e25bbc1f21b8161",
+    "train-models/loss_curve/cleanser/loss_bigru_cleanser_baseline_VI.png": "4c2a29b699252877b84f0cc366f12cf90f800591c26d882ad600efffc59bc28a",
+    "train-models/loss_curve/cleanser/loss_bigru_cleanser_class_weights_VI.png": "00ffc2150c1de0867a53b4433e292b60d1a310bc9d0e21952837aae620bbede7",
+    "train-models/loss_curve/cleanser/loss_bigru_cleanser_focal_loss_VI.png": "1c029e67d2e68fc474c22f663391df13f9114536e94bca98f1996034367c6514",
+    "train-models/loss_curve/cleanser/loss_bilstm_cleanser_baseline_VI.png": "1ec2c5cb37558017e170fc2332436c8b7892173ee6c0ac32c87eef0bb9c1a1bd",
+    "train-models/loss_curve/cleanser/loss_bilstm_cleanser_class_weights_VI.png": "1a408be3ea804319420f3997be0c9c5b285013c771d1ff9c10a2e59c5b756b3f",
+    "train-models/loss_curve/cleanser/loss_bilstm_cleanser_focal_loss_VI.png": "49060aec6f93ff99a258e6fb98a110f1ba3c96fb77475d2963a02dab2e2b9c71",
+    "train-models/loss_curve/cleanser/loss_birnn_cleanser_baseline_VI.png": "8a57643186b86380777201d67b8c79ab336995d7ed4f516a6c5bb96649ac1fa5",
+    "train-models/loss_curve/cleanser/loss_birnn_cleanser_class_weights_VI.png": "a3739ccb485597f18524ab77db41e4028ff16b96858416433ebabd412d322d16",
+    "train-models/loss_curve/cleanser/loss_birnn_cleanser_focal_loss_VI.png": "dfa82c90d53e8677acc892e32ab6a4b14ce545075376d92e101d9f9003cf0f44",
+    "train-models/loss_curve/cleanser/loss_multitask_cleanser_baseline_VI.png": "6d508be247f92c6d43e09c0cd66b28a8092af1c5726ee105b52aecc8a2ad7785",
+    "train-models/loss_curve/cleanser/loss_multitask_cleanser_class_weights_VI.png": "3be35a7c437cc9510621fe5a5fdc106e5bd562052d311239a42bfcca29358f99",
+    "train-models/loss_curve/cleanser/loss_multitask_cleanser_focal_loss_VI.png": "d8449060dcf971d9d2867929b34a40ada0bcf901b4c74828a028d669b7bb43f8",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus/baseline_params.json": "f76f8f2621bd2f437c3a020742efd89c4b4be6a184eaeb368b9a7629de93a203",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus/best_lda_model": "31b85be29fa986d915492dd4cf550c92fd1e1bb39b7e81ad1c99a8bde4760f71",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus/best_lda_model.expElogbeta.npy": "a3bbcd789e45dc166287183eb9126b2b67281317fb1676ee757fde9e9208dd36",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus/best_lda_model.id2word": "bf3141e12a71378929be84798129594a9d4c346d1e09f13cba8a8b336a8579fc",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus/best_lda_model.state": "b9dd8779638db509c084a601d83b099193d6ad7b0817271f9cd7563fc9191e86",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus/best_params.json": "dd05539904834933233270e09a6efa9c4c7d59359c2c1279509767b73155d79b",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus/evaluation_metrics.json": "b0a053fa975675eb5c6aab62a38dd1f296466486a8fc0ffb3bce380f286d4fc7",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus/k_selection.json": "5decee34ee0df9a0785ab56db02c1dabc588a7bba59a26ed8d8b0026c546bb3d",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus/lda_aspect_candidates.csv": "32f56c1f25ff8c11745633fc5b90b90469033e43a98fb467431d56ef9abd8e5f",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus/lda_best_topic_words.csv": "e84ed2ff70b4bb435ef7a5afa8d2bff591a1e93d37bd2c6b81d4c070e16e3136",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus/lda_coherence_vs_k.png": "f55242aa7aace977edae5a88a5bbf2ef08db201569cd41d7e1cc085a1b674f11",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus/lda_dictionary": "59f0969424f7223fe28574aa782ac1ff8e445ea1862d7b9b4d67e839041d1ce5",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus/lda_document_topics.csv": "ee04d5f77de2e94cecadf6304ac1cdd7f98376727115d2070fa0db75b46dd128",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus/lda_grid_search_results.csv": "71e69c6fbedbf1efc799918227a4d1153e2e74fc33136e144da8859d51e9dede",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus/lda_hyperparameter_results.csv": "792c4bfc6f8fad6149c1bd4c24b8981a1b7f4f79a028fb45e27a5c40e2a5fb6c",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus/lda_k_coherence_results.csv": "eddfe3df086daa3d15650021262ca540f4e99b455ea7d9f46f1a2a8587b5acbd",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus/lda_topic_distribution.csv": "35d38bc4ed058e862a7897370cd7e8f0440eb71405578456c4197d77762c2985",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus/lda_topic_frequency.pdf": "3ff412b94c9428ebbfc4dcc5ecef2f1d0450de9e51f2ae650d4acc85c046165b",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus/lda_topic_frequency.png": "46d567515e078999b9754c7291886aab904dde9452b818eab6087e647b907dcb",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus/lda_topic_keyword_weights.pdf": "3eb67759eff8aad2ade1dac657fdd5a735911a12bd6a519a5513fe10e6ca819b",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus/lda_topic_keyword_weights.png": "d86061880b243270ba19e1270d63ca2dcd77af4c22224b209ab4db00a83bf435",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus/lda_topic_words.png": "9f75644156864c8d4dd326edf5842266614a70d60647c9219b4a44e1bc0c3f43",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus/lda_training_summary.txt": "fb1f1b9ced9f0096c676642cd2dffe08db522d62f7f1f2fefd6b7bec97c81e8f",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus/run_config.json": "da073c6885e154845f3201f5b4974a33b7be2bb68279ecc70e0d93364221a139",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus_k16/best_lda_model": "2b8ede8b13acb3eacb57e31b0725146c1bbc291183d5771e6998809001c426be",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus_k16/best_lda_model.expElogbeta.npy": "79d706d9991f79d0054d50368a2a88fcd00a382b11d6e96b6fe2aff80f78d55a",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus_k16/best_lda_model.id2word": "ede1db9e086d56559e18a38430c8090f0e0723b10d1395bf998ed695675161e3",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus_k16/best_lda_model.state": "b894a933e2f2ebee518c77742fec0ea176fcd2cba89d426bdcf0167333335ac3",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus_k16/best_params.json": "546d017f572e4a67688566090b4195b5d2241a809f30d4eb835c541c7e28f3ae",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus_k16/evaluation_metrics.json": "f33936305c7e56e422344b4dc5f2f70390a5fdbcbe011fc603eb807a1cfa11b1",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus_k16/lda_aspect_candidates.csv": "89de2f3a30bf8f34a1725876a8f3a3d8b1f0cbf46352ff4a38cf6f6397d2410a",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus_k16/lda_best_topic_words.csv": "c7b2859971864665db675c156d710db350c4a57e7ca8babc19f12f3aad2fcf8d",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus_k16/lda_dictionary": "40e2393695d72084fe00b719b256341438d22586745aab3989e84692e7eaee81",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus_k16/lda_document_topics.csv": "76d89d09ec7cb393f86ae5261b119286eb3ddc5520caa7c3ff681b791c5d0c2a",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus_k16/lda_grid_search_results.csv": "ffbed0b94d71c307513fd599ee1f6cd8dc4be7073d018c95c13d289a3399b617",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus_k16/lda_topic_distribution.csv": "f81333dc9da4d299d9aa9d6cf3a02c5a91e4f283147599826b4f3a5be77822c9",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus_k16/lda_topic_frequency.pdf": "7f2de110a9d4d17bc5044d546a93f15dd861b3c9a3569014bde6d680610f260f",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus_k16/lda_topic_frequency.png": "5ffd63a47d0c22fe02d4591d38b20a959980b723a1a8e546c329916c382fc78d",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus_k16/lda_topic_keyword_weights.pdf": "6751b23bb60e089a64a33e46243f4a1b5f6b4ed4a46bb9ca3cb41de3e9f1d9a6",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus_k16/lda_topic_keyword_weights.png": "dde3d91a0b76c794e84e8061d3f0963536f437b852314b0a8a9337269e83b5ae",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus_k16/lda_training_summary.txt": "d5549ed21642f6d449f6b9d77850a866cc18169a7c6b0938a9a09505f2153a63",
+    "topic-modeling/data/lda_cleanser_bertopic_corpus_k16/run_config.json": "8ccf0865ec9d274d4a8b37f9aaf8b65c3073399cb486058e8fb12e4ba29255b3",
+    "topic-modeling/data/bertopic_16_topics_reproduced/aspect_candidates.csv": "47c907e9b4c73ac536e277c1953ea293ae4bd6b68654b5e24c06f03bce82ca26",
+    "topic-modeling/data/bertopic_16_topics_reproduced/baseline_params.json": "2b1630e2d1bbd574a76a1adb41eeb4fd07dab27e3e18e76b5df113877af304fd",
+    "topic-modeling/data/bertopic_16_topics_reproduced/evaluation_metrics.json": "c32d2cbb3c776249fe2e6ed5dd020df53d7efdedd7bb30450055a6ea73e88bc2",
+    "topic-modeling/data/bertopic_16_topics_reproduced/evaluation_table.csv": "99a7255c52ae70c3d5f0686a762b7f4bc8bb5b8f351caf9e22eb66d18488abea",
+    "topic-modeling/data/bertopic_16_topics_reproduced/historical_reproduction.json": "3a5b7f647a19790384f3198f531420b6b23112566ef6a54ddc4af73982a3ffa3",
+    "topic-modeling/data/bertopic_16_topics_reproduced/input_unique_texts.csv": "7ceca0719394da8246250b885739686fda1275e6b13fd334f46d1d549966ffbc",
+    "topic-modeling/data/bertopic_16_topics_reproduced/reviews_with_topics.csv": "656e9699de4c9ae0e0ce6968d7e9d0e0bacaaa4cfa74854c867df4d39803f213",
+    "topic-modeling/data/bertopic_16_topics_reproduced/run_config.json": "49f3b03a7ad649afa1c659d5c9ee31b2c00b2e6ff57e2d45029e1f9daf101236",
+    "topic-modeling/data/bertopic_16_topics_reproduced/single_run_params.json": "50ea8bfb9462ac6dddcd4af7ec5cb87c0e6734694d4e044996412c51876d326f",
+    "topic-modeling/data/bertopic_16_topics_reproduced/topic_frequency.csv": "af60fc0e4cf88de1b04a413a49542a4ce7610285448b5506f73fe68ce7a43eb8",
+    "topic-modeling/data/bertopic_16_topics_reproduced/topic_info.csv": "a1a1323d2598ec9b2fbf506680bfcf88f9b6bfc7bf8d1a4003bae45e0aca9c06",
+    "topic-modeling/data/bertopic_16_topics_reproduced/topic_keyword_weights.csv": "87a3c0a21a9e0456e4f005b4248bc6ed90c446c6154322fede7a6749ab70bd5c",
+    "topic-modeling/data/bertopic_16_topics_reproduced/training_summary.txt": "08e6a59258e65415db35111f464bad2dd14a98c9de37db10392c728d2edfd5c1",
+    "evaluation/results/cleanser_models_comparison/outputs/bigru_baseline.txt": "99173a2449ed967930b0ed7a6899577c08f5ae1d600933989a651a86c707019a",
+    "evaluation/results/cleanser_models_comparison/outputs/bigru_class_weights.txt": "2ec9fe0115d3c31aaf097e7f2049b6a6274662f5607d37ad2c6fa6d9e9f12f54",
+    "evaluation/results/cleanser_models_comparison/outputs/bigru_focal_loss.txt": "9c5c13783fe5bf7f784c5107eac144b1b465abd5c7d8de9ef0347cfbb243ff15",
+    "evaluation/results/cleanser_models_comparison/outputs/bilstm_baseline.txt": "758a7d9c29a04ff4129da9ea3fafd1289746e359c382fa3a46ef03b0f338f2d0",
+    "evaluation/results/cleanser_models_comparison/outputs/bilstm_class_weights.txt": "1b6d34201991efc6431d16f5a44de8450fdb41105c9b28a29e7fd2b568db5643",
+    "evaluation/results/cleanser_models_comparison/outputs/bilstm_focal_loss.txt": "edb1a3c364c5f45e85afb2bbe8d6de5f3846ad0496345297e35543a883ee2114",
+    "evaluation/results/cleanser_models_comparison/outputs/birnn_baseline.txt": "fdde15d16e406d823ac2cdc0c4e56b19dce4f5c8d32f59f368f05258b6193ef2",
+    "evaluation/results/cleanser_models_comparison/outputs/birnn_class_weights.txt": "c8d0bc3106437b66f4982650e1adbfbb374bd0b3e40790c81622b87597d930b2",
+    "evaluation/results/cleanser_models_comparison/outputs/birnn_focal_loss.txt": "03930f2d274e0c28533bd2b935cf2474be629ec5333d1b6cb9e9e30458eef7cc",
+    "evaluation/results/cleanser_models_comparison/outputs/multitask_baseline.txt": "6d2d958c86090e18e14710269364482d64878b7e3098dbe8f8f491dd4fe7ba8c",
+    "evaluation/results/cleanser_models_comparison/outputs/multitask_class_weights.txt": "fe81a08f061bd5238d4c508fa33a1713a1c85041e4080dc9775081c9be564797",
+    "evaluation/results/cleanser_models_comparison/outputs/multitask_focal_loss.txt": "a2af5c2ccbb7f64609663711f820d81b0ba2039d5a5903963e69049b4d49a650"
+  },
+  "checkpoints": {
+    "train-models/Models/Cleanser/best_model_bigru_cleanser_baseline_VI.pt": {
+      "size": 546470955,
+      "mtime_ns": 1794218995424776100
+    },
+    "train-models/Models/Cleanser/best_model_bigru_cleanser_class_weights_VI.pt": {
+      "size": 546470955,
+      "mtime_ns": 1794221187252539700
+    },
+    "train-models/Models/Cleanser/best_model_bigru_cleanser_focal_loss_VI.pt": {
+      "size": 546470955,
+      "mtime_ns": 1794216861732612400
+    },
+    "train-models/Models/Cleanser/best_model_bilstm_cleanser_baseline_VI.pt": {
+      "size": 548572203,
+      "mtime_ns": 1794205894298889600
+    },
+    "train-models/Models/Cleanser/best_model_bilstm_cleanser_class_weights_VI.pt": {
+      "size": 548572203,
+      "mtime_ns": 1794207908010508500
+    },
+    "train-models/Models/Cleanser/best_model_bilstm_cleanser_focal_loss_VI.pt": {
+      "size": 548572203,
+      "mtime_ns": 1794203523006410000
+    },
+    "train-models/Models/Cleanser/best_model_birnn_cleanser_baseline_VI.pt": {
+      "size": 542268459,
+      "mtime_ns": 1794307080043815500
+    },
+    "train-models/Models/Cleanser/best_model_birnn_cleanser_class_weights_VI.pt": {
+      "size": 542268459,
+      "mtime_ns": 1794309488305455800
+    },
+    "train-models/Models/Cleanser/best_model_birnn_cleanser_focal_loss_VI.pt": {
+      "size": 542268459,
+      "mtime_ns": 1794305094736602900
+    },
+    "train-models/Models/Cleanser/best_model_multitask_cleanser_baseline_VI.pt": {
+      "size": 540616557,
+      "mtime_ns": 1794234524217491800
+    },
+    "train-models/Models/Cleanser/best_model_multitask_cleanser_class_weights_VI.pt": {
+      "size": 540616557,
+      "mtime_ns": 1794236845422055700
+    },
+    "train-models/Models/Cleanser/best_model_multitask_cleanser_focal_loss_VI.pt": {
+      "size": 540616557,
+      "mtime_ns": 1794232266285132900
+    }
+  },
+  "business_algorithms_ast_sha256": {
+    "extract_aspects": "702d4316c60ab475f83a2031fe1075f6e167686f9644b1b9830819ded24a870a",
+    "parse_price": "5cb52cf8e9fa8257b01551c820d60b24a14fd4b5aa7906351a03ea80dc414d24",
+    "parse_discount": "92730740d4711b9f51a2bdbd0fb674c0a915814c5f8b5a63afb5cabe3c3a4739",
+    "make_scaled_features": "6d967e9d2559b653809dca21ee6cedbd39c701b3a5cbb5ce4d760d10f9c4eddd",
+    "regression_metrics": "af990d1b6c2339df9a149602cd3622284866ce009522ea6c1d1a7da15db3e820",
+    "make_models": "4f95a9d659b59380fb28f382b22a13c350c90c9ca317bfc26ee8ff5c6e9d9b56",
+    "fit_xgboost_for_explanation": "707a2da78b3cf21191e1c5d62ef92adf61443ebc5f2568c9e9c9f0d9e3c36b08",
+    "calculate_aspect_performance": "09b0d4dec25524961f0ad486d8bb2c8c14f6cb757643035090067f3088563080",
+    "quadrant_of": "7a67eb2cb56731cd29fc880d6b8c4c41066e7861972c79b422e67b6ec61f8bd2",
+    "managerial_interpretation": "ed49a2a347a170171242891337f6341be9ef1fb0426ee93b386d308d86df839b"
+  },
+  "retired_visuals_sha256": {
+    "topic-modeling/data/bertopic_16_topics_reproduced/evaluation_table.png": "926d0f079ecb5563ebbe171fb1c08579a2ad3edfd2da6704e2177db0344ff6bc",
+    "topic-modeling/data/bertopic_16_topics_reproduced/evaluation_table.pdf": "ad841d5046fac879a84ae23f2e2ec08bcf54e6b23db3a1232f760c36ea2d7b80",
+    "topic-modeling/data/bertopic_16_topics_reproduced/topic_frequency.png": "ce78bafcf4cebbfcd65fa4f3dbbae63ef68a77d365f0de7ac1782a0d69cde913",
+    "topic-modeling/data/bertopic_16_topics_reproduced/topic_frequency.pdf": "087a38efab9708dcce58aaebef0c6a55843b20362ab11352f69536b3551fd844",
+    "topic-modeling/data/bertopic_16_topics_reproduced/topic_keyword_weights.png": "016da19ac24ba432834b53716ca511d75d4bcc35fc4c5cc9309e118989ebad9c",
+    "topic-modeling/data/bertopic_16_topics_reproduced/topic_keyword_weights.pdf": "1b9483002f778f7946df35fa07d6f140b5e87a48b1df83430467ecb7bd39d6c9"
+  }
+}
