@@ -1,4 +1,0 @@
-﻿Platform,Group_Key,Rank,Review_N,Status,Reason,Output_Subdirectory,N_Valid_Aspects,Importance_Cut,Performance_Cut,Cut_Method,Low_Support_Aspects,Weak_Negative_Aspects,XGBoost_RMSE,XGBoost_MAE,XGBoost_R2
-Tiki,tiki,1,5958,done,,01_tiki,10,10.0,73.50140971845907,mean,0,1,0.6840494214465135,0.4586690856595894,0.508542946251822
-Shopee,shopee,2,5934,done,,02_shopee,10,10.0,78.50339396112938,mean,0,1,0.728275967681546,0.4959950630195542,0.6908116878220155
-Lazada,lazada,3,4400,done,,03_lazada,10,10.0,85.83351024011367,mean,0,1,0.6062028841555559,0.2739505269988017,0.5615822259130385
