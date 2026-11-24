@@ -3,7 +3,7 @@ from matplotlib.colors import ListedColormap,BoundaryNorm
 import _bootstrap
 from common.config import *
 from common.data_utils import load
-from common.plot_utils import plt,save,heatmap,IPA_SHORT_NAMES
+from common.plot_utils import plt,save,heatmap
 
 def main():
     platforms=load('32_ipa_platform_summary')['Platform'].tolist()
@@ -27,7 +27,7 @@ def main():
         for y in range(10):
             for x in range(len(groups)):
                 quadrant=values.iloc[y,x]
-                ax.text(x,y,IPA_SHORT_NAMES[quadrant],ha='center',va='center',
+                ax.text(x,y,Q_NAMES[quadrant],ha='center',va='center',
                         color='#17314b' if quadrant=='Low Priority' else 'white',fontsize=8.7)
     save(fig,Path(__file__).stem)
 

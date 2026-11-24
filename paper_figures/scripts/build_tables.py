@@ -2,9 +2,8 @@
 import _bootstrap
 import csv
 import json
-from common.config import ASPECTS, CODES, DATA, LABELS, LOSSES, MODEL_NAMES, TABLES
+from common.config import ASPECTS, CODES, DATA, LABELS, LOSSES, MODEL_NAMES, Q_NAMES, TABLES
 from common.data_utils import dataset_summary, load, number as f
-from common.plot_utils import IPA_SHORT_NAMES
 
 TABLE_STEMS = [
     'table01_dataset_overview', 'table02_platform_overview', 'table03_train_validation_test',
@@ -77,7 +76,7 @@ def main():
     write(10, ['Mô hình', 'RMSE', 'MAE', 'R²', 'MBRE', 'MIBRE', 'PRED(25)'], rows)
     write(11, ['Khía cạnh', 'Importance (%)', 'Performance', 'Đề xuất IPA'],
           [[f'{CODES[r.Aspect]} – {LABELS[r.Aspect]}', f(r.Importance_Pct), f(r.Performance_0_100),
-            IPA_SHORT_NAMES[r.IPA_Quadrant]] for r in load('25_ipa_overall').sort_values('Importance_Pct', ascending=False).itertuples()])
+            Q_NAMES[r.IPA_Quadrant]] for r in load('25_ipa_overall').sort_values('Importance_Pct', ascending=False).itertuples()])
     write(12, ['Phương pháp', 'Ngưỡng Importance (%)', 'Ngưỡng Performance'],
           [['Trung bình' if r.Cut_Method == 'mean' else 'Trung vị', f(r.Importance_Cut, 3), f(r.Performance_Cut, 3)]
            for r in load('35_ipa_cutoff_comparison').itertuples()])
@@ -85,8 +84,8 @@ def main():
     changed = comparison.loc[comparison.IPA_Quadrant_Mean.ne(comparison.IPA_Quadrant_Median)]
     changed = changed.sort_values('Importance_Pct', ascending=False).reset_index()
     write(13, ['Khía cạnh', 'Ngưỡng trung bình', 'Ngưỡng trung vị'],
-          [[f'{CODES[r.Aspect]} – {LABELS[r.Aspect]}', IPA_SHORT_NAMES[r.IPA_Quadrant_Mean],
-            IPA_SHORT_NAMES[r.IPA_Quadrant_Median]] for r in changed.itertuples()])
+          [[f'{CODES[r.Aspect]} – {LABELS[r.Aspect]}', Q_NAMES[r.IPA_Quadrant_Mean],
+            Q_NAMES[r.IPA_Quadrant_Median]] for r in changed.itertuples()])
 
 
 if __name__ == '__main__':

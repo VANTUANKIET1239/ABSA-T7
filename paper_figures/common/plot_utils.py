@@ -14,9 +14,6 @@ plt.rcParams.update({'font.family':'DejaVu Sans','font.size':10,'axes.titlesize'
                      'axes.spines.top':False,'axes.spines.right':False,
                      'pdf.fonttype':42,'ps.fonttype':42,'savefig.facecolor':'white'})
 
-IPA_SHORT_NAMES = dict(zip(QUADRANTS, ['Ưu tiên', 'Duy trì', 'Theo dõi', 'Cân nhắc']))
-
-
 def decimal_axes(ax,x=False,y=True,digits=0):
     formatter=FuncFormatter(lambda v,pos:number(v,digits))
     if x: ax.xaxis.set_major_formatter(formatter)
@@ -99,7 +96,7 @@ def ipa_quadrant_labels(ax,frame,importance_cut,performance_cut):
            (xmin,pc,ymin,ic),(pc,xmax,ymin,ic)]
     for index,(quadrant,zone) in enumerate(zip(QUADRANTS,zones)):
         x0,x1,y0,y1=zone
-        text=IPA_SHORT_NAMES[quadrant]
+        text=Q_NAMES[quadrant]
         zone_box=Bbox(ax.transData.transform([[x0,y0],[x1,y1]])).padded(-3)
         artist=ax.text(0,0,text,ha='center',va='center',fontsize=7.6,fontweight='bold',
                        color='#2563eb',zorder=6,gid='ipa_quadrant_label',alpha=0,
@@ -148,10 +145,9 @@ def ipa_axes(ax,frame,title,importance_cut=None,performance_cut=None,xlim=(40,10
     if labels: label_points(ax,frame)
     return ic,pc
 
-def ipa_legend(fig,location='lower center',anchor=(.5,0),columns=2,short_labels=False):
+def ipa_legend(fig,location='lower center',anchor=(.5,0),columns=2):
     from matplotlib.lines import Line2D
-    names=IPA_SHORT_NAMES if short_labels else Q_NAMES
-    handles=[Line2D([0],[0],marker='o',color='none',markerfacecolor=c,markersize=7,label=names[q])
+    handles=[Line2D([0],[0],marker='o',color='none',markerfacecolor=c,markersize=7,label=Q_NAMES[q])
              for q,c in zip(QUADRANTS,Q_COLORS)]
     fig.legend(handles=handles,loc=location,bbox_to_anchor=anchor,ncol=columns,frameon=False,fontsize=9)
 

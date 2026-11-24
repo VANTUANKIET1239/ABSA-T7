@@ -19,7 +19,7 @@ def main():
         ax.set_ylabel('Importance (%)',fontsize=9)
         ax.set_xticks([40,60,80,100])
     for ax,sub in zip(axes,parts): label_points(ax,sub)
-    ipa_legend(fig,anchor=(.5,.015),columns=4,short_labels=True)
+    ipa_legend(fig,anchor=(.5,.015),columns=4)
     save(fig,Path(__file__).stem)
 
 if __name__=='__main__': main()

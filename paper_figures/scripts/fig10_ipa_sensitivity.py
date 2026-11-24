@@ -13,7 +13,7 @@ def main():
         ax.set_xlabel('Performance (0-100)',fontsize=9)
     axes[1].set_ylabel('')
     for ax in axes: label_points(ax,values)
-    ipa_legend(fig,anchor=(.5,.0),columns=4,short_labels=True)
+    ipa_legend(fig,anchor=(.5,.0),columns=4)
     save(fig,Path(__file__).stem)
 
 if __name__=='__main__': main()
