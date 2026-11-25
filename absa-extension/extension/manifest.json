@@ -10,7 +10,7 @@
   ],
   "host_permissions": [
     "http://127.0.0.1:8000/*",
-    "https://opens-power-thereafter-food.trycloudflare.com/*"
+    "https://strict-adapted-are-extends.trycloudflare.com/*"
   ],
   "background": {
     "service_worker": "background.js"
@@ -20,6 +20,6 @@
     "default_popup": "popup.html"
   },
   "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' http://127.0.0.1:8000 https://opens-power-thereafter-food.trycloudflare.com"
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' http://127.0.0.1:8000 https://strict-adapted-are-extends.trycloudflare.com"
   }
 }
