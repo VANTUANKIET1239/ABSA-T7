@@ -1,11 +1,11 @@
-"""Figure 4.16: all five brands, one independently reproducible multi-panel figure."""
+"""All five brands, one independently reproducible multi-panel figure."""
 import _bootstrap
 from common.config import *
-from common.data_utils import load,number
+from common.data_utils import load_ipa_by_brand, number
 from common.plot_utils import plt,save,ipa_axes,ipa_legend,label_points
 
 def main():
-    data=load('31_ipa_brand')
+    data=load_ipa_by_brand()
     fig=plt.figure(figsize=(8,9.4))
     grid=fig.add_gridspec(3,4,left=.085,right=.98,top=.95,bottom=.09,wspace=.95,hspace=.35)
     axes=[fig.add_subplot(grid[0,:2]),fig.add_subplot(grid[0,2:]),

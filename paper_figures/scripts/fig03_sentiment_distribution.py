@@ -2,13 +2,13 @@
 import _bootstrap
 import numpy as np
 from common.config import Path, ASPECTS, ASPECT_CAPTIONS
-from common.data_utils import load
+from common.data_utils import sentiment_counts
 from common.plot_utils import plt, save, heatmap
 
 
 def main():
     sentiments = ['positive', 'negative', 'neutral']
-    counts = load('06_aspect_sentiment_counts').set_index('Aspect').loc[ASPECTS, sentiments].to_numpy()
+    counts = sentiment_counts().set_index('Aspect').loc[ASPECTS, sentiments].to_numpy()
     fig, axes = plt.subplots(1, 2, figsize=(11.4, 5.1), layout='constrained',
                             gridspec_kw={'width_ratios': [1, 1.15]})
     heatmap(axes[0], counts, cmap='Blues')

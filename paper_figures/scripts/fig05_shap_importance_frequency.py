@@ -1,12 +1,12 @@
-"""Figure 4.12: normalized mean absolute SHAP importance versus mention prevalence."""
+"""Normalized mean absolute SHAP importance versus mention prevalence."""
 import _bootstrap
 from common.config import *
-from common.data_utils import load,number
+from common.data_utils import load_shap_aspect_summary, sentiment_counts, number
 from common.plot_utils import plt,save,label_points,decimal_axes
 
 def main():
-    data=load('24_shap_aspect_summary').sort_values('Importance_Pct')
-    mentions=load('06_aspect_sentiment_counts').set_index('Aspect')
+    data=load_shap_aspect_summary().sort_values('Importance_Pct')
+    mentions=sentiment_counts().set_index('Aspect')
     fig,axes=plt.subplots(1,2,figsize=(11.4,4.8),layout='constrained',
                           gridspec_kw={'width_ratios':[1.2,1]})
     ax=axes[0]; bars=ax.barh([ASPECT_CAPTIONS[a] for a in data.Aspect],data.Importance_Pct,color='#4477aa')

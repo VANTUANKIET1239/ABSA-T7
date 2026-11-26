@@ -1,12 +1,12 @@
 """Selected figure 4: saved BiRNN/Focal history, without retraining."""
 import _bootstrap
 from common.config import Path
-from common.data_utils import HISTORY_PATH, read
+from common.data_utils import load_training_history
 from common.plot_utils import plt, save
 
 
 def main():
-    history = read(HISTORY_PATH)
+    history = load_training_history()
     with plt.rc_context({'axes.spines.top': True, 'axes.spines.right': True}):
         fig, ax = plt.subplots(figsize=(8, 5), layout='constrained')
         ax.plot(history.epoch, history.train_loss, label='Train Loss', marker='o')

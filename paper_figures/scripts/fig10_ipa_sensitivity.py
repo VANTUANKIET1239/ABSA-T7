@@ -1,11 +1,11 @@
-"""Figure 4.18: unchanged coordinates, different mean/median cutoff lines."""
+"""Unchanged coordinates, different mean/median cutoff lines."""
 import _bootstrap
 from common.config import *
-from common.data_utils import load
+from common.data_utils import load_ipa_overall, load_ipa_cutoffs
 from common.plot_utils import plt,save,ipa_axes,ipa_legend,label_points
 
 def main():
-    values=load('25_ipa_overall'); cuts=load('35_ipa_cutoff_comparison').set_index('Cut_Method')
+    values=load_ipa_overall(); cuts=load_ipa_cutoffs().set_index('Cut_Method')
     fig,axes=plt.subplots(1,2,figsize=(7.2,3.4),sharey=True)
     fig.subplots_adjust(left=.1,right=.98,top=.9,bottom=.24,wspace=.22)
     for ax,method,title in zip(axes,['mean','median'],['(a) Trung bình','(b) Trung vị']):

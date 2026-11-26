@@ -13,7 +13,11 @@ sys.path.insert(0, str(BASE / 'scripts'))
 from build_all import FIGURE_STEMS
 from build_tables import TABLE_STEMS
 from common.config import ASPECTS, PROJECT
-from common.data_utils import dataset_summary, label_matrix, load, reviews
+from common.data_utils import (
+    absa_model_metrics, bertopic_topics, dataset_summary, label_matrix,
+    load_ipa_by_brand, load_ipa_by_platform, load_ipa_mean_median_comparison,
+    load_ipa_overall, load_rating_regression_metrics, reviews, topic_model_metrics,
+)
 
 
 def sha(path):
@@ -34,22 +38,23 @@ def main():
     assert (meta['raw_reviews'], meta['valid_reviews'], meta['unique_texts']) == (16822, 16292, 12690)
     assert list(meta['split_counts'].values()) == [8882, 1904, 1904]
     assert int(label_matrix().sum()) == 43495
-    topics = load('topic_model_metrics')
+    topics = topic_model_metrics()
     assert topics.Topics.tolist() == [16, 12, 16]
     assert topics.Reviews.tolist() == [12741] * 3
     np.testing.assert_allclose(topics.Native_Cv, [.5757062354607918, .6663524880839993, .6447784548214361])
-    assert len(load('bertopic_topics')) == 16
-    metrics = load('11_absa_model_metrics')
+    assert len(bertopic_topics()) == 16
+    metrics = absa_model_metrics()
     focal = metrics.loc[metrics.Model.eq('birnn') & metrics.Scenario.eq('focal_loss')].iloc[0]
     np.testing.assert_allclose([focal.F1_Macro, focal.Weighted_F1, focal.Accuracy], [70.01, 88.44, 83.95])
-    reg = load('22_rating_regression_oof').set_index('Model').loc['XGBoost']
+    reg = load_rating_regression_metrics().set_index('Model').loc['XGBoost']
     np.testing.assert_allclose([reg.RMSE, reg.MBRE, reg.MIBRE, reg.PRED25],
                                [.692109989083627, .1975839901150215, .11243210358083092, .8652712987969555])
     # Recompute performance for all 90 IPA cells from the original reference labels.
     matrix = label_matrix()
     data = reviews()
-    for name, column in [('25_ipa_overall', None), ('30_ipa_platform', 'Platform'), ('31_ipa_brand', 'Brand')]:
-        frame = load(name)
+    for frame, column in [(load_ipa_overall(), None),
+                          (load_ipa_by_platform(), 'Platform'),
+                          (load_ipa_by_brand(), 'Brand')]:
         groups = frame.groupby(column, sort=False) if column else [('All', frame)]
         for group, sub in groups:
             mask = np.ones(len(data), dtype=bool) if column is None else data[column].eq(group).to_numpy()
@@ -60,7 +65,7 @@ def main():
                 counts = labels[single].sum(axis=0)
                 assert tuple(counts) == (row.N_Positive, row.N_Negative, row.N_Neutral)
                 np.testing.assert_allclose(100 * (counts[0] + .5 * counts[2]) / counts.sum(), row.Performance_0_100)
-    compare = load('34_ipa_mean_median_comparison')
+    compare = load_ipa_mean_median_comparison()
     assert set(compare.loc[compare.IPA_Quadrant_Mean.ne(compare.IPA_Quadrant_Median), 'Aspect']) == {ASPECTS[1], ASPECTS[2], ASPECTS[9]}
 
     protected = json.loads((BASE / 'data/protected_sources.json').read_text(encoding='utf-8'))

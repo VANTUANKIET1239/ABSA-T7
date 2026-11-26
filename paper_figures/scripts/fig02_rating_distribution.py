@@ -2,12 +2,12 @@
 import _bootstrap
 import numpy as np
 from common.config import Path
-from common.data_utils import load
+from common.data_utils import rating_counts
 from common.plot_utils import plt, save
 
 
 def main():
-    ratings = load('05_rating_counts').set_index('Platform')
+    ratings = rating_counts().set_index('Platform')
     fig, ax = plt.subplots(figsize=(10.8, 3.7), layout='constrained')
     left = np.zeros(len(ratings))
     for star, color in zip(range(1, 6), ['#b64e58', '#d58e76', '#d6c38c', '#82afa3', '#247f72']):

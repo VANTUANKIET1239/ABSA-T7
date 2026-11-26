@@ -2,12 +2,12 @@
 import _bootstrap
 import numpy as np
 from common.config import Path
-from common.data_utils import load
+from common.data_utils import reviews
 from common.plot_utils import plt, save
 
 
 def main():
-    data = load('review_observations')
+    data = reviews()
     fig, axes = plt.subplots(1, 2, figsize=(11.4, 4.6), layout='constrained')
     axes[0].hist(data.Whitespace_Tokens, bins=np.arange(0, min(500, data.Whitespace_Tokens.max()) + 5, 5),
                  color='#397ea1', edgecolor='white')

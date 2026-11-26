@@ -1,11 +1,11 @@
-"""Figure 4.15: all three platform-specific IPA matrices."""
+"""All three platform-specific IPA matrices."""
 import _bootstrap
 from common.config import *
-from common.data_utils import load,number
+from common.data_utils import load_ipa_by_platform, number
 from common.plot_utils import plt,save,ipa_axes,ipa_legend,label_points
 
 def main():
-    data=load('30_ipa_platform')
+    data=load_ipa_by_platform()
     fig=plt.figure(figsize=(8,6.6))
     grid=fig.add_gridspec(2,4,left=.085,right=.98,top=.94,bottom=.12,wspace=.95,hspace=.42)
     axes=[fig.add_subplot(grid[0,:2]),fig.add_subplot(grid[0,2:]),

@@ -14,5 +14,3 @@ Mã nguồn nghiên cứu phân tích cảm xúc theo khía cạnh (ABSA) cho đ
 | [Business/](./Business/) | Phân tích mức độ hài lòng bằng hồi quy, SHAP và IPA; so sánh theo sàn, thương hiệu và ngưỡng mean/median. |
 | [absa-extension/](./absa-extension/) | Tiện ích Chrome phân tích đánh giá Shopee hoặc nội dung nhập tay |
 | [paper_figures/](./paper_figures/) | Tạo và kiểm tra hình, bảng dùng trong bài nghiên cứu từ dữ liệu và kết quả đã có. |
-| [research_results/](./research_results/) | Giữ lệnh xuất kết quả cũ, chuyển tiếp sang bộ tạo hình và bảng trong `paper_figures/`. |
-| [tests/](./tests/) | Kiểm thử các bước xử lý và đầu ra của mô hình chủ đề. |

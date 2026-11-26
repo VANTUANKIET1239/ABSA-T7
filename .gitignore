@@ -2,6 +2,9 @@
 __pycache__/
 *.py[cod]
 
+# Local labeling scripts and generated labels.
+/Labeling/
+
 # Trained model checkpoints and downloaded NLP model resources.
 /train-models/Models/
 /vncorenlp_model/
@@ -20,3 +23,5 @@ __pycache__/
 /paper_figures/.cache/presentation_build/
 /outputs/research_presentation/
 /.chart-data-*/
+
+/tests

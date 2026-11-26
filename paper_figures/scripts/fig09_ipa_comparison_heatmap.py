@@ -1,18 +1,22 @@
-"""Figure 4.17: categorical IPA overall, by platform, and by brand."""
+"""Categorical IPA overall, by platform, and by brand."""
 from matplotlib.colors import ListedColormap,BoundaryNorm
 import _bootstrap
 from common.config import *
-from common.data_utils import load
+from common.data_utils import (
+    load_brand_run_summary, load_ipa_by_brand, load_ipa_by_platform,
+    load_ipa_overall, load_platform_run_summary,
+)
 from common.plot_utils import plt,save,heatmap
 
 def main():
-    platforms=load('32_ipa_platform_summary')['Platform'].tolist()
-    brands=load('33_ipa_brand_summary')['Brand'].tolist()
-    overall=load('25_ipa_overall').set_index('Aspect')[['IPA_Quadrant']]
+    platforms=load_platform_run_summary()['Platform'].tolist()
+    brands=load_brand_run_summary()['Brand'].tolist()
+    overall=load_ipa_overall().set_index('Aspect')[['IPA_Quadrant']]
     overall=overall.rename(columns={'IPA_Quadrant':'Tổng thể'}).reindex(ASPECTS[:10])
     panels=[overall]
-    for file,col,groups in [('30_ipa_platform','Platform',platforms),('31_ipa_brand','Brand',brands)]:
-        panels.append(load(file).pivot(index='Aspect',columns=col,values='IPA_Quadrant')
+    for data,col,groups in [(load_ipa_by_platform(),'Platform',platforms),
+                            (load_ipa_by_brand(),'Brand',brands)]:
+        panels.append(data.pivot(index='Aspect',columns=col,values='IPA_Quadrant')
                       .reindex(index=ASPECTS[:10],columns=groups))
     fig,axes=plt.subplots(1,3,figsize=(12.8,4.8),sharey=True,layout='constrained',
                           gridspec_kw={'width_ratios':[1,3,5]})
